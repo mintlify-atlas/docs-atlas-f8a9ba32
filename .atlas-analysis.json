@@ -1,0 +1,117 @@
+{
+  "projectType": "saas",
+  "projectName": "HoYoVista",
+  "projectDescription": "A Discord bot that brings HoYoLAB features to Discord, including daily check-ins, profile viewing, and automatic code redemption.",
+  "theme": "almond",
+  "primaryColor": "#8c93ed",
+  "lightColor": null,
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "setup"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/overview",
+              "features/check-in",
+              "features/profile",
+              "features/notes",
+              "features/income",
+              "features/redeem"
+            ]
+          },
+          {
+            "group": "Automation",
+            "pages": [
+              "automation/overview",
+              "automation/auto-checkin",
+              "automation/auto-redeem"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              "configuration/settings",
+              "configuration/privacy",
+              "configuration/data-management"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Commands",
+        "groups": [
+          {
+            "group": "Command Reference",
+            "pages": [
+              "commands/overview",
+              "commands/register",
+              "commands/hoyolink",
+              "commands/check-in",
+              "commands/profile",
+              "commands/notes",
+              "commands/income",
+              "commands/redeem",
+              "commands/settings",
+              "commands/data",
+              "commands/feedback",
+              "commands/about"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Support",
+        "groups": [
+          {
+            "group": "Help",
+            "pages": [
+              "support/faq",
+              "support/troubleshooting",
+              "support/supported-games"
+            ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              "legal/terms-of-service",
+              "legal/privacy-policy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Daily HoYoLAB check-ins for all HoYoverse games",
+    "Automatic code redemption for new game codes",
+    "View game profiles, real-time notes, and income tracking",
+    "Scheduled automation with Discord DM notifications",
+    "Multi-game support (Genshin Impact, Honkai Star Rail, ZZZ, Honkai Impact 3rd)",
+    "Privacy controls and data management",
+    "User settings with caching and rate limiting"
+  ],
+  "publicApiSurface": [
+    "/register - Register your Discord account with HoYoVista",
+    "/hoyolink - Link your HoYoLAB account to Discord",
+    "/check-in - Perform daily check-in for linked games",
+    "/profile - View your game profile information",
+    "/notes - Check real-time notes (resin, stamina, etc.)",
+    "/income - View monthly income statistics",
+    "/redeem - Redeem codes for your games",
+    "/settings - Configure bot settings and automation",
+    "/data - Manage your stored data",
+    "/feedback - Send feedback to developers",
+    "/about - View bot information and statistics"
+  ]
+}
