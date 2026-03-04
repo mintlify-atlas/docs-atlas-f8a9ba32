@@ -1,0 +1,216 @@
+---
+title: /profile
+description: View detailed game profile statistics
+icon: user
+---
+
+## Overview
+
+The `/profile` command displays comprehensive game statistics, achievements, and player information for your linked accounts.
+
+## Usage
+
+```bash
+/profile account:<game>
+```
+
+<ParamField path="account" type="string" required>
+  The game account to view the profile for.
+  
+  **Autocomplete**: Shows your linked games
+</ParamField>
+
+## Supported Games
+
+- **Genshin Impact** (with Enka Network integration)
+- **Zenless Zone Zero** (with Enka Network integration)
+
+<Note>
+  Honkai: Star Rail and Honkai Impact 3rd are excluded from profile viewing.
+</Note>
+
+## Example
+
+```bash
+/profile account:Genshin Impact (NA)
+```
+
+## Genshin Impact Profile
+
+### Display Information
+
+<Accordion title="Profile Components">
+  **Banner**
+  - Displays your equipped namecard
+  - Full-width header image from Enka Network
+
+  **Player Info**
+  - Traveler name
+  - Adventure Rank (AR)
+  - Server region
+  - UID
+  - Profile signature
+  - Character icon
+
+  **Statistics**
+  - Total Achievements
+  - Max Friendship characters
+  - Spiral Abyss progress (floor-chamber | stars)
+  - Imaginarium Theater (Act | stars)
+  - Stygian Onslaught (difficulty level + time)
+</Accordion>
+
+### Example Response
+
+```markdown
+# TravelerName
+-# `AR 60 | America | 600123456`
+Exploring Teyvat one domain at a time
+
+Total Achievements: 957
+Max Friendships: 42
+Spiral Abyss: 12-3 | 36
+Imaginarium Theater: Act 8 | 18
+Stygian Onslaught: Incarnadine Nightmare 120s
+```
+
+## Zenless Zone Zero Profile
+
+### Display Information
+
+<Accordion title="Profile Components">
+  **Banner**
+  - Displays your equipped card background
+  - Full-width header from game data
+
+  **Player Info**
+  - Proxy name
+  - Inter-Knot Level
+  - Server region
+  - UID
+  - Personal bio/description
+  - Agent icon
+
+  **Statistics**
+  - Personal title
+  - Active days
+  - Total achievements
+  - Simulated Battle Trial progress
+  - Battle Trial: The Last Stand
+</Accordion>
+
+### Example Response
+
+```markdown
+# ProxyName
+-# `Lv.55 | America | 1001234567`
+Just another day in New Eridu
+
+Senior Proxy
+Active Days: 156
+Achievements: 378
+Simulated Battle Trial: 100
+Battle Trial: The Last Stand: 80
+```
+
+## Data Sources
+
+### Enka Network Integration
+
+Profile data is fetched from multiple sources:
+
+<ParamField path="HoYoLAB API" type="source">
+  - Base game statistics
+  - Achievement counts
+  - Friendship levels
+</ParamField>
+
+<ParamField path="Enka Network" type="source">
+  - Player showcase data
+  - Namecard information
+  - Spiral Abyss/Theater/Stygian progress
+  - Profile signature and description
+</ParamField>
+
+## Loading Process
+
+The command provides real-time feedback:
+
+<Steps>
+  <Step title="Retrieving Account">
+    "Retrieving your data. Please wait..."
+  </Step>
+  
+  <Step title="Account Retrieved">
+    "Account successfully retrieved in 150ms. Fetching profile from HoYoverse..."
+  </Step>
+  
+  <Step title="Profile Retrieved">
+    "Profile retrieved in 450ms. Preparing your data..."
+  </Step>
+  
+  <Step title="Display">
+    Shows complete profile with statistics
+  </Step>
+</Steps>
+
+<Info>
+  The bot displays loading times to show real-time progress. Total fetch time is typically under 1 second.
+</Info>
+
+## Error Messages
+
+<CodeGroup>
+```markdown Not Registered
+You are not registered. Please use the `/register` command to create an account.
+```
+
+```markdown No Linked Games
+An error occurred while fetching your data. Please try again later.
+```
+
+```markdown API Error
+An error occurred while fetching your data. Please try again later.
+```
+</CodeGroup>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  30 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Public (visible to everyone in the channel)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/profile.js:20-31`
+- **Cooldown**: `src/commands/profile.js:19`
+- **Genshin Data Fetch**: `src/commands/profile.js:171-220`
+- **ZZZ Data Fetch**: `src/commands/profile.js:221-264`
+- **Autocomplete Exclude**: `src/commands/profile.js:39-40`
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Notes" icon="note-sticky" href="/commands/notes">
+    View real-time notes like resin and commissions
+  </Card>
+  
+  <Card title="Income" icon="coins" href="/commands/income">
+    Check monthly currency income reports
+  </Card>
+</CardGroup>

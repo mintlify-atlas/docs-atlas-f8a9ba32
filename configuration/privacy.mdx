@@ -1,0 +1,429 @@
+---
+title: 'Privacy'
+description: 'Understanding how HoYoVista protects your data and respects your privacy'
+icon: 'shield-halved'
+---
+
+## Our Privacy Commitment
+
+HoYoVista is committed to protecting your privacy and ensuring your data is handled securely. This page explains what data we collect, how we use it, and the privacy features available to you.
+
+## Privacy Features
+
+### Privacy Blur
+
+Privacy Blur is a key feature that protects your sensitive game information from being visible to other users.
+
+#### What is Privacy Blur?
+
+Privacy Blur automatically censors your game UIDs (User IDs) when the bot displays information in public channels or to other users.
+
+**How it works:**
+
+```
+Original UID: 123456789
+With Privacy Blur: 1****6789
+```
+
+The censoring algorithm:
+- Preserves the first digit of your UID
+- Replaces middle digits with asterisks (*)
+- Preserves the last 4 digits
+- Example: `123456789` becomes `1****6789`
+
+**Implementation:**
+
+The bot uses the following logic for UID censoring:
+
+```javascript
+// From privacy.js
+const firstPart = uid.slice(0, 1);      // First digit
+const lastPart = uid.slice(-4);         // Last 4 digits  
+const middlePart = uid.slice(1, -4)     // Middle portion
+  .replace(/[0-9]/g, '*');              // Replaced with *
+
+return firstPart + middlePart + lastPart;
+```
+
+#### When Privacy Blur Applies
+
+Privacy Blur affects:
+- Profile displays in public channels
+- Shared game statistics
+- Any bot response visible to other users
+- Public command outputs
+
+**Privacy Blur does NOT affect:**
+- Your own private views (DMs, ephemeral messages)
+- Internal bot operations
+- Data exports (your full data is always available to you)
+- Administrative functions
+
+#### Enabling Privacy Blur
+
+**Default:** Disabled
+
+To enable Privacy Blur:
+
+1. Use the `/settings` command
+2. Navigate to "General Settings"
+3. Find "Privacy Blur"
+4. Click "Enable"
+
+<Tip>
+  We recommend enabling Privacy Blur if you use HoYoVista in public Discord servers.
+</Tip>
+
+### Data Collection Toggle
+
+HoYoVista gives you complete control over analytics data collection.
+
+#### What is the Data Collection Toggle?
+
+The "Collect Analytics Data" setting determines whether the bot tracks your usage for analytics and improvements.
+
+**When ENABLED (default):**
+- Anonymous usage statistics are collected
+- Command interactions are tracked
+- Usage patterns help improve the bot
+- You'll receive an end-of-year wrapped summary
+- Bug reports include your usage context
+
+**When DISABLED:**
+- No analytics events are recorded
+- No usage statistics are tracked
+- Commands still function normally
+- You will not receive year-end wrapped
+- Limited ability to troubleshoot issues
+
+#### Types of Analytics Collected
+
+When data collection is enabled, we track:
+
+**Command Interactions:**
+```json
+{
+  "game": "discord",
+  "type": "interaction",
+  "metadata": {
+    "command": "settings"
+  }
+}
+```
+
+**Event Information:**
+- Timestamp of interaction
+- Command name used
+- Game context (if applicable)
+- Basic usage patterns
+
+**What we DO NOT collect:**
+- Message content
+- Private conversations
+- Personal identifying information beyond Discord ID
+- Financial information
+- Location data
+- Device information
+
+#### Managing Data Collection
+
+To toggle data collection:
+
+1. Use `/settings`
+2. Go to "General Settings"
+3. Find "Collect Analytics Data"
+4. Click Enable or Disable
+
+<Note>
+  Changes to data collection settings apply immediately. Previously collected data is retained according to our retention policy.
+</Note>
+
+## Data We Collect
+
+### Required Data
+
+To function properly, HoYoVista must store:
+
+#### User Account Data
+- Discord User ID (uid)
+- Account creation timestamp
+- Settings preferences (notifications, privacy, etc.)
+- Last updated timestamp
+
+#### HoYoLAB Authentication
+- HoYoLAB cookies (encrypted)
+  - `ltmid_v2` - Session identifier
+  - `ltoken_v2` - Access token
+  - `ltuid_v2` - User identifier
+  - `account_id_v2` - Account identifier
+  - `account_mid_v2` - Account metadata
+  - `mi18nLang` - Language preference
+
+<Warning>
+  Cookies are stored securely and used only to authenticate with HoYoLAB on your behalf. Never share your cookies with anyone.
+</Warning>
+
+#### Linked Game Data
+- Game identifiers (Genshin, Star Rail, etc.)
+- Game Role ID (your in-game UID)
+- Server region
+- Auto check-in preferences
+- Auto redemption preferences
+- Attempted redemption codes
+
+### Optional Data
+
+#### Analytics Events (if enabled)
+- Command usage logs
+- Interaction timestamps
+- Game selection patterns
+- Feature usage statistics
+
+#### Cached Game Data (temporary)
+- Game statistics
+- Income ledgers
+- Profile information
+- Battle chronicle data
+
+This data is fetched from HoYoLAB and cached temporarily for performance.
+
+## Data Security Practices
+
+### How We Protect Your Data
+
+<AccordionGroup>
+  <Accordion title="Encryption">
+    - All data transmits over encrypted HTTPS connections
+    - Database connections use secure protocols
+    - Sensitive cookies are handled with care
+    - No plaintext storage of sensitive credentials
+  </Accordion>
+
+  <Accordion title="Access Control">
+    - Only your Discord ID can access your data
+    - Bot interactions are user-specific
+    - No cross-user data sharing
+    - Administrative access is logged and limited
+  </Accordion>
+
+  <Accordion title="Data Minimization">
+    - We only collect data necessary for functionality
+    - Analytics collection can be disabled
+    - Cached data expires automatically
+    - No unnecessary data retention
+  </Accordion>
+
+  <Accordion title="Secure Development">
+    - Regular security audits
+    - Dependency updates
+    - Input validation and sanitization
+    - Rate limiting to prevent abuse
+  </Accordion>
+</AccordionGroup>
+
+### Third-Party Services
+
+HoYoVista interacts with:
+
+**HoYoLAB API (by HoYoverse)**
+- Purpose: Fetch game data, perform check-ins, redeem codes
+- Data shared: Your cookies, game selections
+- Privacy policy: [HoYoverse Privacy Policy](https://www.hoyoverse.com/en-us/privacy)
+
+**Code API (by seria_ati)**
+- Purpose: Fetch available promotional codes
+- Data shared: None (read-only public API)
+- No personal data transmitted
+
+**Discord API**
+- Purpose: Bot functionality, DM notifications
+- Data shared: Discord User ID, interactions
+- Privacy policy: [Discord Privacy Policy](https://discord.com/privacy)
+
+## Your Privacy Rights
+
+### Right to Access
+
+You can view all data we store about you at any time:
+
+```bash
+/data
+```
+
+This command shows:
+- Your user settings
+- Linked HoYoLAB cookies
+- Connected games
+- Recent analytics events (if enabled)
+
+See [Data Management](/configuration/data-management) for details.
+
+### Right to Control
+
+You have complete control over:
+- Privacy Blur (enable/disable)
+- Analytics collection (enable/disable)
+- Notifications (enable/disable per type)
+- Automatic features (enable/disable per game)
+
+Manage these in `/settings`.
+
+### Right to Deletion
+
+You can delete all your data at any time:
+
+```bash
+/hoyolink
+```
+
+Then click "Unlink HoYoLAB Account" and confirm.
+
+<Warning>
+  Unlinking your account permanently deletes all your data, including:
+  - User account
+  - All settings
+  - Linked games
+  - HoYoLAB cookies
+  - Analytics events
+  - Cached game data
+  
+  This action cannot be reversed.
+</Warning>
+
+### Right to Export
+
+All your data is provided in JSON format via the `/data` command. You can:
+- Copy and save this data locally
+- Review what information is stored
+- Use it for personal records
+- Share with support if needed
+
+See [Data Management](/configuration/data-management) for export details.
+
+## Data Retention
+
+### Active Accounts
+
+**User Data:** Retained indefinitely while account is active
+- Account settings
+- Linked games
+- HoYoLAB cookies
+- Preferences
+
+**Analytics Events:** Retained for up to 1 year
+- Used for year-end wrapped
+- Helps improve the bot
+- Automatically pruned after retention period
+
+**Cached Game Data:** Temporary storage
+- Automatically expires (typically 5-10 minutes)
+- Not permanently stored
+- Refreshed on each request
+
+### Deleted Accounts
+
+When you unlink your HoYoLAB account:
+- All user data is deleted immediately
+- Cannot be recovered
+- Analytics events may be retained in aggregate (anonymized)
+- No personal identifiers remain
+
+### Inactive Accounts
+
+Currently, inactive accounts are retained indefinitely. Future policy may include:
+- Notification before deletion
+- Automatic cleanup after extended inactivity
+- Option to keep account dormant
+
+## Discord Privacy Settings
+
+### Ephemeral Messages
+
+Many bot commands use "ephemeral" messages (only visible to you):
+- `/settings` - Private to you
+- `/data` - Private to you
+- `/hoyolink` - Private to you
+- Error messages - Often private
+
+Public commands:
+- `/profile` - Visible to others (use Privacy Blur)
+- `/income` - Visible to others
+
+### Direct Messages
+
+The bot sends DMs for:
+- Check-in notifications (if enabled)
+- Redemption notifications (if enabled)
+- Update announcements (if enabled)
+
+**To receive DMs:**
+1. Enable DMs in Discord privacy settings
+2. Allow DMs from server members
+3. Don't block the bot
+
+**To stop DMs:**
+1. Use `/settings`
+2. Disable relevant notification settings
+3. Or block the bot (not recommended)
+
+## Compliance
+
+### GDPR Compliance
+
+For users in the European Union:
+- Right to access: Use `/data`
+- Right to rectification: Use `/settings`
+- Right to erasure: Use `/hoyolink` unlink
+- Right to data portability: Export via `/data`
+- Right to object: Disable data collection in `/settings`
+
+### CCPA Compliance
+
+For California residents:
+- We disclose what data we collect (see above)
+- You can opt-out of analytics (disable in `/settings`)
+- You can delete your data (use `/hoyolink` unlink)
+- We don't sell your personal information
+
+## Updates to Privacy Policy
+
+We may update our privacy practices. When we do:
+- Notification via Update Notifications (if enabled)
+- Announcement in our Discord community
+- Updates reflected in this documentation
+- No changes without notice
+
+## Privacy Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Protect Your Cookies" icon="cookie-bite">
+    Never share your HoYoLAB cookies with anyone. They provide full access to your account.
+  </Card>
+  
+  <Card title="Enable Privacy Blur" icon="eye-slash">
+    Use Privacy Blur in public servers to hide your game UIDs from others.
+  </Card>
+  
+  <Card title="Review Data Regularly" icon="file-magnifying-glass">
+    Periodically check `/data` to see what information is stored.
+  </Card>
+  
+  <Card title="Secure Your Discord" icon="lock">
+    Enable 2FA on Discord to protect access to the bot and your settings.
+  </Card>
+</CardGroup>
+
+## Questions About Privacy?
+
+If you have questions or concerns about privacy:
+
+- Review our [Data Management guide](/configuration/data-management)
+- Check [Settings documentation](/configuration/settings)
+- Visit our [support resources](/support/getting-help)
+- Contact us through our Discord community
+
+## Related Resources
+
+- [Settings Configuration](/configuration/settings)
+- [Data Management](/configuration/data-management)
+- [Getting Help](/support/getting-help)

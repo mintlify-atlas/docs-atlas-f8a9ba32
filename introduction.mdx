@@ -1,0 +1,185 @@
+---
+title: Welcome to HoYoVista
+description: Empower your HoYoverse experience with seamless Discord integration
+mode: custom
+---
+
+<div className="relative overflow-hidden dark:bg-[#0f1117] bg-white py-20">
+  <div className="absolute inset-0 dark:bg-gradient-to-br dark:from-[#8c93ed]/10 dark:via-transparent dark:to-[#2c3e94]/10 bg-gradient-to-br from-[#8c93ed]/5 via-transparent to-[#2c3e94]/5"></div>
+  <div className="relative max-w-7xl mx-auto px-6">
+    <div className="grid lg:grid-cols-12 gap-12 items-center">
+      <div className="lg:col-span-7">
+        <h1 className="text-5xl sm:text-6xl font-bold dark:text-gray-100 text-gray-900 mb-6">
+          Welcome to HoYoVista Documentation
+        </h1>
+        <p className="text-lg sm:text-xl dark:text-gray-400 text-gray-600 max-w-2xl mb-8">
+          Access all your HoYoLAB features right from Discord. Daily check-ins, profile viewing, code redemption, and more—all automated and at your fingertips.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <a 
+            href="/quickstart" 
+            className="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors bg-[#8c93ed] text-white hover:bg-[#7a82db] no-underline"
+          >
+            Get Started
+          </a>
+          <a 
+            href="/commands/overview" 
+            className="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors dark:border-[#27272a] border-gray-200 dark:bg-white/5 bg-gray-50 dark:text-gray-100 text-gray-900 dark:hover:bg-white/10 hover:bg-gray-100 border no-underline"
+          >
+            View Commands
+          </a>
+        </div>
+      </div>
+      <div className="lg:col-span-5 hidden lg:block">
+        <div className="relative">
+          <div className="absolute inset-0 dark:bg-[#8c93ed]/20 bg-[#8c93ed]/10 blur-3xl rounded-full"></div>
+          <img 
+            src="https://media.brand.dev/86d2d81a-1543-44eb-acb5-29a4e13182e1.png" 
+            alt="HoYoVista Logo" 
+            className="relative w-full h-auto max-w-md mx-auto"
+            noZoom
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-bold dark:text-gray-100 text-gray-900 mb-4">Quick Start</h2>
+  <p className="text-base dark:text-gray-400 text-gray-600 mb-8">Get up and running with HoYoVista in minutes</p>
+  
+  <Steps>
+    <Step title="Add HoYoVista to your Discord">
+      Invite the bot to your Discord server or use it directly in DMs. HoYoVista supports both server and personal interactions.
+      
+      <Note>
+        HoYoVista uses Discord's slash commands, so make sure the bot has permission to use application commands in your server.
+      </Note>
+    </Step>
+    
+    <Step title="Register your account">
+      Run the `/register` command to create your HoYoVista account. You'll need to agree to the privacy policy and terms of service.
+      
+      ```bash
+      /register
+      ```
+      
+      This creates your account and enables you to use all bot features.
+    </Step>
+    
+    <Step title="Link your HoYoLAB account">
+      Use the `/hoyolink` command to connect your HoYoLAB account to Discord. This allows HoYoVista to access your game data and perform actions on your behalf.
+      
+      ```bash
+      /hoyolink
+      ```
+      
+      <Warning>
+        Keep your HoYoLAB cookies secure. Never share them with anyone. HoYoVista stores them encrypted in the database.
+      </Warning>
+    </Step>
+    
+    <Step title="Start using commands">
+      You're all set! Try checking in for daily rewards:
+      
+      ```bash
+      /check-in
+      ```
+      
+      Explore other commands like `/profile`, `/notes`, and `/settings` to customize your experience.
+    </Step>
+  </Steps>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-bold dark:text-gray-100 text-gray-900 mb-4">Core Features</h2>
+  <p className="text-base dark:text-gray-400 text-gray-600 mb-8">Everything you need to manage your HoYoverse games from Discord</p>
+  
+  <CardGroup cols={2}>
+    <Card title="Daily Check-ins" icon="calendar-check" href="/features/check-in">
+      Never miss your daily HoYoLAB check-ins. Claim rewards for all your games with a single command or enable automation.
+    </Card>
+    <Card title="Auto Code Redemption" icon="ticket" href="/features/redeem">
+      Automatically redeem new game codes as soon as they're available. Never miss out on free primogems and rewards.
+    </Card>
+    <Card title="Game Profiles" icon="user" href="/features/profile">
+      View detailed game profiles including stats, achievements, and character rosters for all your HoYoverse games.
+    </Card>
+    <Card title="Real-time Notes" icon="bolt" href="/features/notes">
+      Check your resin, stamina, expeditions, and other real-time game data without opening the game.
+    </Card>
+    <Card title="Income Tracking" icon="chart-line" href="/features/income">
+      Track your monthly primogem and currency income across all your games with detailed breakdowns.
+    </Card>
+    <Card title="Privacy Controls" icon="shield" href="/configuration/privacy">
+      Full control over your data with privacy blur, data collection settings, and the ability to delete your data anytime.
+    </Card>
+  </CardGroup>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-bold dark:text-gray-100 text-gray-900 mb-4">Supported Games</h2>
+  <p className="text-base dark:text-gray-400 text-gray-600 mb-8">HoYoVista supports all major HoYoverse titles</p>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="dark:bg-[#1a1d27] bg-gray-50 dark:border-[#27272a] border-gray-200 border rounded-xl p-6">
+      <h3 className="text-xl font-semibold dark:text-gray-100 text-gray-900 mb-2">Genshin Impact</h3>
+      <p className="dark:text-gray-400 text-gray-600 text-sm">Full support for daily check-ins, character profiles, resin tracking, and primogem income.</p>
+    </div>
+    <div className="dark:bg-[#1a1d27] bg-gray-50 dark:border-[#27272a] border-gray-200 border rounded-xl p-6">
+      <h3 className="text-xl font-semibold dark:text-gray-100 text-gray-900 mb-2">Honkai: Star Rail</h3>
+      <p className="dark:text-gray-400 text-gray-600 text-sm">Complete integration with trailblaze power tracking, character rosters, and stellar jade income.</p>
+    </div>
+    <div className="dark:bg-[#1a1d27] bg-gray-50 dark:border-[#27272a] border-gray-200 border rounded-xl p-6">
+      <h3 className="text-xl font-semibold dark:text-gray-100 text-gray-900 mb-2">Zenless Zone Zero</h3>
+      <p className="dark:text-gray-400 text-gray-600 text-sm">Full feature support including battery tracking, agent profiles, and polychrome income.</p>
+    </div>
+    <div className="dark:bg-[#1a1d27] bg-gray-50 dark:border-[#27272a] border-gray-200 border rounded-xl p-6">
+      <h3 className="text-xl font-semibold dark:text-gray-100 text-gray-900 mb-2">Honkai Impact 3rd</h3>
+      <p className="dark:text-gray-400 text-gray-600 text-sm">Daily check-ins and profile viewing for veteran Honkai players.</p>
+    </div>
+  </div>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-3xl font-bold dark:text-gray-100 text-gray-900 mb-4">Automation</h2>
+  <p className="text-base dark:text-gray-400 text-gray-600 mb-8">Set it and forget it with HoYoVista's automation features</p>
+  
+  <CardGroup cols={2}>
+    <Card title="Auto Check-in" icon="clock" href="/automation/auto-checkin">
+      Enable automatic daily check-ins for your games. HoYoVista will claim your rewards every day between specific hours.
+    </Card>
+    <Card title="Auto Redeem" icon="sparkles" href="/automation/auto-redeem">
+      Automatically redeem new codes as soon as they're available. Never miss time-limited rewards again.
+    </Card>
+  </CardGroup>
+  
+  <div className="mt-6 dark:bg-[#1a1d27] bg-gray-50 dark:border-[#27272a] border-gray-200 border rounded-xl p-6">
+    <h3 className="text-lg font-semibold dark:text-gray-100 text-gray-900 mb-2">Discord Notifications</h3>
+    <p className="dark:text-gray-400 text-gray-600 text-sm mb-4">
+      Receive DM notifications when automated tasks complete. Stay informed about your check-ins and code redemptions without lifting a finger.
+    </p>
+    <a href="/configuration/settings" className="dark:text-[#8c93ed] text-[#2c3e94] dark:hover:text-[#7a82db] hover:text-[#1f2d6b] text-sm font-medium inline-flex items-center no-underline">
+      Configure notifications
+      <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <div className="dark:bg-gradient-to-r dark:from-[#8c93ed]/20 dark:to-[#2c3e94]/20 bg-gradient-to-r from-[#8c93ed]/10 to-[#2c3e94]/10 dark:border-[#8c93ed]/30 border-[#8c93ed]/20 border rounded-2xl p-8 text-center">
+    <h2 className="text-2xl font-bold dark:text-gray-100 text-gray-900 mb-3">Ready to get started?</h2>
+    <p className="dark:text-gray-400 text-gray-600 mb-6 max-w-2xl mx-auto">
+      Join thousands of Travelers, Trailblazers, and Agents using HoYoVista to streamline their HoYoverse experience.
+    </p>
+    <a 
+      href="/quickstart" 
+      className="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors bg-[#8c93ed] text-white hover:bg-[#7a82db] no-underline"
+    >
+      Get Started Now
+    </a>
+  </div>
+</div>

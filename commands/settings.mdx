@@ -1,0 +1,276 @@
+---
+title: /settings
+description: Configure bot preferences and automation
+icon: gear
+---
+
+## Overview
+
+The `/settings` command provides a comprehensive interface to configure your HoYoVista preferences, including notifications, privacy, automation, and data collection.
+
+## Usage
+
+```bash
+/settings
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## Settings Categories
+
+The settings interface is organized into 4 main categories:
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="sliders">
+    Notifications, privacy, and analytics preferences
+  </Card>
+  
+  <Card title="Check-in Settings" icon="calendar-check">
+    Auto check-in and notifications per game
+  </Card>
+  
+  <Card title="Code Redemption Settings" icon="ticket">
+    Auto-redeem and notifications per game
+  </Card>
+  
+  <Card title="Reset Settings" icon="rotate-right">
+    Restore all settings to defaults
+  </Card>
+</CardGroup>
+
+## General Settings
+
+### Update Notifications
+
+<ParamField path="subscribed" type="boolean" default={true}>
+  **Description**: Receive updates and alerts from the bot including new features, bug fixes, and announcements.
+  
+  **Default**: Enabled
+</ParamField>
+
+### Privacy Blur
+
+<ParamField path="private" type="boolean" default={false}>
+  **Description**: Hide sensitive information like UIDs from other users. Adds extra privacy protection beyond defaults.
+  
+  **Example**:
+  - OFF: `600123456` (full UID)
+  - ON: `600******6` (censored)
+  
+  **Default**: Disabled
+</ParamField>
+
+### Collect Analytics Data
+
+<ParamField path="collectData" type="boolean" default={true}>
+  **Description**: Allow anonymized usage data collection to help improve the bot. Enables personalized end-of-year wrapped reports.
+  
+  **Collected Data**:
+  - Command usage patterns
+  - Feature interactions
+  - Error occurrences (for debugging)
+  
+  **Default**: Enabled
+</ParamField>
+
+## Check-in Settings
+
+### DM Notifications
+
+<ParamField path="notifyCheckin" type="boolean" default={true}>
+  **Description**: Receive DM notifications when automatic check-ins occur.
+  
+  **Requirement**: Discord DMs must be enabled
+  
+  **Default**: Enabled
+</ParamField>
+
+### Per-Game Auto Check-in
+
+Each linked game has its own auto check-in toggle:
+
+```markdown
+🎮 Genshin Impact (600123456)
+Check-ins are currently `Enabled`
+[Disable Button]
+
+⭐ Honkai: Star Rail (700123456)
+Check-ins are currently `Disabled`
+[Enable Button]
+```
+
+<Info>
+  **Automatic Schedule**: Daily between `<t:1735751100:t>` and `<t:1735754400:t>` (server time)
+</Info>
+
+## Code Redemption Settings
+
+### DM Notifications
+
+<ParamField path="notifyRedeem" type="boolean" default={true}>
+  **Description**: Receive DM notifications when codes are automatically redeemed.
+  
+  **Requirement**: Discord DMs must be enabled
+  
+  **Default**: Enabled
+</ParamField>
+
+### Per-Game Auto Redeem
+
+Each supported game has its own auto-redeem toggle:
+
+```markdown
+🎮 Genshin Impact (600123456)
+Redemptions are currently `Enabled`
+[Disable Button]
+
+🌟 Zenless Zone Zero (1001234567)
+Redemptions are currently `Disabled`
+[Enable Button]
+```
+
+<Note>
+  Auto-redeem fetches codes from an external API by seria_ati and redeems them automatically when available.
+</Note>
+
+## Reset Settings
+
+<Warning>
+  **Destructive Action**: Resetting settings **cannot be reversed**.
+</Warning>
+
+Resetting will:
+- Restore all settings to default values
+- Keep your linked games intact
+- Preserve your HoYoLAB connection
+
+Confirmation required:
+
+```markdown
+## Reset Settings
+Are you sure you want to reset your settings?
+**This action cannot be reversed.**
+
+[Confirm Reset Button]
+```
+
+## Navigation
+
+Use the dropdown menu to switch between categories:
+
+```
+📋 Select a category
+├─ General Settings
+├─ Check-in Settings  
+├─ Code Redemption Settings
+└─ Reset Settings
+```
+
+## Caching & Performance
+
+<Accordion title="Technical Implementation">
+  **Cache Duration**: 5 minutes
+  
+  Settings are cached to reduce database queries:
+  - User settings cached for 5 minutes
+  - Linked games cached for 5 minutes
+  - Cache automatically invalidated on updates
+  
+  **Rate Limiting**: 5 attempts per 30 seconds
+  
+  Prevents spam and ensures stability:
+  - Max 5 setting updates per 30 seconds
+  - Automatic cooldown message if exceeded
+  - Reset confirmation bypasses rate limit
+</Accordion>
+
+## Rate Limit Protection
+
+If you update settings too quickly:
+
+```markdown
+⏱️ Whoa, you're updating settings too quickly!
+Please wait 15 seconds before trying again.
+```
+
+## Ownership Verification
+
+<Info>
+  Only the user who initiated the settings command can interact with the buttons and menus. Others will be ignored.
+</Info>
+
+## Example Settings Flow
+
+<Steps>
+  <Step title="Open Settings">
+    Run `/settings` - defaults to General Settings
+  </Step>
+  
+  <Step title="Enable Privacy Blur">
+    Click "Enable" next to Privacy Blur
+  </Step>
+  
+  <Step title="Navigate to Check-in">
+    Use dropdown → select "Check-in Settings"
+  </Step>
+  
+  <Step title="Enable Auto Check-in">
+    Toggle auto check-in for desired games
+  </Step>
+  
+  <Step title="Save Automatically">
+    Changes save instantly - no confirmation needed
+  </Step>
+</Steps>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  10 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/settings.js:121-125`
+- **Cooldown**: `src/commands/settings.js:120`
+- **General Settings**: `src/commands/settings.js:210-268`
+- **Auto Settings**: `src/commands/settings.js:277-367`
+- **Cache Duration**: `src/commands/settings.js:34`
+- **Rate Limiter**: `src/commands/settings.js:35-47`
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Check-in" icon="calendar-check" href="/commands/check-in">
+    Manual daily check-in command
+  </Card>
+  
+  <Card title="Redeem" icon="ticket" href="/commands/redeem">
+    Manual code redemption command
+  </Card>
+  
+  <Card title="Data" icon="database" href="/commands/data">
+    View your stored account data
+  </Card>
+  
+  <Card title="HoYoLink" icon="link" href="/commands/hoyolink">
+    Manage your HoYoLAB connection
+  </Card>
+</CardGroup>

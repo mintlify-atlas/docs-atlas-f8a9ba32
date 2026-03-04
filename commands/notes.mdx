@@ -1,0 +1,280 @@
+---
+title: /notes
+description: View Real-Time Notes for your games
+icon: note-sticky
+---
+
+## Overview
+
+The `/notes` command displays real-time game data such as resin, stamina, daily commissions, realm currency, and other time-gated resources.
+
+## Usage
+
+```bash
+/notes account:<game>
+```
+
+<ParamField path="account" type="string" required>
+  The game account to view notes for.
+  
+  **Autocomplete**: Shows all your linked games
+</ParamField>
+
+## Supported Games
+
+- **Genshin Impact**
+- **Zenless Zone Zero**
+- **Honkai: Star Rail**
+- **Honkai Impact 3rd**
+
+## Example
+
+```bash
+/notes account:Genshin Impact (NA)
+```
+
+## Genshin Impact Notes
+
+### Original Resin
+
+```markdown
+### Original Resin
+Fully replenished in <t:1234567890:R>
+160/160
+```
+
+<Info>
+  Shows current resin and time until full recovery.
+</Info>
+
+### Enemies of Note
+
+```markdown
+### Enemies of Note
+Remaining resin cost-halving opportunities this week
+3/3
+```
+
+### Daily Commission Reward
+
+```markdown
+### Daily Commission Reward
+-# Daily Commissions
+✅✅✅❌
+-# Encounter Points
+🟦🟦⬜
+-# Long-Term Encounter Points
+🟦 x5
+3/4
+```
+
+<Accordion title="Commission Icons">
+  - ✅ = Completed commission
+  - ❌ = Incomplete commission
+  - 🟦 = Claimed encounter point
+  - ⬜ = Unclaimed encounter point
+</Accordion>
+
+### Jar of Riches - Realm Currency
+
+```markdown
+### Jar of Riches - Realm Currency
+The Limit will be reached <t:1234567890:R>
+2400/2400
+```
+
+### Parametric Transformer
+
+```markdown
+### Parametric Transformer
+Can be used again in 6 days
+Cooldown in progress
+```
+
+## Zenless Zone Zero Notes
+
+### Battery Charge
+
+```markdown
+### Battery Charge
+**240/240**
+Fully Recovered
+```
+
+or
+
+```markdown
+### Battery Charge
+**180/240**
+Full at 14:30 Today
+```
+
+### Daily Missions
+
+```markdown
+### Daily Missions
+Engagement Today: **100/100**
+Scratch Card Mania: **Complete**
+Video Store Management: **Revenue Available**
+```
+
+### Season Missions
+
+```markdown
+### Season Missions
+Bounty Commission Progress: **3/3**
+-# Refreshes <t:1234567890:R>
+Ridu Weekly Points: **1000/1000**
+-# Refreshes <t:1234567890:R>
+```
+
+## Honkai: Star Rail Notes
+
+### Trailblazer Powder
+
+```markdown
+### Trailblazer Powder
+**240**/240
+Fully Restored
+```
+
+or
+
+```markdown
+### Trailblazer Powder
+**180**/240
+Fully restores <t:1234567890:R>
+```
+
+### Additional Stats
+
+```markdown
+### Daily Training
+**500**/500
+
+### Echo of War
+**3**/3
+
+### Simulated Universe Points
+**14000**/14000
+
+### Currency War Points
+**6000**/6000
+```
+
+## Honkai Impact 3rd Notes
+
+### Stamina
+
+```markdown
+### Stamina
+**200**/200
+Fully Restored
+Daily BP: **500**/500
+```
+
+### Q-Manifold / Superstring Dimension
+
+```markdown
+### Q-Manifold
+Time Left: <t:1234567890:R>
+Current Score: **800**/800
+```
+
+or for higher-tier players:
+
+```markdown
+### Superstring Dimension
+Time Left: <t:1234567890:R>
+Current Score: **32000**
+Current Tier: Infernal
+```
+
+### Memorial Arena
+
+```markdown
+### Memorial Arena
+Time Left: <t:1234567890:R>
+Challenge Rewards: **450**/450
+SSS-rank Rewards: **250**/250
+```
+
+### Elysian Realm
+
+```markdown
+### Elysian Realm
+Time Left: <t:1234567890:R>
+Current Score: **800**/800
+```
+
+## Loading Process
+
+<Steps>
+  <Step title="Retrieving Data">
+    "Retrieving your data. Please wait..."
+  </Step>
+  
+  <Step title="Account Retrieved">
+    "Account successfully retrieved in 120ms. Fetching notes from HoYoverse..."
+  </Step>
+  
+  <Step title="Notes Retrieved">
+    "Notes retrieved in 380ms. Preparing your data..."
+  </Step>
+  
+  <Step title="Display">
+    Shows complete real-time notes
+  </Step>
+</Steps>
+
+## Refresh Rate
+
+<Warning>
+  Real-Time Notes data has a delay:
+  - **Genshin Impact**: ~1 hour delay
+  - **Zenless Zone Zero**: ~2 hour delay
+  - **Honkai: Star Rail**: ~1 hour delay
+  - **Honkai Impact 3rd**: ~30 minutes delay
+</Warning>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  30 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Public (visible to everyone in the channel)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/notes.js:16-27`
+- **Cooldown**: `src/commands/notes.js:15`
+- **Genshin Notes**: `src/commands/notes.js:152-288`
+- **ZZZ Notes**: `src/commands/notes.js:289-341`
+- **Star Rail Notes**: `src/commands/notes.js:342-397`
+- **Honkai Notes**: `src/commands/notes.js:398-463`
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Profile" icon="user" href="/commands/profile">
+    View comprehensive game statistics
+  </Card>
+  
+  <Card title="Check-in" icon="calendar-check" href="/commands/check-in">
+    Claim daily HoYoLAB rewards
+  </Card>
+</CardGroup>

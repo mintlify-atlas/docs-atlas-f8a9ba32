@@ -1,0 +1,306 @@
+---
+title: 'Settings'
+description: 'Configure your HoYoVista preferences and customize your bot experience'
+icon: 'gear'
+---
+
+## Overview
+
+The `/settings` command allows you to customize your HoYoVista experience by configuring notifications, privacy settings, automatic features, and data collection preferences. Settings are organized into intuitive categories for easy navigation.
+
+## Accessing Settings
+
+To open your settings:
+
+```bash
+/settings
+```
+
+The settings interface uses an interactive menu system that allows you to:
+- Navigate between different setting categories using the dropdown menu
+- Toggle individual settings with dedicated Enable/Disable buttons
+- See the current status of each setting at a glance
+- Reset all settings to default values if needed
+
+## Settings Categories
+
+### General Settings
+
+General Settings control your core bot experience, including notifications, privacy, and analytics.
+
+#### Update Notifications
+
+**Default:** Enabled
+
+When enabled, you will receive updates and alerts from the bot about:
+- New features and functionality
+- Important bug fixes
+- Bot announcements
+- Service updates
+
+**To toggle:**
+1. Open `/settings`
+2. Ensure you're on the "General Settings" page
+3. Click Enable/Disable next to "Update Notifications"
+
+<Note>
+  Update notifications are sent via Discord DMs, so ensure you have DMs enabled from server members.
+</Note>
+
+#### Privacy Blur
+
+**Default:** Disabled
+
+When enabled, sensitive information such as UIDs will be hidden from other users in bot responses. This adds an extra layer of privacy protection beyond Discord's default privacy settings.
+
+**How it works:**
+- Your UID will be censored (e.g., `1*****2345` instead of `123452345`)
+- Only the first digit and last 4 digits remain visible
+- Applies to all public bot responses
+- Your own view is not affected
+
+**To toggle:**
+1. Open `/settings`
+2. Navigate to "General Settings"
+3. Click Enable/Disable next to "Privacy Blur"
+
+<Tip>
+  Enable Privacy Blur if you use the bot in public servers and want to protect your game account identifiers.
+</Tip>
+
+#### Collect Analytics Data
+
+**Default:** Enabled
+
+When enabled, anonymized usage data will be collected to help improve the bot. This data helps:
+- Identify and fix bugs
+- Understand usage patterns
+- Prioritize feature requests
+- Generate your personalized end-of-year wrapped (similar to Spotify Wrapped)
+
+**Data collected includes:**
+- Command usage (which commands you use)
+- Interaction timestamps
+- Game selection preferences
+- General usage patterns
+
+**Data NOT collected when disabled:**
+- No analytics events are recorded
+- No usage statistics are tracked
+- You will not receive an end-of-year wrapped
+
+**To toggle:**
+1. Open `/settings`
+2. Navigate to "General Settings"
+3. Click Enable/Disable next to "Collect Analytics Data"
+
+<Warning>
+  Disabling analytics means you won't receive a personalized end-of-year wrapped summary.
+</Warning>
+
+### Check-in Settings
+
+Check-in Settings control automatic daily check-ins for your linked games.
+
+#### Automatic Check-in
+
+HoYoVista can automatically check in to your games each day, earning you daily rewards without manual intervention.
+
+**How it works:**
+- Check-ins occur automatically between **12:45 AM - 1:45 AM UTC** each day
+- Supports: Genshin Impact, Honkai Impact 3rd, Honkai: Star Rail, Zenless Zone Zero
+- Each game can be enabled/disabled independently
+- Check-ins happen for all enabled games
+
+**To enable for specific games:**
+1. Open `/settings`
+2. Select "Check-in Settings" from the dropdown
+3. Find the game you want to configure
+4. Click Enable/Disable next to the game name
+
+<Tip>
+  Enable auto check-in for all your games to never miss daily rewards!
+</Tip>
+
+#### DM Notifications (Check-in)
+
+**Default:** Enabled
+
+Receive direct messages when automatic check-ins occur.
+
+**Notification includes:**
+- Game name and account details
+- Check-in success/failure status
+- Rewards earned
+- Total check-ins for the month
+
+**Requirements:**
+- Discord DMs must be enabled
+- You must have DMs from bot enabled
+
+**To toggle:**
+1. Open `/settings`
+2. Navigate to "Check-in Settings"
+3. Click Enable/Disable next to "DM Notifications"
+
+<Note>
+  If DMs are disabled in your Discord settings, you won't receive notifications even if this setting is enabled.
+</Note>
+
+### Code Redemption Settings
+
+Code Redemption Settings manage automatic redemption of promotional codes for your games.
+
+#### Automatic Code Redemption
+
+**Default:** Enabled per game
+
+When enabled, HoYoVista automatically redeems newly discovered promotional codes for your games.
+
+**How it works:**
+- Codes are fetched from an external API maintained by seria_ati
+- New codes are detected and redeemed automatically
+- Each game can be configured independently
+- Already-attempted codes are tracked to prevent duplicates
+- Supports: Genshin Impact, Honkai: Star Rail, Zenless Zone Zero
+
+**To enable for specific games:**
+1. Open `/settings`
+2. Select "Code Redemption Settings" from the dropdown
+3. Find the game you want to configure
+4. Click Enable/Disable next to the game name
+
+<Tip>
+  Never miss out on limited-time rewards by enabling auto-redemption!
+</Tip>
+
+#### DM Notifications (Redemption)
+
+**Default:** Enabled
+
+Receive notifications when codes are automatically redeemed for your accounts.
+
+**Notification includes:**
+- Game name and account
+- Code that was redeemed
+- Redemption success/failure status
+- Rewards earned (if available)
+
+**To toggle:**
+1. Open `/settings`
+2. Navigate to "Code Redemption Settings"
+3. Click Enable/Disable next to "DM Notifications"
+
+### Reset Settings
+
+The Reset Settings page allows you to restore all settings to their default values.
+
+**What gets reset:**
+- All General Settings return to defaults
+- Privacy Blur: Disabled
+- Collect Analytics Data: Enabled
+- Update Notifications: Enabled
+- All Check-in settings: Enabled
+- All Redemption settings: Enabled
+- DM Notifications: Enabled
+
+**What does NOT get reset:**
+- Your linked HoYoLAB account
+- Your game data and progress
+- Historical analytics data
+- Linked games
+
+**To reset settings:**
+1. Open `/settings`
+2. Select "Reset Settings" from the dropdown
+3. Read the warning carefully
+4. Click "Confirm Reset"
+
+<Warning>
+  Resetting settings cannot be reversed. You'll need to reconfigure your preferences manually.
+</Warning>
+
+## Rate Limiting
+
+To prevent accidental changes, the settings system includes rate limiting:
+- Maximum 5 setting changes per 30 seconds
+- If exceeded, you'll see a cooldown message
+- Wait for the cooldown to expire before making more changes
+
+## Per-Game Configuration
+
+Both Check-in and Redemption settings can be configured per-game:
+
+| Game | Check-in Support | Redemption Support |
+|------|-----------------|--------------------|
+| Genshin Impact | ✓ | ✓ |
+| Honkai Impact 3rd | ✓ | ✗ |
+| Honkai: Star Rail | ✓ | ✓ |
+| Zenless Zone Zero | ✓ | ✓ |
+
+<Note>
+  You'll only see settings for games that are linked to your account.
+</Note>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Recommended Settings for Privacy-Conscious Users">
+    - Enable **Privacy Blur** to hide UIDs in public responses
+    - Consider disabling **Collect Analytics Data** if you prefer no tracking
+    - Keep **Update Notifications** enabled for security updates
+  </Accordion>
+
+  <Accordion title="Recommended Settings for Active Players">
+    - Enable **Automatic Check-in** for all games
+    - Enable **Automatic Code Redemption** for all games
+    - Enable all **DM Notifications** to stay informed
+    - Keep **Collect Analytics Data** enabled for year-end wrapped
+  </Accordion>
+
+  <Accordion title="Recommended Settings for Minimal Notifications">
+    - Disable **DM Notifications** for check-in and redemption
+    - Keep automatic features enabled to not miss rewards
+    - Disable **Update Notifications** if you only want critical alerts
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Settings not saving">
+    - Check if you're being rate limited (too many changes too quickly)
+    - Ensure you're clicking the Enable/Disable buttons, not just viewing
+    - Try using `/settings` again to verify changes were saved
+  </Accordion>
+
+  <Accordion title="Not receiving DM notifications">
+    - Verify DMs are enabled in your Discord privacy settings
+    - Check that the specific notification setting is enabled
+    - Ensure you haven't blocked the bot
+    - Verify automatic features are enabled for your games
+  </Accordion>
+
+  <Accordion title="Auto check-in not working">
+    - Verify the game has auto check-in enabled in settings
+    - Ensure your HoYoLAB account is still linked (`/hoyolink`)
+    - Check-ins occur between 12:45-1:45 AM UTC - check during/after this window
+    - Some games may have service interruptions
+  </Accordion>
+
+  <Accordion title="Privacy Blur not working">
+    - Ensure the setting is enabled in General Settings
+    - Privacy Blur only affects bot responses to others, not your own view
+    - Try a command like `/profile` in a server to test
+  </Accordion>
+</AccordionGroup>
+
+## Related Commands
+
+- [/hoyolink](/commands/hoyolink) - Link your HoYoLAB account
+- [/data](/configuration/data-management) - View and export your data
+- [Privacy Policy](/configuration/privacy) - Learn about privacy and data collection
+
+## Support
+
+Need help with settings? Check out our [support resources](/support/getting-help) or join our Discord community.

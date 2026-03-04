@@ -1,0 +1,323 @@
+---
+title: 'Troubleshooting Guide'
+description: 'Solutions to common issues with HoYoVista'
+icon: 'wrench'
+---
+
+## Cookie Issues
+
+### Invalid or Incomplete Cookies
+
+**Symptoms:**
+- Error message: "The cookies provided are invalid or incomplete"
+- Missing required cookies error
+
+**Solution:**
+1. Make sure you're copying the **entire** cookie string from the Network tab
+2. Required cookies are: `ltmid_v2`, `ltoken_v2`, and `ltuid_v2`
+3. Don't manually edit the cookie string
+4. Copy everything after "Cookie:" in the Request Headers section
+5. The cookie string should be very long (several lines)
+
+**Example of valid cookies:**
+```
+ltmid_v2=____; ltoken_v2=v2____; ltuid_v2=____; DEVICEFP=____; 
+HYV_LOGIN_PLATFORM_LIFECYCLE_ID={}; account_id_v2=____; 
+account_mid_v2=____; cookie_token_v2=v2____; mi18nLang=en-us
+```
+
+### Cookie Expiration
+
+**Symptoms:**
+- Commands suddenly stop working
+- "Failed to fetch data" errors
+- Automatic check-ins failing
+
+**Solution:**
+Cookies expire periodically (usually after a few months). To refresh:
+1. Go to `/hoyolink`
+2. Click "Unlink HoYoLAB Account" (this won't delete your registration)
+3. Click "Add HoYoLAB Account"
+4. Get fresh cookies from HoYoLAB following the guide
+5. Paste the new cookies
+
+<Warning>
+You need to re-link your account if you:
+- Log out of HoYoLAB
+- Clear browser cookies
+- Change your HoYoLAB password
+- Use a different browser
+</Warning>
+
+### No Games Found
+
+**Symptoms:**
+- "No games found linked to this account"
+- "No supported linked games found"
+
+**Solution:**
+1. Verify games are linked to your HoYoLAB account:
+   - Visit [HoYoLAB](https://www.hoyolab.com/)
+   - Go to your profile
+   - Check "Game Accounts" section
+2. Make sure your HoYoLAB privacy settings allow data access:
+   - Go to Account Settings → Privacy Settings
+   - Enable "Display my game data"
+3. Wait 5-10 minutes after linking a new game to HoYoLAB
+4. Try unlinking and re-linking with `/hoyolink`
+
+## Command Errors
+
+### "You are not registered"
+
+**Solution:**
+Run `/register` first before using any other commands. Registration is required to use HoYoVista.
+
+### "None of your linked games are supported for this command"
+
+**Cause:**
+Some commands only work with specific games.
+
+**Feature availability:**
+- `/profile`: Genshin Impact, Zenless Zone Zero only
+- `/income`: Genshin Impact, Zenless Zone Zero only
+- `/redeem`: All except Honkai Impact 3rd (currently under maintenance)
+- `/notes`: All games
+- `/check-in`: All games
+
+### "This command is currently under maintenance"
+
+**Affected commands:**
+- `/redeem` - Code redemption feature
+
+**Solution:**
+This is a known issue. The feature is being worked on. Check `/roadmap` for updates.
+
+### Cooldown Errors
+
+**Symptoms:**
+- "You're on cooldown"
+- "Please wait X seconds"
+
+**Solution:**
+Commands have cooldowns to prevent abuse:
+- `/check-in`: 30 minutes (1800 seconds)
+- `/redeem`: 60 seconds
+- `/notes`, `/profile`, `/income`: 30 seconds
+- `/settings`, `/hoyolink`: 30 seconds
+- `/register`: 10 seconds
+
+Wait for the cooldown period to expire before trying again.
+
+### Rate Limit in Settings
+
+**Symptoms:**
+- "Whoa, you're updating settings too quickly!"
+- "Please wait X seconds before trying again"
+
+**Cause:**
+Settings updates are limited to 5 changes per 30 seconds.
+
+**Solution:**
+Wait 30 seconds and try again. The rate limit will reset automatically.
+
+## Check-in Issues
+
+### Check-in Failed with Error Code
+
+Common error codes and their meanings:
+
+**Code `-5003`**
+- **Meaning:** Already checked in today
+- **Solution:** Wait until tomorrow. Each game allows one check-in per day.
+
+**Code `-100`**
+- **Meaning:** Invalid or expired cookies
+- **Solution:** Re-link your account with `/hoyolink`
+
+**Code `-10001`**
+- **Meaning:** Invalid request parameters
+- **Solution:** Try again in a few minutes. If persists, re-link account.
+
+**Code `401` or `403`**
+- **Meaning:** Authentication failed
+- **Solution:** Your cookies expired. Get new cookies via `/hoyolink`
+
+**Code `429`**
+- **Meaning:** Rate limited by HoYoLAB
+- **Solution:** You've made too many requests. Wait 1 hour before trying again.
+
+### Automatic Check-in Not Working
+
+**Checklist:**
+1. Is auto check-in enabled in `/settings` → "Check-in Settings"?
+2. Is auto check-in enabled for the specific game?
+3. Are your cookies still valid? (test with `/notes` or `/check-in`)
+4. Check DM notifications (if enabled) for error messages
+5. Automatic check-ins run between 1:00-2:00 AM UTC daily
+
+**Solution:**
+If automatic check-ins fail consistently:
+1. Verify settings: `/settings` → "Check-in Settings"
+2. Test manual check-in: `/check-in`
+3. If manual works but auto doesn't, use `/feedback` to report
+4. Re-link cookies if you see authentication errors
+
+### "No checkin details available"
+
+**Cause:**
+Some games don't provide detailed check-in reward information through the API.
+
+**Solution:**
+This is normal. The check-in was successful, but HoYoLAB didn't return reward details. You can verify in the HoYoLAB app or website.
+
+## Real-Time Notes Issues
+
+### "An error occurred while fetching your notes"
+
+**Common causes:**
+1. **Expired cookies** - Re-link with `/hoyolink`
+2. **HoYoLAB server issues** - Try again in a few minutes
+3. **Network timeout** - Try again
+4. **Game not fully set up** - Some features require game progression
+
+**For Genshin Impact:**
+- Serenitea Pot must be unlocked for Realm Currency
+- Parametric Transformer must be obtained to show status
+
+**For Honkai Impact 3rd:**
+- Memorial Arena must be unlocked
+- Superstring Dimension requires Captain Level progress
+
+### Data Appears Delayed
+
+**Expected behavior:**
+- Genshin Impact: ~1 hour delay
+- Honkai: Star Rail: Real-time to a few minutes
+- Zenless Zone Zero: ~2 hour delay
+- Honkai Impact 3rd: ~5-10 minutes
+
+These delays are from HoYoLAB's API, not the bot.
+
+## Profile & Income Issues
+
+### "An error occurred while fetching your data"
+
+**For `/profile`:**
+1. Make sure you selected a supported game (Genshin or ZZZ only)
+2. Check if Enka Network is accessible (third-party service)
+3. Your profile must be public on HoYoLAB
+4. Wait a few minutes and try again
+
+**For `/income`:**
+1. Supported games: Genshin Impact and Zenless Zone Zero only
+2. Make sure you've earned resources in the selected month
+3. The ledger feature must be enabled in HoYoLAB settings
+4. Check if the selected month has data (current or past 2 months)
+
+### Profile Shows Outdated Stats
+
+**Cause:**
+Profile data comes from Enka Network, which caches player data.
+
+**Solution:**
+1. Update your showcase in the game
+2. Wait 5-10 minutes
+3. Try `/profile` again
+4. If still outdated, the data will refresh on the next Enka update cycle
+
+### Income Shows Zero or Incomplete
+
+**Possible reasons:**
+1. Selected a month where you didn't play
+2. The month just started (data takes time to populate)
+3. Only includes non-purchase resources (excludes top-ups)
+4. First-time fetch can take a few minutes to generate
+
+## Permission & Access Issues
+
+### Bot Not Responding
+
+**Checklist:**
+1. Is the bot online? (check bot status in member list)
+2. Are you using slash commands? (type `/` to see available commands)
+3. Do you have permission to use commands in this channel?
+4. Is the bot installed for your user account or the server?
+
+**Solution:**
+If the bot doesn't respond at all:
+1. Try in DMs with the bot
+2. Check if you can see the bot's commands when typing `/`
+3. Re-add the bot to the server or reinstall user app
+
+### "Interaction Failed"
+
+**Cause:**
+Discord interaction timeout (3 seconds for initial response).
+
+**Solution:**
+This usually happens when:
+1. Database is slow to respond
+2. HoYoLAB API is slow
+3. Network issues
+
+Try again in a few moments. If persistent, use `/feedback` to report.
+
+### Cannot Send DM Notifications
+
+**Symptoms:**
+- Automatic notifications not arriving
+- "Failed to send DM" in logs
+
+**Solution:**
+1. Check Discord privacy settings:
+   - User Settings → Privacy & Safety
+   - Enable "Allow direct messages from server members"
+2. Make sure you haven't blocked the bot
+3. Check if the bot user is in your mutual servers or installed as user app
+
+## Data & Privacy Issues
+
+### Cannot Access /data or /settings
+
+**Solution:**
+1. Make sure you're registered with `/register`
+2. Try unlinking and re-linking with `/hoyolink`
+3. If the issue persists, your data may be corrupted - use `/feedback`
+
+### Privacy Blur Not Working
+
+**Solution:**
+1. Go to `/settings` → "General Settings"
+2. Ensure "Privacy Blur" is Enabled
+3. The setting applies to new command responses
+4. Some UIDs in embeds may not be affected (known limitation)
+
+### Deleting Data
+
+**To completely remove your data:**
+1. Use `/hoyolink` → "Unlink HoYoLAB Account" → "Confirm"
+2. This removes:
+   - All cookies
+   - Linked games
+   - Settings
+   - Analytics data (if enabled)
+
+<Warning>
+Unlinking is permanent and cannot be undone. You'll need to register again and re-link your account.
+</Warning>
+
+## Still Need Help?
+
+If your issue isn't covered here:
+
+1. **Check the FAQ**: [Frequently Asked Questions](/support/faq)
+2. **Review Game Support**: [Supported Games](/support/supported-games)
+3. **Submit Feedback**: Use `/feedback` in Discord
+4. **Check Roadmap**: Use `/roadmap` to see known issues and planned fixes
+
+When reporting issues, include:
+- The exact command you used
+- Error message (if any)
+- Which game you were trying to access
+- Whether it worked before or is a first-time issue

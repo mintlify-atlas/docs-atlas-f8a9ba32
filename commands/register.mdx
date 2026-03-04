@@ -1,0 +1,94 @@
+---
+title: /register
+description: Register your account with HoYoVista
+icon: user-plus
+---
+
+## Overview
+
+The `/register` command creates your HoYoVista account. This is the first step required before using any other bot features.
+
+## Usage
+
+```bash
+/register
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## Behavior
+
+### First Time Registration
+
+When you run `/register` for the first time:
+
+1. The bot displays the **HoYoVista Registration** screen
+2. You must agree to the [Privacy Policy](/legal/privacy-policy) and [Terms of Service](/legal/terms-of-service)
+3. Click **"Agree and Register"** to complete registration
+4. Your account is created and you'll see suggested next steps
+
+### Already Registered
+
+If you've already registered, the bot will inform you that your account already exists.
+
+## Response Format
+
+<CodeGroup>
+```markdown Success Response
+## You're all set~
+Welcome to HoYoVista! Here are some commands you can use to get started:
+- `/hoyolink` - Link/unlink your HoYoLAB account with your Discord account.
+- `/settings` - Access and modify your account settings.
+- `/data` - Manage your data, including viewing or deleting it.
+```
+
+```markdown Already Registered
+You have already registered your account.
+```
+</CodeGroup>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  10 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/register.js:14-17`
+- **Cooldown Property**: `src/commands/register.js:12`
+
+## Next Steps
+
+After registering, you should:
+
+<CardGroup cols={2}>
+  <Card title="Link HoYoLAB" icon="link" href="/commands/hoyolink">
+    Connect your HoYoLAB account to unlock game features
+  </Card>
+  
+  <Card title="Configure Settings" icon="gear" href="/commands/settings">
+    Customize notification preferences and privacy settings
+  </Card>
+</CardGroup>
+
+<Warning>
+  You must register before using any other HoYoVista commands. The bot will prompt you to register if you try to use other commands without an account.
+</Warning>

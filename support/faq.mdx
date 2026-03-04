@@ -1,0 +1,157 @@
+---
+title: 'Frequently Asked Questions'
+description: 'Common questions and answers about HoYoVista'
+icon: 'circle-question'
+---
+
+## Getting Started
+
+<Accordion title="What is HoYoVista?">
+HoYoVista is a Discord bot that integrates with HoYoLAB to provide real-time game information, automatic daily check-ins, code redemption, and more for HoYoverse games including Genshin Impact, Honkai: Star Rail, Honkai Impact 3rd, and Zenless Zone Zero.
+</Accordion>
+
+<Accordion title="How do I register with HoYoVista?">
+Use the `/register` command in Discord. You'll need to agree to the Terms of Service and Privacy Policy. After registration, use `/hoyolink` to connect your HoYoLAB account with your cookies.
+</Accordion>
+
+<Accordion title="What are HoYoLAB cookies and why do I need them?">
+HoYoLAB cookies are authentication tokens that allow HoYoVista to access your game data on your behalf. They're required for the bot to fetch your real-time notes, perform check-ins, and access other game information. The bot needs cookies like `ltmid_v2`, `ltoken_v2`, and `ltuid_v2` to authenticate with HoYoLAB's API.
+</Accordion>
+
+<Accordion title="How do I get my HoYoLAB cookies?">
+1. Go to [HoYoLAB](https://www.hoyolab.com/home) and log in
+2. Click your profile picture and select "Personal Homepage"
+3. Open browser DevTools (F12 or right-click → Inspect)
+4. Go to the Network tab and refresh the page (Ctrl+R or Cmd+R)
+5. Type "getGame" in the filter box
+6. Click on "getGameRecordCard" in the results
+7. Under Request Headers, find the `Cookie` field and copy everything after "Cookie:"
+8. Use `/hoyolink` and paste the cookies when prompted
+</Accordion>
+
+<Accordion title="Which games does HoYoVista support?">
+HoYoVista supports:
+- **Genshin Impact** (Game ID: 2)
+- **Honkai: Star Rail** (Game ID: 6)
+- **Honkai Impact 3rd** (Game ID: 1)
+- **Zenless Zone Zero** (Game ID: 8)
+
+Different features are available for different games. See the [Supported Games](/support/supported-games) page for details.
+</Accordion>
+
+## Features & Usage
+
+<Accordion title="What commands are available?">
+Key commands include:
+- `/register` - Register your account
+- `/hoyolink` - Link your HoYoLAB account
+- `/check-in` - Perform daily check-in
+- `/notes` - View real-time game notes (resin, stamina, etc.)
+- `/profile` - View your game profile and stats
+- `/income` - View monthly income reports
+- `/redeem` - Redeem codes (currently under maintenance)
+- `/settings` - Configure bot settings
+- `/data` - Manage your stored data
+</Accordion>
+
+<Accordion title="How do automatic check-ins work?">
+Once you link your HoYoLAB account, you can enable automatic check-ins in `/settings`. The bot will automatically check in for your games daily between approximately 1:00 AM and 2:00 AM UTC. You can enable/disable auto check-ins per game and choose whether to receive DM notifications.
+</Accordion>
+
+<Accordion title="Can I use HoYoVista in DMs?">
+Yes! HoYoVista supports Discord's integration types, allowing you to use commands in:
+- Server channels (where the bot is added)
+- Direct Messages
+- User-installed app contexts
+</Accordion>
+
+<Accordion title="What are Real-Time Notes?">
+Real-Time Notes show your current game resources like:
+- **Genshin Impact**: Original Resin, Daily Commissions, Realm Currency, Parametric Transformer
+- **Honkai: Star Rail**: Trailblazer Power, Daily Training, Echo of War
+- **Honkai Impact 3rd**: Stamina, Superstring Dimension, Memorial Arena
+- **Zenless Zone Zero**: Battery Charge, Daily Missions, Season Missions
+</Accordion>
+
+<Accordion title="How often can I use commands?">
+Commands have cooldowns to prevent abuse:
+- Most commands: 10-30 seconds
+- `/check-in`: 30 minutes
+- `/redeem`: 60 seconds
+- `/notes` and `/profile`: 30 seconds
+
+Settings updates have a rate limit of 5 changes per 30 seconds.
+</Accordion>
+
+## Privacy & Data
+
+<Accordion title="What data does HoYoVista collect?">
+HoYoVista stores:
+- Discord user ID
+- HoYoLAB cookies (encrypted)
+- Linked game accounts (UIDs, regions)
+- Settings and preferences
+- Optional: Usage analytics (if you enable "Collect Analytics Data" in settings)
+
+You can view and delete your data anytime using `/data`.
+</Accordion>
+
+<Accordion title="Can I hide my UID from others?">
+Yes! Enable "Privacy Blur" in `/settings` under General Settings. This will censor your UID in bot responses, showing only partial digits.
+</Accordion>
+
+<Accordion title="How do I delete my data?">
+Use `/hoyolink` and select "Unlink HoYoLAB Account" to remove your cookies and linked games. Use `/data` to manage or delete all your stored information. This action is permanent and cannot be undone.
+</Accordion>
+
+## Troubleshooting
+
+<Accordion title="Why aren't my cookies working?">
+Common issues:
+- Missing required cookies (`ltmid_v2`, `ltoken_v2`, `ltuid_v2`)
+- Cookies expired (re-copy from HoYoLAB)
+- Copied incomplete cookie string
+- Logged out of HoYoLAB
+
+See the [Troubleshooting](/support/troubleshooting) page for detailed solutions.
+</Accordion>
+
+<Accordion title="Why can't I see my game data?">
+Make sure:
+1. You've registered with `/register`
+2. You've linked your HoYoLAB account with `/hoyolink`
+3. Your HoYoLAB account has the game linked
+4. Your cookies are still valid
+5. Your HoYoLAB privacy settings allow data access
+</Accordion>
+
+<Accordion title="The bot says 'No supported linked games found'. What does this mean?">
+This means either:
+- You haven't linked your HoYoLAB account yet (use `/hoyolink`)
+- Your HoYoLAB account doesn't have any supported games linked
+- The specific command doesn't support the games you have (some features are game-specific)
+</Accordion>
+
+<Accordion title="Why did my automatic check-in fail?">
+Check-ins can fail due to:
+- Expired cookies (re-link your account)
+- Already checked in manually
+- HoYoLAB server issues
+- Rate limiting from HoYoLAB
+- Network connectivity issues
+
+The bot will show error codes when check-ins fail. See [Troubleshooting](/support/troubleshooting) for specific error codes.
+</Accordion>
+
+## Support
+
+<Accordion title="How do I report a bug or request a feature?">
+Use the `/feedback` command to submit feedback directly to the developers. You can also check `/roadmap` to see planned features and improvements.
+</Accordion>
+
+<Accordion title="Where can I get more help?">
+If your question isn't answered here:
+1. Check the [Troubleshooting](/support/troubleshooting) guide
+2. Use `/feedback` to contact the developers
+3. Review the [Terms of Service](/legal/terms-of-service) and [Privacy Policy](/legal/privacy-policy)
+</Accordion>

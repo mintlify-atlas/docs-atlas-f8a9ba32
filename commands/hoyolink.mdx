@@ -1,0 +1,179 @@
+---
+title: /hoyolink
+description: Link your HoYoLAB account with HoYoVista
+icon: link
+---
+
+## Overview
+
+The `/hoyolink` command allows you to link your HoYoLAB account to HoYoVista using cookies. This enables access to game data, check-ins, profiles, and more.
+
+## Usage
+
+```bash
+/hoyolink
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## Behavior
+
+### No Account Linked
+
+If you haven't linked an account yet:
+- Shows "Add HoYoLAB Account" button
+- Provides help guide button with cookie instructions
+- Opens a modal to paste your HoYoLAB cookies
+
+### Account Already Linked
+
+If you've already linked an account:
+- Confirms your account is linked
+- Offers "Unlink HoYoLAB Account" button to remove the connection
+
+### Linking Process
+
+<Steps>
+  <Step title="Click 'Add HoYoLAB Account'">
+    Opens a modal to enter your cookies
+  </Step>
+  
+  <Step title="Paste Your Cookies">
+    Enter the complete cookie string from HoYoLAB
+  </Step>
+  
+  <Step title="Validation">
+    Bot validates cookies and fetches your game records
+  </Step>
+  
+  <Step title="Game Detection">
+    Automatically detects and links all your HoYoverse games
+  </Step>
+</Steps>
+
+## Getting Your Cookies
+
+Click the info button (ℹ️) in the command response to see detailed instructions:
+
+<Accordion title="Cookie Extraction Guide">
+1. Go to [HoYoLAB](https://www.hoyolab.com/home) and log in
+2. Click your profile picture → **"Personal Homepage"**
+3. Open browser DevTools ([How to open](https://balsamiq.com/support/faqs/browserconsole/))
+4. Navigate to **Network** tab and refresh (Ctrl+R / Cmd+R)
+5. Filter by **"getGame"** and click **"getGameRecordCard"**
+6. Find **Cookie** in Request Headers
+7. Copy everything after **"Cookie:"**
+8. Paste into the HoYoVista modal
+</Accordion>
+
+## Required Cookies
+
+The following cookies are **required** for the bot to function:
+
+<ParamField path="ltmid_v2" type="string" required>
+  Account identifier token
+</ParamField>
+
+<ParamField path="ltoken_v2" type="string" required>
+  Authentication token
+</ParamField>
+
+<ParamField path="ltuid_v2" type="string" required>
+  User ID token
+</ParamField>
+
+<Info>
+  The bot validates these required cookies before accepting your link. Missing cookies will trigger an error message.
+</Info>
+
+## Sample Cookie Format
+
+```
+ltmid_v2=____; ltoken_v2=v2____; ltuid_v2=____; DEVICEFP=____; 
+HYV_LOGIN_PLATFORM_LIFECYCLE_ID={}; account_id_v2=____; 
+account_mid_v2=____; cookie_token_v2=v2____; mi18nLang=en-us
+```
+
+## Error Messages
+
+<CodeGroup>
+```markdown Invalid/Incomplete Cookies
+The cookies provided are **invalid** or **incomplete**.
+The following required cookies are missing: `ltmidV2`, `ltokenV2`, `ltuidV2`.
+Please copy everything and try again.
+```
+
+```markdown No Games Found
+No games found linked to this account. Please ensure your account 
+has valid game data.
+```
+
+```markdown API Error
+An error occurred while fetching your game data. 
+Please try again later.
+```
+</CodeGroup>
+
+## Unlinking Your Account
+
+To unlink your HoYoLAB account:
+
+1. Run `/hoyolink` when already linked
+2. Click **"Unlink HoYoLAB Account"**
+3. Confirm the destructive action
+
+<Warning>
+  Unlinking your account is **permanent and cannot be reversed**. All linked games and settings will be removed.
+</Warning>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  30 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/hoyolink.js:20-24`
+- **Cooldown**: `src/commands/hoyolink.js:19`
+- **Cookie Validation**: `src/commands/hoyolink.js:219-241`
+- **Game Detection**: `src/commands/hoyolink.js:274-282`
+
+## What's Next?
+
+After linking your HoYoLAB account:
+
+<CardGroup cols={2}>
+  <Card title="Daily Check-in" icon="calendar-check" href="/commands/check-in">
+    Claim daily rewards from HoYoLAB
+  </Card>
+  
+  <Card title="View Profile" icon="user" href="/commands/profile">
+    See your game statistics and progress
+  </Card>
+  
+  <Card title="Real-Time Notes" icon="note-sticky" href="/commands/notes">
+    Check resin, commissions, and more
+  </Card>
+  
+  <Card title="Configure Settings" icon="gear" href="/commands/settings">
+    Enable auto check-in and notifications
+  </Card>
+</CardGroup>

@@ -1,122 +1,108 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "HoYoVista",
+  "theme": "almond",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#8c93ed",
+    "light": "#8c93ed",
+    "dark": "#8c93ed"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/ScobbleQ/HoYoVista"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/ScobbleQ/HoYoVista"
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Get Started",
             "pages": [
-              "index",
+              "introduction",
               "quickstart",
-              "development"
+              "setup"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Features",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "features/overview",
+              "features/check-in",
+              "features/profile",
+              "features/notes",
+              "features/income",
+              "features/redeem"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Automation",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "automation/overview",
+              "automation/auto-checkin",
+              "automation/auto-redeem"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Configuration",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "configuration/settings",
+              "configuration/privacy",
+              "configuration/data-management"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Commands",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Command Reference",
             "pages": [
-              "api-reference/introduction"
+              "commands/overview",
+              "commands/register",
+              "commands/hoyolink",
+              "commands/check-in",
+              "commands/profile",
+              "commands/notes",
+              "commands/income",
+              "commands/redeem",
+              "commands/settings",
+              "commands/data",
+              "commands/feedback",
+              "commands/about"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Support",
+        "groups": [
+          {
+            "group": "Help",
+            "pages": [
+              "support/faq",
+              "support/troubleshooting",
+              "support/supported-games"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Legal",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "legal/terms-of-service",
+              "legal/privacy-policy"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ]
   }
 }

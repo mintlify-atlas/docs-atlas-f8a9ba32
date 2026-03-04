@@ -1,0 +1,162 @@
+---
+title: Daily Check-In
+description: Claim daily rewards from HoYoLAB for all your linked games
+icon: calendar-check
+---
+
+The `/check-in` command allows you to claim daily login rewards from HoYoLAB directly through Discord. Never miss a day of rewards again!
+
+## Usage
+
+```bash
+/check-in [account]
+```
+
+### Parameters
+
+- `account` (optional) - The specific game account to check in. If not provided, checks in all linked accounts.
+
+### Examples
+
+**Check in all linked accounts:**
+```bash
+/check-in
+```
+
+**Check in a specific game:**
+```bash
+/check-in account:Genshin Impact
+```
+
+## How It Works
+
+When you use the check-in command:
+
+1. HoYoVista connects to HoYoLAB using your linked account
+2. Claims the daily check-in reward for each selected game
+3. Displays the reward you received (e.g., Primogems, Mora)
+4. Shows if you missed any previous days
+
+<Info>
+  The check-in command has a 30-minute cooldown to prevent spam and comply with HoYoLAB rate limits.
+</Info>
+
+## Response Format
+
+### Successful Check-In
+
+When check-in is successful, you'll see:
+
+- Game name and censored UID
+- "Daily Check-in Claimed" confirmation
+- Reward item name and quantity (e.g., "Primogem x60")
+- Number of missed days (if any)
+- Reward icon thumbnail
+
+### Already Claimed
+
+If you've already checked in today:
+
+```
+Failed to check-in with code `-5003`
+You have already checked in today
+```
+
+### No Details Available
+
+Some games may not return detailed reward information:
+
+```
+Daily Check-in Claimed
+No checkin details available
+```
+
+## Supported Games
+
+The check-in feature supports all HoYoverse games:
+
+<CardGroup cols={2}>
+  <Card title="Genshin Impact" icon="star">
+    Full support with detailed rewards
+  </Card>
+  <Card title="Honkai: Star Rail" icon="star">
+    Full support with detailed rewards
+  </Card>
+  <Card title="Zenless Zone Zero" icon="star">
+    Full support with detailed rewards
+  </Card>
+  <Card title="Honkai Impact 3rd" icon="star">
+    Full support with detailed rewards
+  </Card>
+</CardGroup>
+
+## Common Rewards
+
+### Genshin Impact
+- Primogems (10-60)
+- Mora (5,000-20,000)
+- Hero's Wit
+- Mystic Enhancement Ore
+- Fine Enhancement Ore
+
+### Honkai: Star Rail
+- Stellar Jade
+- Credit
+- Traveler's Guide
+- Adventure Log
+
+### Zenless Zone Zero
+- Polychromes
+- Dennies
+- W-Engine Energy Module
+- Official Investigator Log
+
+### Honkai Impact 3rd
+- Crystals
+- Asterite
+- Coins
+- Ancient Willpower
+
+<Warning>
+  Check-in rewards reset daily at server refresh time. Make sure to check in every day to maximize your rewards!
+</Warning>
+
+## Tips & Best Practices
+
+1. **Set a reminder**: Check in at the same time every day to build a habit
+2. **Use automation**: Enable [auto check-in](/automation/auto-checkin) to never miss a day
+3. **Check all accounts**: Use `/check-in` without parameters to claim rewards for all games at once
+4. **Monitor missed days**: The bot shows missed days to help you track your streak
+
+## Error Codes
+
+Common error codes you might encounter:
+
+| Code | Meaning | Solution |
+|------|---------|----------|
+| `-5003` | Already checked in | Wait until tomorrow |
+| `-100` | Invalid cookies | Re-link your account with `/hoyolink` |
+| `-10001` | Invalid UID | Check your linked accounts |
+| `1008` | Account not found | Link your account first |
+
+## Privacy Settings
+
+Your UID is automatically censored in check-in responses based on your privacy settings. You can modify this in `/settings`.
+
+**Censored:** `123****890`  
+**Uncensored:** `123456890`
+
+<Note>
+  Check-in data is logged for analytics if you've enabled data collection. This helps improve the bot's reliability.
+</Note>
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Auto Check-In" icon="robot" href="/automation/auto-checkin">
+    Automate daily check-ins for all your accounts
+  </Card>
+  <Card title="Notes" icon="clock" href="/features/notes">
+    View real-time status of your resources
+  </Card>
+</CardGroup>

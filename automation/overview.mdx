@@ -1,0 +1,93 @@
+---
+title: "Automation Overview"
+description: "Automate daily check-ins and code redemptions for all your HoYoverse games"
+icon: "robot"
+---
+
+## What is Automation?
+
+HoYoVista's automation features help you stay on top of daily rewards and limited-time codes without manual intervention. The bot can automatically perform check-ins and redeem codes across all your linked HoYoverse games.
+
+<CardGroup cols={2}>
+  <Card title="Auto Check-in" icon="calendar-check" href="/automation/auto-checkin">
+    Daily check-ins for game rewards
+  </Card>
+  <Card title="Auto Redeem" icon="ticket" href="/automation/auto-redeem">
+    Automatic code redemption
+  </Card>
+</CardGroup>
+
+## How It Works
+
+Automation runs on a scheduled basis using cron jobs that execute tasks at specific times each day. When enabled, the bot will:
+
+1. **Check for eligible accounts** - Only processes games where automation is enabled
+2. **Execute the task** - Performs check-ins or redeems codes on your behalf
+3. **Send notifications** - DMs you a summary of the results (if notifications are enabled)
+4. **Handle errors gracefully** - Automatically disables automation if credentials become invalid
+
+<Note>
+All automation tasks include a random delay to distribute load and avoid rate limiting from HoYoLAB servers.
+</Note>
+
+## Supported Games
+
+Automation is available for the following HoYoverse games:
+
+- **Genshin Impact** - Full check-in and redemption support
+- **Honkai: Star Rail** - Full check-in and redemption support
+- **Zenless Zone Zero** - Full check-in and redemption support
+- **Honkai Impact 3rd** - Check-in support; redemption requires manual in-game entry
+
+<Warning>
+Honkai Impact 3rd codes cannot be automatically redeemed via API. The bot will send you codes to redeem manually in-game.
+</Warning>
+
+## Privacy & Security
+
+Your account security is our top priority:
+
+- **Encrypted storage** - Your HoYoLAB cookies are stored securely
+- **Read-only access** - The bot can only claim rewards, not modify your account
+- **Automatic safeguards** - Invalid credentials automatically disable automation
+- **Privacy controls** - Enable Privacy Blur in settings to hide UIDs in notifications
+
+## Getting Started
+
+<Steps>
+  <Step title="Link your HoYoLAB account">
+    Use `/register` to connect your HoYoLAB account and link your games
+  </Step>
+  <Step title="Configure automation settings">
+    Use `/settings` to enable auto check-in and auto redeem for each game
+  </Step>
+  <Step title="Enable notifications">
+    Make sure DM notifications are enabled so you receive summaries
+  </Step>
+  <Step title="Sit back and relax">
+    The bot will handle your daily tasks automatically
+  </Step>
+</Steps>
+
+## Managing Automation
+
+You have full control over automation settings:
+
+- **Per-game control** - Enable or disable automation for each linked game individually
+- **Notification preferences** - Choose whether to receive DMs for each automation type
+- **Easy toggles** - Use `/settings` to quickly enable or disable features
+
+<Tip>
+You can disable notifications but keep automation enabled if you prefer to check results manually.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Set up Auto Check-in" icon="calendar-check" href="/automation/auto-checkin">
+    Configure daily check-ins
+  </Card>
+  <Card title="Set up Auto Redeem" icon="ticket" href="/automation/auto-redeem">
+    Configure code redemption
+  </Card>
+</CardGroup>

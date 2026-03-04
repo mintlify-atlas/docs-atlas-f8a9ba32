@@ -1,0 +1,319 @@
+---
+title: /data
+description: Retrieve and view your stored account data
+icon: database
+---
+
+## Overview
+
+The `/data` command allows you to view all data that HoYoVista stores about your account, including user settings, HoYoLAB cookies, linked games, and recent events.
+
+## Usage
+
+```bash
+/data
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## What Data is Displayed
+
+The command returns a comprehensive view of your stored information:
+
+### User Data
+
+```json
+{
+  "discordId": "755897312357777550",
+  "subscribed": true,
+  "private": false,
+  "collectData": true,
+  "notifyCheckin": true,
+  "notifyRedeem": true,
+  "autoCheckin": false,
+  "autoRedeem": false,
+  "createdAt": "2024-01-15T08:30:00.000Z",
+  "updatedAt": "2024-03-04T14:22:00.000Z"
+}
+```
+
+<Accordion title="User Data Fields">
+  <ParamField path="discordId" type="string">
+    Your Discord user ID
+  </ParamField>
+  
+  <ParamField path="subscribed" type="boolean">
+    Update notification preference
+  </ParamField>
+  
+  <ParamField path="private" type="boolean">
+    Privacy blur setting for UIDs
+  </ParamField>
+  
+  <ParamField path="collectData" type="boolean">
+    Analytics collection consent
+  </ParamField>
+  
+  <ParamField path="notifyCheckin" type="boolean">
+    Check-in DM notifications
+  </ParamField>
+  
+  <ParamField path="notifyRedeem" type="boolean">
+    Redemption DM notifications
+  </ParamField>
+  
+  <ParamField path="createdAt" type="timestamp">
+    Account registration date
+  </ParamField>
+  
+  <ParamField path="updatedAt" type="timestamp">
+    Last settings update
+  </ParamField>
+</Accordion>
+
+### HoYoLAB Cookies
+
+```json
+{
+  "ltmidV2": "****_****",
+  "ltokenV2": "v2_****",
+  "ltuidV2": "****",
+  "accountIdV2": "****",
+  "cookieTokenV2": "v2_****"
+}
+```
+
+<Note>
+  Sensitive cookie values are stored encrypted and only shown to you in this command.
+</Note>
+
+### Linked Games
+
+```json
+[
+  {
+    "game": "genshin",
+    "gameId": "2",
+    "gameRoleId": "600123456",
+    "region": "os_usa",
+    "regionName": "America",
+    "autoCheckin": true,
+    "autoRedeem": false
+  },
+  {
+    "game": "zzz",
+    "gameId": "8",
+    "gameRoleId": "1001234567",
+    "region": "prod_gf_us",
+    "regionName": "America",
+    "autoCheckin": false,
+    "autoRedeem": true
+  }
+]
+```
+
+<Accordion title="Game Data Fields">
+  <ParamField path="game" type="string">
+    Game abbreviation (genshin, starrail, zzz, honkai)
+  </ParamField>
+  
+  <ParamField path="gameId" type="string">
+    HoYoverse internal game ID
+  </ParamField>
+  
+  <ParamField path="gameRoleId" type="string">
+    Your UID for this game
+  </ParamField>
+  
+  <ParamField path="region" type="string">
+    Server region identifier
+  </ParamField>
+  
+  <ParamField path="regionName" type="string">
+    Human-readable region name
+  </ParamField>
+  
+  <ParamField path="autoCheckin" type="boolean">
+    Auto check-in enabled for this game
+  </ParamField>
+  
+  <ParamField path="autoRedeem" type="boolean">
+    Auto-redeem enabled for this game
+  </ParamField>
+</Accordion>
+
+### Recent Events (Latest 2)
+
+```json
+[
+  {
+    "game": "discord",
+    "type": "interaction",
+    "metadata": {
+      "command": "profile",
+      "gameId": "2"
+    },
+    "timestamp": "2024-03-04T14:20:00.000Z"
+  },
+  {
+    "game": "2",
+    "type": "checkin",
+    "metadata": {
+      "reward": "Primogem",
+      "amount": 20
+    },
+    "timestamp": "2024-03-04T08:00:00.000Z"
+  }
+]
+```
+
+<Accordion title="Event Types">
+  **Discord Interactions**
+  - Command usage
+  - Button clicks
+  - Modal submissions
+  
+  **Game Events**
+  - Check-ins
+  - Code redemptions
+  - Profile views
+</Accordion>
+
+<Info>
+  Events are only logged if you have **Collect Analytics Data** enabled in settings.
+</Info>
+
+## Response Format
+
+Data is displayed in formatted JSON code blocks:
+
+```markdown
+### User Data
+```json
+{...}
+```
+
+### Hoyolab Cookies
+```json
+{...}
+```
+
+### Linked Games
+```json
+[...]
+```
+
+### Recent Events (Latest 2)
+```json
+[...]
+```
+```
+
+## Privacy & Security
+
+<Warning>
+  This command response is **ephemeral** - only you can see it. Never share your cookies with others.
+</Warning>
+
+### Data Protection
+
+- Response only visible to you
+- Cookies stored encrypted in database
+- No data shared with third parties
+- Events are anonymized
+
+### Data Deletion
+
+To delete your data:
+
+1. Use `/hoyolink` → Unlink account
+2. This removes all associated data
+3. Or contact support for manual deletion
+
+## When to Use This Command
+
+<CardGroup cols={2}>
+  <Card title="Verify Settings" icon="circle-check">
+    Confirm your preferences are correctly saved
+  </Card>
+  
+  <Card title="Troubleshooting" icon="screwdriver-wrench">
+    Debug issues with linked accounts or cookies
+  </Card>
+  
+  <Card title="Data Audit" icon="magnifying-glass">
+    Review what information is stored
+  </Card>
+  
+  <Card title="Export Data" icon="download">
+    Personal data portability (GDPR)
+  </Card>
+</CardGroup>
+
+## No Linked Account
+
+If you haven't linked a HoYoLAB account yet:
+
+```markdown
+### User Data
+```json
+{...}
+```
+```
+
+Only base user data is shown without cookies, games, or events.
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  300 seconds (5 minutes)
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/data.js:13-17`
+- **Cooldown**: `src/commands/data.js:12`
+- **Events Fetch**: `src/commands/data.js:83`
+- **User Data**: `src/commands/data.js:49-52`
+- **Cookies**: `src/commands/data.js:69-72`
+- **Linked Games**: `src/commands/data.js:76-79`
+
+## GDPR Compliance
+
+<Info>
+  HoYoVista complies with GDPR data protection regulations:
+  
+  - **Right to Access**: This command provides full data access
+  - **Right to Deletion**: Use `/hoyolink` unlink to delete data
+  - **Right to Portability**: JSON format allows easy export
+  - **Right to Rectification**: Use `/settings` to update preferences
+</Info>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/commands/settings">
+    Modify your preferences
+  </Card>
+  
+  <Card title="HoYoLink" icon="link" href="/commands/hoyolink">
+    Unlink account to delete data
+  </Card>
+</CardGroup>

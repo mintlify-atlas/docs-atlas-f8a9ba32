@@ -1,0 +1,332 @@
+---
+title: Income Tracker
+description: Track your monthly currency income and analyze resource sources
+icon: coins
+---
+
+The `/income` command provides detailed reports on your monthly currency income, showing how much you've earned and where it came from.
+
+## Usage
+
+```bash
+/income account:<game> month:<month>
+```
+
+### Parameters
+
+- `account` (required) - The game account to view income for
+- `month` (required) - The month to view (current, previous, or two months ago)
+
+### Examples
+
+**Check current month income:**
+```bash
+/income account:Genshin Impact month:March
+```
+
+**Check previous month:**
+```bash
+/income account:Zenless Zone Zero month:February
+```
+
+<Info>
+  The income command has a 30-second cooldown per user.
+</Info>
+
+## How It Works
+
+When you request an income report:
+
+1. HoYoVista fetches your Traveler's Diary/ledger from HoYoLAB
+2. Analyzes your currency income for the selected month
+3. Breaks down income by source category
+4. Identifies your primary income source
+5. Compares with previous month (if applicable)
+
+## Genshin Impact Income
+
+### Overview Display
+
+```
+## Income Overview: March
+PlayerName | America | 123****890
+💎 Primogems: 12,450
+🪙 Mora: 2,450,000
+```
+
+**Shows:**
+- Month name
+- Player nickname, region, and censored UID
+- Total Primogems earned
+- Total Mora earned
+
+### Income Breakdown
+
+Sources are automatically categorized:
+
+```
+- Daily Commissions: 2,400 Primogems
+- Events: 4,200 Primogems
+- Spiral Abyss: 1,800 Primogems
+- Quests: 1,600 Primogems
+- Mail: 800 Primogems
+- Other: 1,650 Primogems
+```
+
+### Primary Source Analysis
+
+```
+This month, your primary source for obtaining Primogems 
+is through Events, for a total of 4,200 Primogems, 
+or 33.7% of your total.
+```
+
+### Monthly Comparison
+
+For previous months:
+
+```
+15% more Primogems than last month, 
+8% less Mora than last month.
+```
+
+### Current Month Note
+
+For the current month:
+
+```
+You have earned 560 Primogems and 125,000 Mora today, 
+what a bountiful day!
+```
+
+Or if no activity today:
+
+```
+Where did you venture off to today?
+```
+
+### Data Disclaimers
+
+```
+* The data is delayed by about one hour, 
+  please check the updated records later
+* This diary only includes the resources obtained 
+  outside of top-ups
+```
+
+<Warning>
+  Primogems from purchases/top-ups are NOT included in the Traveler's Diary. Only free-to-play income is tracked.
+</Warning>
+
+## Zenless Zone Zero Income
+
+### Overview Display
+
+```
+## Income Overview: March  
+AgentName | America | 100****890
+💎 Polychromes: 8,640
+🎟️ Master Tape: 12
+🎫 Boopons: 24
+```
+
+**Shows:**
+- Month name
+- Character nickname, region, and censored UID
+- Total Polychromes earned
+- Master Tapes obtained
+- Boopons collected
+
+### Income Breakdown
+
+```
+- Daily Activity Rewards: 3,600 Polychromes
+- Event Rewards: 2,520 Polychromes  
+- Shiyu Defense & Deadly Assult Rewards: 1,800 Polychromes
+- Mail Rewards: 480 Polychromes
+- Development Rewards: 180 Polychromes
+- Hallow Zero Rewards: 60 Polychromes
+```
+
+Categories mapped from API:
+- `daily_activity_rewards` → Daily Activity Rewards
+- `event_rewards` → Event Rewards
+- `shiyu_rewards` → Shiyu Defense & Deadly Assult Rewards
+- `mail_rewards` → Mail Rewards
+- `growth_rewards` → Development Rewards
+- `hollow_rewards` → Hallow Zero Rewards
+- `other_rewards` → Other Rewards
+
+### Primary Source Analysis
+
+```
+This month, your primary source for obtaining Polychromes 
+is through Daily Activity Rewards, for a total of 
+3,600 Polychromes, or 41.7% of your total.
+```
+
+### Data Disclaimers
+
+```
+* Please note that there is a delay of approximately 
+  2 hours for data to be updated
+* Polychromes exchanged using Monochromes are not 
+  counted as Polychrome revenue
+```
+
+## Supported Games
+
+<CardGroup cols={2}>
+  <Card title="Genshin Impact" icon="check">
+    Full support - Primogems and Mora tracking
+  </Card>
+  <Card title="Zenless Zone Zero" icon="check">
+    Full support - Polychromes, Tapes, and Boopons
+  </Card>
+  <Card title="Honkai: Star Rail" icon="xmark">
+    Not supported (API returns error -100)
+  </Card>
+  <Card title="Honkai Impact 3rd" icon="xmark">
+    Not supported (no ledger API available)
+  </Card>
+</CardGroup>
+
+<Note>
+  Star Rail support is planned but currently returns API error code -100 when accessing ledger data.
+</Note>
+
+## Month Selection
+
+The month autocomplete shows the last 3 months:
+
+- Current month
+- Previous month (last month)
+- Two months ago
+
+Months are displayed by name (January, February, etc.) and internally mapped to month numbers (1-12).
+
+## Understanding Your Income
+
+### Genshin Impact
+
+**Daily Commissions:** Regular daily quest rewards
+
+**Events:** Limited-time event primogems
+
+**Spiral Abyss:** Floor 9-12 completion rewards
+
+**Quests:** Story and world quest rewards
+
+**Mail:** Compensation, anniversary gifts, codes
+
+**Exploration:** Chest, puzzle, and achievement rewards
+
+### Zenless Zone Zero
+
+**Daily Activity:** Daily missions and engagement
+
+**Shiyu Defense:** End-game mode rewards
+
+**Events:** Limited-time event polychromes
+
+**Mail Rewards:** Codes and compensation
+
+**Development Rewards:** Story and progression
+
+**Hollow Zero:** Roguelike mode rewards
+
+## Income Optimization Tips
+
+### Maximize Your Earnings
+
+1. **Complete dailies every day** - Consistent daily income
+2. **Clear all event content** - Events are the largest source
+3. **Full-star Abyss/Shiyu** - Don't miss bi-weekly rewards
+4. **Finish story quests** - One-time primogem rewards
+5. **Explore thoroughly** - Chests add up over time
+
+### Track Your Progress
+
+Use the income command to:
+- Set monthly earning goals
+- Identify which content you're missing
+- Compare month-over-month performance
+- Plan for upcoming banners
+
+## Performance Metrics
+
+```
+Retrieving your data. Please wait...
+Account successfully retrieved in 98ms.
+Fetching ledger from HoYoverse...
+Ledger retrieved in 723ms.
+Preparing your data...
+```
+
+The command shows:
+1. Database query time
+2. HoYoLAB API response time
+3. Data processing stage
+
+## Data Accuracy
+
+<Warning>
+  Income data is delayed by 1-2 hours due to HoYoLAB caching. Recent earnings may not appear immediately.
+</Warning>
+
+**Update frequency:**
+- Genshin Impact: ~1 hour delay
+- Zenless Zone Zero: ~2 hours delay
+
+**What's included:**
+- All free-to-play currency sources
+- Event rewards
+- Daily/weekly content
+- Quest rewards
+- Mail and compensation
+
+**What's excluded:**
+- Top-up purchases
+- Welkin Moon/Battle Pass (except free BP rewards)
+- Currency conversions (e.g., Monochromes → Polychromes)
+
+## Privacy & Censoring
+
+Your UID is automatically censored in income reports based on privacy settings.
+
+Modify privacy with:
+```bash
+/settings privacy:true
+```
+
+## Troubleshooting
+
+### No Data Available
+
+- Check that you've earned currency in the selected month
+- Verify your account was active during that period
+- Some months may have zero income if inactive
+
+### Old Data Showing
+
+- Income data updates every 1-2 hours
+- Today's earnings may not be included yet
+- Try again after the next HoYoLAB update cycle
+
+### API Error -100 (Star Rail)
+
+This is a known limitation:
+- Star Rail ledger API is currently unavailable
+- HoYoverse may enable it in future updates
+- Use the in-game tools for now
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Notes" icon="clock" href="/features/notes">
+    Check your real-time resources
+  </Card>
+  <Card title="Profile" icon="user" href="/features/profile">
+    View your game profile and stats
+  </Card>
+</CardGroup>

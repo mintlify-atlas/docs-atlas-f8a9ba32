@@ -1,0 +1,436 @@
+---
+title: 'Privacy Policy'
+description: 'How HoYoVista collects, uses, and protects your data'
+icon: 'shield-halved'
+---
+
+**Last Updated:** March 4, 2026
+
+## 1. Introduction
+
+This Privacy Policy explains how HoYoVista ("we", "us", "the Bot") collects, uses, stores, and protects your personal information when you use our Discord bot service.
+
+By using HoYoVista, you consent to the data practices described in this policy. If you do not agree with this policy, please do not use the Bot.
+
+## 2. Information We Collect
+
+### 2.1 Information You Provide
+
+**Discord User ID**
+- Automatically collected when you register with `/register`
+- Used as your unique identifier in our database
+- Permanent identifier linking all your data
+
+**HoYoLAB Cookies**
+- Provided voluntarily via `/hoyolink`
+- Includes: `ltmid_v2`, `ltoken_v2`, `ltuid_v2`, and related authentication tokens
+- Required for accessing HoYoLAB API on your behalf
+- Stored encrypted in our secure database
+
+**Linked Game Accounts**
+- Game UIDs (User IDs)
+- Server regions
+- Game IDs
+- Region names
+- Automatically retrieved from HoYoLAB when you link cookies
+
+**Settings and Preferences**
+- Notification preferences (DM notifications)
+- Privacy settings (Privacy Blur)
+- Data collection preferences (Analytics)
+- Auto check-in and auto redemption settings per game
+- Subscription status for bot updates
+
+### 2.2 Automatically Collected Information
+
+**Usage Data** (if analytics enabled)
+- Commands executed (command name only)
+- Timestamps of interactions
+- Selected game IDs in commands
+- Check-in events and results
+- Redemption attempts and outcomes
+- Feature usage statistics
+
+**Technical Data**
+- Discord interaction metadata
+- Command parameters (without sensitive content)
+- Error logs for debugging
+- Response times for performance monitoring
+
+### 2.3 Third-Party Data
+
+**From HoYoLAB API**
+- Real-time notes (resin, stamina, etc.)
+- Game records and statistics
+- Check-in status and rewards
+- Income/ledger data
+- Account and character information
+
+**From Enka Network API**
+- Player profile data
+- Character showcase information
+- Achievement and progression stats
+- Public profile information
+
+<Info>
+Third-party data is fetched in real-time and typically not stored permanently in our database. It is displayed to you and discarded after the interaction.
+</Info>
+
+## 3. How We Use Your Information
+
+### 3.1 Primary Service Functions
+
+We use your data to:
+- Authenticate with HoYoLAB on your behalf
+- Fetch and display your game data
+- Perform automatic daily check-ins
+- Redeem codes for your accounts (when available)
+- Store your preferences and settings
+- Provide personalized bot responses
+
+### 3.2 Service Improvement
+
+If you enable "Collect Analytics Data":
+- Identify and fix bugs
+- Analyze usage patterns to prioritize features
+- Generate aggregate statistics (non-identifiable)
+- Create personalized year-end summaries (e.g., "Wrapped")
+- Understand which features are most valuable
+
+### 3.3 Communication
+
+If you enable notifications:
+- Send DM notifications for check-in results
+- Send DM notifications for redemption results
+- Send bot update announcements (if subscribed)
+- Send service alerts for critical issues
+
+### 3.4 Security and Compliance
+
+- Detect and prevent abuse
+- Enforce rate limits and cooldowns
+- Comply with legal obligations
+- Investigate violations of Terms of Service
+
+## 4. Data Storage and Security
+
+### 4.1 Storage Infrastructure
+
+Your data is stored in:
+- **MongoDB Database**: User accounts, settings, and analytics
+- **PostgreSQL Database**: May be used for structured data (referenced in config)
+- **Secure servers**: With access controls and authentication
+
+Database connection details:
+- Environment-controlled access (not hardcoded)
+- Encrypted connections
+- Regular backups for disaster recovery
+
+### 4.2 Security Measures
+
+We implement:
+- **Encryption**: HoYoLAB cookies are encrypted at rest
+- **Access Controls**: Limited developer access with authentication
+- **Rate Limiting**: Prevents brute force and abuse attempts
+- **Input Validation**: Sanitizes user inputs to prevent injection attacks
+- **Secure APIs**: HTTPS connections to all external services
+- **Audit Logs**: Track data access for security monitoring
+
+### 4.3 Data Retention
+
+**Active Accounts**
+- Data retained as long as you use the Bot
+- Cookies and game data remain until you unlink
+- Settings persist until you modify or reset them
+
+**Inactive Accounts**
+- Data may be retained indefinitely unless you delete it
+- We do not automatically delete inactive accounts
+- You must manually unlink to remove data
+
+**Analytics Data**
+- Event logs retained for up to 1 year
+- Aggregate statistics retained indefinitely
+- Individual events anonymized after analysis
+
+### 4.4 Data Backups
+
+Regular backups are created for:
+- Disaster recovery
+- Service continuity
+- Data integrity
+
+Backups are:
+- Stored securely with the same protections as live data
+- Retained for a limited period
+- Not used for purposes beyond recovery
+
+## 5. Data Sharing and Disclosure
+
+### 5.1 We Do NOT Share Your Data
+
+Your personal information is **never** sold, rented, or traded to third parties.
+
+### 5.2 Third-Party Service Providers
+
+We share data with:
+
+**HoYoLAB API**
+- Purpose: Authenticate and fetch your game data
+- Data shared: Cookies, game UIDs, API requests
+- Privacy: Subject to HoYoverse Privacy Policy
+
+**Enka Network API**
+- Purpose: Retrieve detailed profile information
+- Data shared: Game UIDs only (publicly available data)
+- Privacy: Subject to Enka Network's policies
+
+**Discord Platform**
+- Purpose: Deliver bot responses and notifications
+- Data shared: Discord User ID, interaction responses
+- Privacy: Subject to Discord Privacy Policy
+
+**Database Providers**
+- Purpose: Store and manage your data
+- Data shared: All stored data (encrypted where applicable)
+- Privacy: Industry-standard security and confidentiality
+
+### 5.3 Legal Disclosures
+
+We may disclose your information if:
+- Required by law or legal process
+- Necessary to protect our rights or property
+- To prevent fraud or abuse
+- To protect the safety of users or the public
+- In connection with a merger, acquisition, or sale of assets (with notice)
+
+### 5.4 Aggregate Data
+
+We may share anonymized, aggregate statistics:
+- Total number of users
+- Popular commands and features
+- Average usage metrics
+- General trends and patterns
+
+This data cannot be used to identify individual users.
+
+## 6. Your Privacy Rights
+
+### 6.1 Access Your Data
+
+Use `/data` to:
+- View all data we have stored about you
+- See your linked games and settings
+- Review analytics preferences
+- Understand what information we hold
+
+### 6.2 Modify Your Data
+
+Use `/settings` to:
+- Enable or disable analytics collection
+- Toggle Privacy Blur (UID censoring)
+- Manage notification preferences
+- Configure auto check-in and redemption per game
+- Reset all settings to defaults
+
+### 6.3 Delete Your Data
+
+You have the right to delete your data at any time:
+
+**Partial Deletion** via `/hoyolink`:
+- Unlink HoYoLAB Account → Confirm
+- Removes: Cookies, linked games, game-specific settings
+- Keeps: Discord ID, general settings
+
+**Full Account Deletion**:
+- Unlink via `/hoyolink`
+- Contact us via `/feedback` for complete account removal
+- We will delete all associated data within 30 days
+
+<Warning>
+Deletion is permanent and cannot be undone. You will need to register again to use the Bot.
+</Warning>
+
+### 6.4 Export Your Data
+
+Currently, data export is available through:
+- `/data` command (view in Discord)
+- Manual request via `/feedback` (we can provide JSON export)
+
+We are working on automated export features.
+
+### 6.5 Opt-Out of Analytics
+
+At any time:
+1. Use `/settings` → "General Settings"
+2. Disable "Collect Analytics Data"
+3. Future analytics will not be collected
+4. Past analytics are retained but anonymized
+
+### 6.6 Opt-Out of Communications
+
+Control notifications:
+1. Use `/settings` → "Check-in Settings" or "Redemption Settings"
+2. Disable "DM Notifications"
+3. Disable "Update Notifications" in General Settings
+
+## 7. Children's Privacy
+
+HoYoVista is not intended for children under 13 years of age (or the minimum age in your jurisdiction).
+
+We do not knowingly collect personal information from children. If you believe a child has provided us with personal information:
+- Contact us immediately via `/feedback`
+- We will delete the information promptly
+- Parents/guardians can request data deletion
+
+## 8. International Data Transfers
+
+Your data may be transferred to and processed in countries other than your own:
+- Our servers may be located in various jurisdictions
+- HoYoLAB API is operated globally by HoYoverse
+- Data protection laws may differ by country
+
+By using HoYoVista, you consent to such transfers. We ensure appropriate safeguards are in place.
+
+## 9. Cookies and Tracking
+
+### 9.1 HoYoLAB Cookies
+
+The "cookies" you provide are **HoYoLAB authentication tokens**, not browser tracking cookies. These are:
+- Session tokens for API authentication
+- Stored securely and encrypted
+- Never used for tracking or advertising
+- Only used to access your game data
+
+### 9.2 Discord Tracking
+
+We do not use browser cookies or tracking technologies. All interactions occur within Discord, which may have its own tracking as described in Discord's Privacy Policy.
+
+### 9.3 Analytics
+
+Our optional analytics:
+- Track command usage (not browsing behavior)
+- Record interaction events (not personal activities)
+- Are fully opt-in via settings
+- Can be disabled at any time
+
+## 10. Data Breaches
+
+In the event of a data breach:
+- We will investigate and contain the breach immediately
+- Affected users will be notified within 72 hours via Discord DM
+- We will provide details about what data was affected
+- Steps to protect yourself will be recommended
+- Authorities will be notified if required by law
+
+**If you suspect your cookies are compromised:**
+1. Immediately unlink your account via `/hoyolink`
+2. Change your HoYoLAB password
+3. Re-link with fresh cookies after securing your account
+4. Contact us via `/feedback` to report the incident
+
+## 11. Third-Party Links
+
+HoYoVista may provide links to third-party websites or services:
+- [HoYoLAB](https://www.hoyolab.com/) - Official HoYoverse platform
+- [Enka Network](https://enka.network/) - Profile data provider
+- Documentation and guides
+
+We are not responsible for the privacy practices of these sites. Please review their privacy policies independently.
+
+## 12. Changes to This Policy
+
+We may update this Privacy Policy periodically:
+- Changes will be posted with a new "Last Updated" date
+- Material changes will be announced via the Bot (if you're subscribed)
+- Continued use after changes constitutes acceptance
+- We encourage you to review this policy regularly
+
+You can view the current policy at any time by visiting this page.
+
+## 13. Your Consent
+
+By using HoYoVista, you consent to:
+- The collection of data described in this policy
+- The use of your data as outlined
+- The storage and processing of your information
+- Data transfers as described
+- Communication via Discord DMs (if enabled)
+
+You can withdraw consent by:
+- Disabling specific features in `/settings`
+- Unlinking your account via `/hoyolink`
+- Stopping use of the Bot
+
+## 14. Contact and Complaints
+
+### 14.1 Questions or Concerns
+
+If you have questions about this Privacy Policy:
+- Use `/feedback` in Discord
+- Check the `/about` command for developer info
+- Review our [Terms of Service](/legal/terms-of-service)
+
+### 14.2 Privacy Complaints
+
+If you believe we have violated your privacy rights:
+1. Contact us via `/feedback` with details
+2. We will investigate within 7 business days
+3. We will respond with our findings and actions taken
+4. If unresolved, you may contact your local data protection authority
+
+### 14.3 Data Protection Rights (GDPR/CCPA)
+
+If you are in the EU/EEA or California, you have additional rights:
+- **Right to Access**: Request a copy of your data
+- **Right to Rectification**: Correct inaccurate data
+- **Right to Erasure**: Request deletion ("right to be forgotten")
+- **Right to Restrict Processing**: Limit how we use your data
+- **Right to Data Portability**: Receive your data in a portable format
+- **Right to Object**: Oppose certain data processing
+- **Right to Withdraw Consent**: Revoke permissions at any time
+
+To exercise these rights, use `/feedback` or the Bot's built-in tools (`/data`, `/settings`, `/hoyolink`).
+
+## 15. Data Processing Legal Basis
+
+We process your data based on:
+- **Consent**: You explicitly agree when registering and linking accounts
+- **Contract**: Necessary to provide the Bot's services to you
+- **Legitimate Interests**: Service improvement, security, and fraud prevention
+- **Legal Obligations**: Compliance with applicable laws
+
+## 16. Automated Decision-Making
+
+HoYoVista uses automated processes for:
+- Auto check-ins (based on your settings)
+- Auto redemption (based on your settings)
+- Rate limiting (to prevent abuse)
+
+These processes do not involve profiling or significantly affect your rights. You can disable automated features at any time in `/settings`.
+
+## 17. Data Minimization
+
+We follow data minimization principles:
+- Collect only data necessary for the Bot's functions
+- Store data only as long as needed
+- Anonymize analytics data when possible
+- Provide granular control over data collection
+
+You can minimize data collection by:
+- Disabling "Collect Analytics Data" in `/settings`
+- Using Privacy Blur to censor UIDs
+- Disabling notifications to limit communication data
+
+## 18. Acknowledgment
+
+By using HoYoVista, you acknowledge that:
+- You have read and understood this Privacy Policy
+- You consent to the collection and use of your information as described
+- You understand the risks of providing HoYoLAB cookies
+- You are responsible for the security of your credentials
+- You can exercise your privacy rights at any time
+
+<Info>
+This Privacy Policy is part of our Terms of Service. Both documents govern your use of HoYoVista.
+</Info>

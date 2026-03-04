@@ -1,0 +1,365 @@
+---
+title: "Auto Redeem"
+description: "Automatically redeem promotional codes for all your HoYoverse games"
+icon: "ticket"
+---
+
+## What is Auto Redeem?
+
+Auto redeem automatically claims promotional codes for your linked HoYoverse games. When new codes are released (usually during livestreams or special events), the bot detects them and redeems them on your behalf—so you never miss limited-time rewards.
+
+## How It Works
+
+The auto redeem system runs regularly throughout the day:
+
+1. **Scheduled execution** - Runs every 2 hours (when enabled)
+2. **Random delay** - Waits 0-25 minutes before starting
+3. **Code fetching** - Retrieves available codes from an external API by seria_ati
+4. **Redemption process** - Redeems new codes for each enabled game
+5. **Rate limiting** - Waits 5.5 seconds between each code to avoid API limits
+6. **Notification** - Sends you a DM summary with redemption results
+
+<Info>
+Codes are sourced from a community-maintained API that aggregates promotional codes from official livestreams, social media, and events.
+</Info>
+
+## Scheduling Details
+
+**Base Schedule:** Every 2 hours
+
+**Actual Execution Time:** Random 0-25 minute delay after each 2-hour mark
+
+**Frequency:** Up to 12 times per day
+
+**Rate Limiting:** 5.5 seconds between each code redemption
+
+<Note>
+The delay and rate limiting ensure the bot doesn't overwhelm HoYoLAB servers and stays within API rate limits.
+</Note>
+
+## Enabling Auto Redeem
+
+<Steps>
+  <Step title="Open settings">
+    Use the `/settings` command in Discord
+  </Step>
+  <Step title="Navigate to Code Redemption Settings">
+    Select **Code Redemption Settings** from the category dropdown menu
+  </Step>
+  <Step title="Enable notifications">
+    Toggle **DM Notifications** to Enabled (recommended)
+    
+    <Info>
+    You'll receive a summary when codes are redeemed. Requires Discord DMs to be enabled.
+    </Info>
+  </Step>
+  <Step title="Enable per-game">
+    For each linked game, click **Enable** to activate auto redeem
+    
+    You can enable it for some games and leave it disabled for others.
+  </Step>
+</Steps>
+
+## Understanding Notifications
+
+When auto redeem finds new codes, you'll receive a DM with redemption results:
+
+### Successful Redemption
+
+You'll see:
+- Game name and UID (censored if Privacy Blur is enabled)
+- Code that was redeemed
+- Rewards received
+
+**Example:**
+```
+**Genshin Impact** (123***789)
+- Code: `GENSHINGIFT`
+> Reward: Primogem x60, Hero's Wit x5
+- Code: `STARRAILGIFT`
+> Reward: Stellar Jade x50, Credit x10000
+```
+
+### Already Redeemed
+
+If a code was already used:
+```
+- Code: `GENSHINGIFT`
+> [-2017] Redemption code already used
+```
+
+### Honkai Impact 3rd Special Case
+
+Honkai Impact 3rd codes cannot be redeemed via API. Instead, you'll receive codes to redeem manually:
+
+```
+**Honkai Impact 3rd** (456***012)
+-# Please redeem these codes manually in-game:
+- Code: `HONKAIIMPACT`
+> Reward: Crystals x100
+```
+
+<Warning>
+Honkai Impact 3rd requires manual in-game redemption. The bot will track which codes you've been notified about to avoid sending duplicates.
+</Warning>
+
+### Error States
+
+**Invalid UID:**
+```
+- Code: `GENSHINGIFT`
+> [-1071] Invalid UID
+```
+
+**Rate Limited:**
+```
+- Code: `GENSHINGIFT`
+> [-2018] Redemption is currently in cooldown
+```
+
+**Internal Error:**
+```
+- Code: `GENSHINGIFT`
+> [-999] Internal server error
+```
+
+## Code Tracking
+
+The bot tracks which codes have been attempted for each of your games:
+
+- **Attempted codes list** - Stored per game to avoid duplicate redemption attempts
+- **Automatic cleanup** - Removes expired codes from tracking
+- **No duplicate attempts** - Each code is only tried once per game
+
+<Info>
+Even if redemption fails, the code is marked as attempted to prevent spam. You can manually redeem failed codes using the `/redeem` command.
+</Info>
+
+## Notification Settings
+
+### Enabling DM Notifications
+
+1. Go to `/settings`
+2. Select **Code Redemption Settings**
+3. Toggle **DM Notifications** to Enabled
+
+<Tip>
+Make sure you have DMs enabled from server members in your Discord privacy settings, or the bot won't be able to message you.
+</Tip>
+
+### What Happens if DMs are Disabled?
+
+If the bot cannot send you DMs (error code 50007), it will:
+- Automatically disable your redemption notifications
+- Continue redeeming codes automatically
+- Log the issue for debugging
+
+You can re-enable notifications after fixing your DM settings.
+
+## Per-Game Control
+
+You can customize which games use auto redeem:
+
+**In Code Redemption Settings:**
+- Each linked game has its own Enable/Disable toggle
+- Changes take effect for the next scheduled run
+- Games with auto redeem disabled are skipped entirely
+
+**Example Configuration:**
+- Genshin Impact: ✅ Enabled
+- Honkai: Star Rail: ✅ Enabled
+- Zenless Zone Zero: ❌ Disabled
+- Honkai Impact 3rd: ✅ Enabled (will receive manual codes)
+
+<Info>
+This is useful if you want to manually redeem codes for some games but automate others.
+</Info>
+
+## Rate Limiting & Delays
+
+To ensure reliable operation and respect API limits:
+
+**Initial Delay:** 0-25 minutes (random)
+- Distributes load across HoYoLAB servers
+- Prevents all users from hitting the API simultaneously
+
+**Between Codes:** 5.5 seconds
+- Prevents rate limiting errors
+- Required by HoYoLAB redemption API
+
+**Concurrency:** Up to 10 users processed simultaneously
+- Balances speed with server resources
+- Ensures timely code redemption
+
+<Warning>
+Do not attempt to redeem codes manually immediately after auto redeem runs, as you may hit rate limits.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I'm not receiving redemption notifications">
+    **Possible causes:**
+    
+    1. **No new codes available** - The bot only notifies when it finds unredeemed codes
+    2. **DM Notifications are disabled** - Check your settings under Code Redemption Settings
+    3. **Discord DMs are blocked** - Enable DMs from server members in your Discord privacy settings
+    4. **Auto redeem is disabled** - Make sure redemption is enabled for at least one game
+    5. **Bot automatically disabled notifications** - This happens if DMs were previously blocked
+    
+    **Solution:** Re-enable both your Discord DM settings and notification settings in `/settings`.
+  </Accordion>
+  
+  <Accordion title="Codes aren't being redeemed">
+    **Possible causes:**
+    
+    1. **Auto redeem is disabled** - Verify it's enabled in Code Redemption Settings
+    2. **No new codes available** - The bot only redeems codes you haven't tried yet
+    3. **Invalid cookies** - Your HoYoLAB session may have expired
+    4. **Rate limiting** - You may be temporarily rate limited by HoYoLAB
+    
+    **Solution:** 
+    - Check notification messages for error details
+    - Wait for cooldown periods to expire
+    - Try manually redeeming with `/redeem` to test
+  </Accordion>
+  
+  <Accordion title="I got 'code already used' error">
+    **What this means:**
+    
+    The code was already redeemed on your account, either:
+    - By you manually
+    - By the bot in a previous run
+    - By another service
+    
+    **This is normal** and not an error. The bot will mark the code as attempted and won't try it again.
+  </Accordion>
+  
+  <Accordion title="I got 'redemption in cooldown' error">
+    **What this means:**
+    
+    HoYoLAB has rate limits on code redemption. You must wait before redeeming another code.
+    
+    **What happens:**
+    - The code is marked as attempted
+    - The bot will not retry this code
+    
+    **Solution:**
+    Wait for the cooldown to expire (usually a few minutes) and try manually with `/redeem` if needed.
+  </Accordion>
+  
+  <Accordion title="Honkai Impact 3rd codes aren't working">
+    **This is expected behavior.**
+    
+    Honkai Impact 3rd does not support API-based code redemption. You must:
+    1. Receive the code via bot notification
+    2. Open Honkai Impact 3rd
+    3. Go to the in-game redemption menu
+    4. Enter the code manually
+    
+    The bot tracks which codes you've been notified about to avoid duplicates.
+  </Accordion>
+  
+  <Accordion title="How often does the bot check for new codes?">
+    **Base schedule:** Every 2 hours
+    
+    **Actual timing:** Every 2 hours + random 0-25 minute delay
+    
+    This means codes are typically detected and redeemed within 2-2.5 hours of being added to the external API.
+  </Accordion>
+  
+  <Accordion title="Where do the codes come from?">
+    Codes are fetched from an external API maintained by **seria_ati**. This API aggregates promotional codes from:
+    - Official livestreams
+    - Social media announcements
+    - Special events
+    - Community sources
+    
+    The bot does not generate codes—it only redeems publicly available ones.
+  </Accordion>
+  
+  <Accordion title="Can I see which codes have been attempted?">
+    The bot tracks attempted codes internally, but this information is not currently exposed in user commands.
+    
+    You can check your notification history to see which codes were redeemed and when.
+  </Accordion>
+</AccordionGroup>
+
+## Data Collection
+
+If you have **Collect Analytics Data** enabled in General Settings, the bot tracks:
+
+- Redemption events (date, game, and code)
+- Rewards received (when available)
+- Success/failure status
+
+This data is used to:
+- Generate your end-of-year wrapped statistics
+- Improve bot features and reliability
+- Identify usage patterns
+
+<Info>
+Data collection is completely optional and can be disabled in `/settings` under General Settings.
+</Info>
+
+## Manual Redemption
+
+You can also redeem codes manually using the `/redeem` command:
+
+```
+/redeem code:GENSHINGIFT
+```
+
+This is useful for:
+- Testing if codes work
+- Redeeming codes that failed during auto redeem
+- Redeeming codes before auto redeem runs
+- Honkai Impact 3rd codes (in-game)
+
+<Tip>
+Manual redemption via `/redeem` counts as an attempted code and won't be retried by auto redeem.
+</Tip>
+
+## Best Practices
+
+<Steps>
+  <Step title="Enable notifications">
+    Stay informed about new codes and catch redemption issues early
+  </Step>
+  <Step title="Check notifications promptly">
+    Some codes have expiration dates, so review notifications when you receive them
+  </Step>
+  <Step title="Manually redeem Honkai Impact 3rd codes">
+    Don't forget to redeem HI3 codes in-game when the bot notifies you
+  </Step>
+  <Step title="Enable Privacy Blur">
+    Protect your UIDs by enabling Privacy Blur in General Settings
+  </Step>
+  <Step title="Be patient with rate limits">
+    If you hit rate limits, wait a few minutes before trying again
+  </Step>
+</Steps>
+
+## Code Sources
+
+HoYoVista uses the seria_ati API to fetch codes. This community-maintained service aggregates codes from:
+
+- **Official livestreams** - Codes announced during version previews
+- **Social media** - Twitter, Facebook, Reddit announcements
+- **Events** - In-game and web events
+- **Promotions** - Partner collaborations and promotions
+
+<Note>
+Code availability depends on HoYoverse releasing them. During quiet periods, you may not receive any notifications.
+</Note>
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Auto Check-in" icon="calendar-check" href="/automation/auto-checkin">
+    Automatically claim daily check-in rewards
+  </Card>
+  <Card title="Manual Redeem" icon="ticket" href="/commands/redeem">
+    Redeem codes manually with /redeem
+  </Card>
+</CardGroup>

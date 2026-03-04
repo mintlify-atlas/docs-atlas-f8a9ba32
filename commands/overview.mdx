@@ -1,0 +1,84 @@
+---
+title: Commands Overview
+description: Complete reference of all HoYoVista bot commands
+icon: terminal
+---
+
+HoYoVista provides a comprehensive set of commands to manage your HoYoverse gaming experience directly from Discord. All commands use Discord's slash command format.
+
+## Quick Reference
+
+| Command | Description | Cooldown |
+|---------|-------------|----------|
+| `/register` | Register your account with HoYoVista | 10 seconds |
+| `/hoyolink` | Link your HoYoLAB account | 30 seconds |
+| `/check-in` | Daily check-in for HoYoLAB rewards | 30 minutes |
+| `/profile` | View game profile statistics | 30 seconds |
+| `/notes` | View Real-Time Notes | 30 seconds |
+| `/income` | View monthly in-game income | 30 seconds |
+| `/redeem` | Redeem codes for rewards | 60 seconds |
+| `/settings` | Configure bot settings | 10 seconds |
+| `/data` | View your stored account data | 5 minutes |
+| `/feedback` | Send feedback to the developer | 10 seconds |
+| `/about` | Learn about the bot | 10 seconds |
+
+## Commands by Category
+
+<CardGroup cols={2}>
+  <Card title="Account Management" icon="user" href="/commands/register">
+    `/register`, `/hoyolink`, `/data`
+    
+    Set up your account and link your HoYoLAB credentials
+  </Card>
+  
+  <Card title="Game Features" icon="gamepad" href="/commands/profile">
+    `/profile`, `/notes`, `/income`
+    
+    View game statistics, real-time notes, and income reports
+  </Card>
+  
+  <Card title="Automation" icon="robot" href="/commands/check-in">
+    `/check-in`, `/redeem`
+    
+    Automate daily check-ins and code redemption
+  </Card>
+  
+  <Card title="Settings & Support" icon="gear" href="/commands/settings">
+    `/settings`, `/feedback`, `/about`
+    
+    Configure preferences and get help
+  </Card>
+</CardGroup>
+
+## Integration Support
+
+All HoYoVista commands support:
+- **Guild Install** (Integration Type 0) - Use in Discord servers
+- **User Install** (Integration Type 1) - Use in DMs and any server
+
+## Context Availability
+
+Commands can be used in:
+- Guild channels (Context 0)
+- Bot DMs (Context 1)
+- Private channels (Context 2)
+
+## Getting Started
+
+<Steps>
+  <Step title="Register Your Account">
+    Run `/register` to create your HoYoVista account
+  </Step>
+  
+  <Step title="Link HoYoLAB">
+    Use `/hoyolink` to connect your HoYoLAB credentials
+  </Step>
+  
+  <Step title="Start Using Features">
+    Access commands like `/profile`, `/check-in`, and `/notes`
+  </Step>
+</Steps>
+
+<Note>
+  All command responses are ephemeral by default, meaning only you can see them unless specified otherwise.
+</Note>

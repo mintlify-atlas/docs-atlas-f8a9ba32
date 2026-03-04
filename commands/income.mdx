@@ -1,0 +1,230 @@
+---
+title: /income
+description: View monthly in-game currency income reports
+icon: coins
+---
+
+## Overview
+
+The `/income` command displays detailed monthly income reports for premium currencies (Primogems, Polychromes, etc.) showing how much you've earned and from which sources.
+
+## Usage
+
+```bash
+/income account:<game> month:<month>
+```
+
+<ParamField path="account" type="string" required>
+  The game account to view income for.
+  
+  **Autocomplete**: Shows your linked games
+</ParamField>
+
+<ParamField path="month" type="string" required>
+  The month to view income for.
+  
+  **Autocomplete**: Shows last 3 months (e.g., January, February, March)
+</ParamField>
+
+## Supported Games
+
+- **Genshin Impact** (Primogems & Mora)
+- **Zenless Zone Zero** (Polychromes, Master Tape, Boopons)
+
+<Note>
+  Honkai: Star Rail and Honkai Impact 3rd are currently excluded from income tracking.
+</Note>
+
+## Example
+
+```bash
+/income account:Genshin Impact (NA) month:March
+```
+
+## Genshin Impact Income Report
+
+### Monthly Overview
+
+```markdown
+## Income Overview: March
+-# TravelerName | America | 600******6
+💎 Primogems: **12,450**
+🪙 Mora: **2,850,000**
+```
+
+### Income Breakdown
+
+```markdown
+- Daily Commissions: **3,600** Primogems
+- Events: **2,820** Primogems
+- Spiral Abyss: **1,800** Primogems
+- Quests: **1,350** Primogems
+- Other: **2,880** Primogems
+```
+
+### Monthly Comparison
+
+<Info>
+  For previous months, the report compares to the month before:
+</Info>
+
+```markdown
+**15%** more Primogems than last month, **8%** more Mora than last month.
+```
+
+### Primary Source
+
+```markdown
+This month, your primary source for obtaining Primogems is through 
+**Daily Commissions**, for a total of **3,600** Primogems, 
+or **29%** of your total.
+```
+
+### Today's Income (Current Month Only)
+
+```markdown
+You have earned **60** Primogems and **45,000** Mora today, 
+what a bountiful day!
+```
+
+or if no income today:
+
+```markdown
+Where did you venture off to today?
+```
+
+### Important Notes
+
+```markdown
+-# *The data is delayed by about one hour, please check the updated records later
+-# *This dairy only includes the resources obtained outside of top-ups
+```
+
+## Zenless Zone Zero Income Report
+
+### Monthly Overview
+
+```markdown
+## Income Overview: March
+-# ProxyName | America | 100******7
+💎 Polychrome: **8,500**
+🎞️ Master Tape: **15**
+🎫 Boopon: **10**
+```
+
+### Income Components
+
+```markdown
+- Daily Activities: **3,000** Polychromes
+- Events: **2,500** Polychromes
+- Shiyu Defense: **1,200** Polychromes
+- Other Ways: **1,800** Polychromes
+```
+
+### Primary Source
+
+```markdown
+This month, your primary source for obtaining Polychromes is through 
+**Daily Activities**, for a total of **3,000** Polychromes, 
+or **35%** of your total.
+```
+
+### Important Notes
+
+```markdown
+-# *Please note that there is a delay of approximately 2 hours for data to be updated
+-# *Polychromes exchanged using Monochromes are not counted as Polychrome revenue
+```
+
+## Month Selection
+
+The autocomplete shows the previous 3 months:
+
+| Display Name | Value |
+|--------------|-------|
+| March | `3` |
+| February | `2` |
+| January | `1` |
+
+<Note>
+  The current month is always included in the list.
+</Note>
+
+## Privacy Protection
+
+UIDs are censored based on your privacy settings:
+- **Privacy Blur OFF**: Full UID visible
+- **Privacy Blur ON**: Censored format `600******6`
+
+## Loading Process
+
+<Steps>
+  <Step title="Retrieving Account">
+    "Retrieving your data. Please wait..."
+  </Step>
+  
+  <Step title="Account Retrieved">
+    "Account successfully retrieved in 145ms. Fetching ledger from HoYoverse..."
+  </Step>
+  
+  <Step title="Ledger Retrieved">
+    "Ledger retrieved in 520ms. Preparing your data..."
+  </Step>
+  
+  <Step title="Display">
+    Shows complete income report with breakdown
+  </Step>
+</Steps>
+
+## Error Messages
+
+<CodeGroup>
+```markdown No Linked Games
+None of your linked games are supported for this command.
+```
+
+```markdown Fetch Error
+An error occurred while fetching your data. Please try again later.
+```
+</CodeGroup>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  30 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Public (visible to everyone in the channel)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/income.js:32-50`
+- **Cooldown**: `src/commands/income.js:31`
+- **Genshin Report**: `src/commands/income.js:195-273`
+- **ZZZ Report**: `src/commands/income.js:274-339`
+- **Month Autocomplete**: `src/commands/income.js:81-90`
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Profile" icon="user" href="/commands/profile">
+    View overall game statistics
+  </Card>
+  
+  <Card title="Notes" icon="note-sticky" href="/commands/notes">
+    Check current resin and currency status
+  </Card>
+</CardGroup>

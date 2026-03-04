@@ -1,0 +1,258 @@
+---
+title: "Auto Check-in"
+description: "Automatically claim daily check-in rewards for all your HoYoverse games"
+icon: "calendar-check"
+---
+
+## What is Auto Check-in?
+
+Auto check-in automatically claims your daily check-in rewards from HoYoLAB for all your linked games. Never miss a day of rewards again—the bot handles everything for you.
+
+## How It Works
+
+The auto check-in system runs once per day with the following process:
+
+1. **Scheduled execution** - Runs daily at 12:05 PM ET (when enabled)
+2. **Random delay** - Waits 0-55 minutes to distribute load across HoYoLAB servers
+3. **Check-in process** - Claims rewards for each enabled game
+4. **Notification** - Sends you a DM summary with rewards claimed
+
+<Info>
+The random delay helps prevent rate limiting and ensures the system scales efficiently as more users enable automation.
+</Info>
+
+## Scheduling Details
+
+**Base Schedule:** Daily at 12:05 PM ET (America/New_York timezone)
+
+**Actual Execution Time:** 12:05 PM - 1:00 PM ET (due to random delay)
+
+**Frequency:** Once per 24 hours
+
+<Note>
+The scheduled time is configured in the bot's cron settings. The actual execution time varies by up to 55 minutes after the base time.
+</Note>
+
+## Enabling Auto Check-in
+
+<Steps>
+  <Step title="Open settings">
+    Use the `/settings` command in Discord
+  </Step>
+  <Step title="Navigate to Check-in Settings">
+    Select **Check-in Settings** from the category dropdown menu
+  </Step>
+  <Step title="Enable notifications">
+    Toggle **DM Notifications** to Enabled (recommended)
+    
+    <Info>
+    You'll receive a summary of check-ins each day. Requires Discord DMs to be enabled.
+    </Info>
+  </Step>
+  <Step title="Enable per-game">
+    For each linked game, click **Enable** to activate auto check-in
+    
+    You can enable it for some games and leave it disabled for others.
+  </Step>
+</Steps>
+
+## Understanding Notifications
+
+When auto check-in runs, you'll receive a DM with a summary of results:
+
+### Successful Check-in
+
+You'll see:
+- Game name and UID (censored if Privacy Blur is enabled)
+- Reward claimed (e.g., "Primogem x20")
+- Missed days count (if any)
+- Check-in streak information
+
+**Example:**
+```
+### Genshin Impact (123***789)
+Daily Check-in Claimed
+Primogem x20
+```
+
+### Already Claimed
+
+If you already checked in manually:
+```
+### Honkai: Star Rail (456***012)
+Daily Check-in Claimed
+-# No checkin details available
+```
+
+### Error States
+
+If something goes wrong, you'll be notified:
+
+**Invalid Cookies:**
+```
+### Zenless Zone Zero (789***345)
+The cookies are invalid, please re-link your account.
+We have disabled auto check-in for this account in the meantime.
+```
+
+<Warning>
+When cookies become invalid, auto check-in is automatically disabled for your protection. You'll need to re-register and re-enable it.
+</Warning>
+
+**API Error:**
+```
+### Genshin Impact (123***789)
+Failed to check-in with code `-5003`
+Account has not been registered or is not logged in.
+```
+
+## Notification Settings
+
+### Enabling DM Notifications
+
+1. Go to `/settings`
+2. Select **Check-in Settings**
+3. Toggle **DM Notifications** to Enabled
+
+<Tip>
+Make sure you have DMs enabled from server members in your Discord privacy settings, or the bot won't be able to message you.
+</Tip>
+
+### What Happens if DMs are Disabled?
+
+If the bot cannot send you DMs (error code 50007), it will:
+- Automatically disable your check-in notifications
+- Continue performing auto check-ins
+- Log the issue for debugging
+
+You can re-enable notifications after fixing your DM settings.
+
+## Per-Game Control
+
+You can customize which games use auto check-in:
+
+**In Check-in Settings:**
+- Each linked game has its own Enable/Disable toggle
+- Changes take effect for the next scheduled check-in
+- Games with auto check-in disabled are skipped entirely
+
+**Example Configuration:**
+- Genshin Impact: ✅ Enabled
+- Honkai: Star Rail: ✅ Enabled
+- Zenless Zone Zero: ❌ Disabled
+
+<Info>
+This is useful if you want to manually check in for some games but automate others.
+</Info>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I'm not receiving check-in notifications">
+    **Possible causes:**
+    
+    1. **DM Notifications are disabled** - Check your settings under Check-in Settings
+    2. **Discord DMs are blocked** - Enable DMs from server members in your Discord privacy settings
+    3. **Auto check-in is disabled** - Make sure check-ins are enabled for at least one game
+    4. **Bot automatically disabled notifications** - This happens if DMs were previously blocked
+    
+    **Solution:** Re-enable both your Discord DM settings and notification settings in `/settings`.
+  </Accordion>
+  
+  <Accordion title="Check-ins aren't working">
+    **Possible causes:**
+    
+    1. **Auto check-in is disabled** - Verify it's enabled in Check-in Settings for your games
+    2. **Invalid cookies** - Your HoYoLAB session may have expired
+    3. **Account not linked properly** - The game may not be linked to your HoYoLAB account
+    
+    **Solution:** 
+    - Check notification messages for error details
+    - Try re-registering with `/register`
+    - Verify your games are linked on HoYoLAB
+  </Accordion>
+  
+  <Accordion title="I got 'invalid cookies' error">
+    **What this means:**
+    
+    Your HoYoLAB authentication cookies have expired or become invalid.
+    
+    **What happens:**
+    - Auto check-in is automatically disabled for your account
+    - You'll receive a notification about the issue
+    
+    **Solution:**
+    1. Re-register using `/register`
+    2. Re-enable auto check-in in `/settings`
+    3. The bot will resume automatic check-ins
+  </Accordion>
+  
+  <Accordion title="Check-in shows 'already claimed' but I didn't check in">
+    **This can happen if:**
+    
+    1. You checked in earlier through HoYoLAB website or app
+    2. Another bot or service checked in for you
+    3. The check-in was performed but details weren't returned by the API
+    
+    This is normal and your reward was still claimed. The bot just couldn't retrieve detailed information about it.
+  </Accordion>
+  
+  <Accordion title="What time does auto check-in run?">
+    **Scheduled time:** Daily at 12:05 PM ET
+    
+    **Actual execution:** Between 12:05 PM and 1:00 PM ET
+    
+    The bot adds a random delay of 0-55 minutes to avoid overwhelming HoYoLAB servers. Your check-in will complete sometime within this window.
+  </Accordion>
+  
+  <Accordion title="Can I change the check-in time?">
+    No, the check-in time is set globally for all users. This ensures consistent server load and optimal performance.
+    
+    However, the random delay means your actual check-in time will vary day to day within the 12:05 PM - 1:00 PM ET window.
+  </Accordion>
+</AccordionGroup>
+
+## Data Collection
+
+If you have **Collect Analytics Data** enabled in General Settings, the bot tracks:
+
+- Check-in events (date and game)
+- Rewards received (item name and quantity)
+- Missed days
+
+This data is used to:
+- Generate your end-of-year wrapped statistics
+- Improve bot features and reliability
+- Identify usage patterns
+
+<Info>
+Data collection is completely optional and can be disabled in `/settings` under General Settings.
+</Info>
+
+## Best Practices
+
+<Steps>
+  <Step title="Enable notifications">
+    Stay informed about check-in results and catch issues early
+  </Step>
+  <Step title="Check notifications daily">
+    Review summaries to ensure everything is working correctly
+  </Step>
+  <Step title="Keep cookies fresh">
+    If you see invalid cookie errors, re-register promptly
+  </Step>
+  <Step title="Enable Privacy Blur">
+    Protect your UIDs by enabling Privacy Blur in General Settings
+  </Step>
+</Steps>
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Auto Redeem" icon="ticket" href="/automation/auto-redeem">
+    Automatically redeem game codes
+  </Card>
+  <Card title="Settings" icon="gear" href="/essentials/settings">
+    Configure all bot settings
+  </Card>
+</CardGroup>

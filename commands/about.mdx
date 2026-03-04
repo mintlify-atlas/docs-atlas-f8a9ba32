@@ -1,0 +1,332 @@
+---
+title: /about
+description: Learn about HoYoVista and view bot information
+icon: circle-info
+---
+
+## Overview
+
+The `/about` command displays comprehensive information about HoYoVista, including version details, server statistics, developer information, and important links.
+
+## Usage
+
+```bash
+/about
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## Displayed Information
+
+### Bot Description
+
+```markdown
+## About HoYoVista
+HoYoVista is a multipurpose Discord bot designed to enhance your 
+gaming experience across various HoYoverse titles.
+```
+
+### Statistics & Technical Info
+
+<Accordion title="Information Fields">
+  <ParamField path="Guild Count" type="number">
+    Total number of Discord servers using HoYoVista
+    
+    **Example**: `1,234`
+  </ParamField>
+  
+  <ParamField path="Developer" type="string">
+    Bot developer name from package.json
+    
+    **Example**: `ScobbleQ`
+  </ParamField>
+  
+  <ParamField path="Version" type="string">
+    Current bot version
+    
+    **Example**: `3.2.0`
+  </ParamField>
+  
+  <ParamField path="Node.js" type="string">
+    Node.js runtime version
+    
+    **Example**: `v20.11.0`
+  </ParamField>
+  
+  <ParamField path="Discord.js" type="string">
+    Discord.js library version
+    
+    **Example**: `^14.16.3`
+  </ParamField>
+  
+  <ParamField path="Uptime" type="timestamp">
+    How long the bot has been running
+    
+    **Format**: `<t:1234567890:R>` (Discord relative timestamp)
+    
+    **Example**: "started 2 hours ago"
+  </ParamField>
+</Accordion>
+
+## Quick Links
+
+The response includes four button links:
+
+### Directory
+
+<ParamField path="URL" type="link">
+  `https://discord.com/application-directory/{botId}`
+  
+  **Description**: Official Discord App Directory listing
+  
+  **Purpose**: Add HoYoVista to your servers
+</ParamField>
+
+### GitHub
+
+<ParamField path="URL" type="link">
+  From `package.json` repository field
+  
+  **Description**: Source code repository
+  
+  **Purpose**: View code, report issues, contribute
+</ParamField>
+
+### Docs
+
+<ParamField path="URL" type="link">
+  `https://xentriom.gitbook.io/hoyovista/`
+  
+  **Description**: Official documentation
+  
+  **Purpose**: Comprehensive guides and references
+</ParamField>
+
+### Server
+
+<ParamField path="URL" type="link">
+  `https://discord.gg/WATyv9tkFC`
+  
+  **Description**: Official support Discord server
+  
+  **Purpose**: Get help, report issues, chat with community
+</ParamField>
+
+## Example Response
+
+```markdown
+## About HoYoVista
+HoYoVista is a multipurpose Discord bot designed to enhance your 
+gaming experience across various HoYoverse titles.
+
+---
+
+### Guild Count
+1,234
+
+### Developer
+ScobbleQ
+
+### Version
+3.2.0
+
+### Node.js
+v20.11.0
+
+### Discord.js
+^14.16.3
+
+### Uptime
+<t:1709559600:R>
+
+[Directory] [GitHub] [Docs] [Server]
+```
+
+## Guild Count Calculation
+
+### Sharded Bots
+
+For bots running on multiple shards:
+
+```javascript
+const guildCountPromise = 
+  await interaction.client.shard?.fetchClientValues('guilds.cache.size');
+const guildCount = guildCountPromise
+  ? guildCountPromise.reduce((acc, count) => acc + count, 0)
+  : interaction.client.guilds.cache.size;
+```
+
+<Info>
+  The bot automatically aggregates guild counts across all shards if sharding is enabled.
+</Info>
+
+### Single Instance
+
+For non-sharded deployments:
+
+```javascript
+const guildCount = interaction.client.guilds.cache.size;
+```
+
+## Uptime Calculation
+
+Uptime displays when the bot last started:
+
+```javascript
+const startTime = Math.floor((Date.now() - interaction.client.uptime) / 1000);
+// Format: <t:${startTime}:R>
+```
+
+**Display formats**:
+- "started 5 minutes ago"
+- "started 2 hours ago"
+- "started yesterday"
+
+## When to Use This Command
+
+<CardGroup cols={2}>
+  <Card title="Version Check" icon="code-compare">
+    Verify you're running the latest version
+  </Card>
+  
+  <Card title="Get Support" icon="life-ring">
+    Access support server and documentation links
+  </Card>
+  
+  <Card title="Report Issues" icon="bug">
+    Find GitHub repository for bug reports
+  </Card>
+  
+  <Card title="Bot Information" icon="circle-info">
+    Learn about the bot's technical details
+  </Card>
+</CardGroup>
+
+## Version History
+
+Check the GitHub repository (linked in response) for:
+- Release notes
+- Changelog
+- Update history
+- Breaking changes
+
+## Contributing
+
+Interested in contributing?
+
+<Steps>
+  <Step title="Visit GitHub">
+    Click the GitHub button in `/about` response
+  </Step>
+  
+  <Step title="Read CONTRIBUTING.md">
+    Review contribution guidelines
+  </Step>
+  
+  <Step title="Fork & Clone">
+    Fork the repository and clone locally
+  </Step>
+  
+  <Step title="Submit PR">
+    Make changes and submit a pull request
+  </Step>
+</Steps>
+
+## Support Resources
+
+### Documentation
+
+Access via **Docs** button:
+- Command references
+- Setup guides
+- Troubleshooting
+- FAQ
+
+### Discord Server
+
+Join via **Server** button:
+- Live support
+- Community help
+- Feature discussions
+- Update announcements
+
+### GitHub Issues
+
+Access via **GitHub** button:
+- Bug reports
+- Feature requests
+- Technical discussions
+
+## Privacy & Terms
+
+For legal information:
+- [Privacy Policy](/legal/privacy-policy)
+- [Terms of Service](/legal/terms-of-service)
+
+<Note>
+  You agreed to these during registration with `/register`
+</Note>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  10 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/about.js:17-21`
+- **Cooldown**: `src/commands/about.js:16`
+- **Guild Count**: `src/commands/about.js:27-31`
+- **Package Info**: `src/commands/about.js:11-13`
+- **Links**: `src/commands/about.js:78-95`
+
+## Package.json Integration
+
+The command reads from `package.json`:
+
+```json
+{
+  "author": "ScobbleQ",
+  "version": "3.2.0",
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  },
+  "repository": {
+    "url": "https://github.com/username/hoyovista"
+  }
+}
+```
+
+<Info>
+  This ensures version information is always accurate and automatically updated.
+</Info>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Feedback" icon="comment" href="/commands/feedback">
+    Submit suggestions or report issues
+  </Card>
+  
+  <Card title="Settings" icon="gear" href="/commands/settings">
+    Configure bot preferences
+  </Card>
+</CardGroup>

@@ -1,0 +1,567 @@
+---
+title: 'Data Management'
+description: 'View, export, and delete your HoYoVista data'
+icon: 'database'
+---
+
+## Overview
+
+HoYoVista provides comprehensive tools for managing your data. You have full control to view, export, and delete all information stored by the bot.
+
+## Viewing Your Data
+
+### The /data Command
+
+The `/data` command displays all information HoYoVista stores about you in a structured, readable format.
+
+```bash
+/data
+```
+
+**Cooldown:** 5 minutes (to prevent spam)
+
+**Visibility:** Private (ephemeral message - only you can see it)
+
+<Note>
+  This command requires you to be registered. Use `/register` first if you haven't already.
+</Note>
+
+### What Data is Displayed
+
+The `/data` command shows up to four sections:
+
+#### 1. User Data
+
+Your core account information and settings:
+
+```json
+{
+  "uid": "123456789012345678",
+  "createdAt": "1704067200",
+  "subscribed": true,
+  "private": false,
+  "collectData": true,
+  "notifyCheckin": true,
+  "notifyRedeem": true,
+  "updatedAt": "2024-03-04T15:30:00.000Z"
+}
+```
+
+**Fields explained:**
+- `uid` - Your Discord User ID
+- `createdAt` - Unix timestamp when you registered
+- `subscribed` - Whether update notifications are enabled
+- `private` - Privacy Blur status (true = enabled)
+- `collectData` - Analytics collection status
+- `notifyCheckin` - Check-in DM notifications enabled
+- `notifyRedeem` - Redemption DM notifications enabled
+- `updatedAt` - Last time settings were modified
+
+#### 2. HoYoLAB Cookies
+
+<Warning>
+  This section contains sensitive authentication tokens. Never share this data with anyone.
+</Warning>
+
+Your stored HoYoLAB authentication cookies:
+
+```json
+{
+  "ltmid_v2": "...",
+  "ltoken_v2": "v2_...",
+  "ltuid_v2": "...",
+  "mi18nLang": "en-us",
+  "account_id_v2": "...",
+  "account_mid_v2": "..."
+}
+```
+
+**Cookie purposes:**
+- `ltmid_v2` - Session identifier
+- `ltoken_v2` - Access token for HoYoLAB API
+- `ltuid_v2` - Your HoYoLAB user ID
+- `mi18nLang` - Language preference
+- `account_id_v2` - Account identifier
+- `account_mid_v2` - Account metadata identifier
+
+These cookies are used to:
+- Authenticate with HoYoLAB on your behalf
+- Fetch your game data
+- Perform automatic check-ins
+- Redeem promotional codes
+
+<Tip>
+  If you see this section, your HoYoLAB account is successfully linked. If it's missing, use `/hoyolink` to connect your account.
+</Tip>
+
+#### 3. Linked Games
+
+All games connected to your account:
+
+```json
+[
+  {
+    "uid": "123456789012345678",
+    "gameId": "2",
+    "gameRoleId": "901234567",
+    "region": "os_usa",
+    "regionName": "America",
+    "autoCheckin": true,
+    "autoRedeem": true,
+    "attemptedCodes": ["CODE123", "CODE456"],
+    "game": "genshin"
+  },
+  {
+    "uid": "123456789012345678",
+    "gameId": "6",
+    "gameRoleId": "801234567",
+    "region": "prod_official_usa",
+    "regionName": "America",
+    "autoCheckin": true,
+    "autoRedeem": false,
+    "attemptedCodes": [],
+    "game": "hkrpg"
+  }
+]
+```
+
+**Fields explained:**
+- `uid` - Your Discord ID (links to your account)
+- `gameId` - HoYoLAB game identifier
+- `gameRoleId` - Your in-game UID
+- `region` - Server region code
+- `regionName` - Human-readable region name
+- `autoCheckin` - Auto check-in enabled for this game
+- `autoRedeem` - Auto redemption enabled for this game
+- `attemptedCodes` - Codes already tried (prevents duplicates)
+- `game` - Game abbreviation (genshin, hkrpg, zzz, etc.)
+
+#### 4. Recent Events
+
+<Note>
+  This section only appears if you have "Collect Analytics Data" enabled in settings.
+</Note>
+
+Your most recent analytics events (latest 2 shown):
+
+```json
+[
+  {
+    "game": "discord",
+    "type": "interaction",
+    "timestamp": "2024-03-04T15:30:00.000Z",
+    "metadata": {
+      "command": "settings"
+    }
+  },
+  {
+    "game": "discord",
+    "type": "interaction",
+    "timestamp": "2024-03-04T14:20:00.000Z",
+    "metadata": {
+      "command": "profile"
+    }
+  }
+]
+```
+
+**Event data:**
+- `game` - Context (usually "discord" for bot commands)
+- `type` - Event type ("interaction" for commands)
+- `timestamp` - When the event occurred
+- `metadata` - Additional context (command name, etc.)
+
+Events help:
+- Power your end-of-year wrapped
+- Identify usage patterns
+- Improve the bot
+- Debug issues
+
+## Exporting Your Data
+
+### Export Format
+
+All data is displayed in JSON format, which is:
+- **Human-readable** - Easy to understand
+- **Machine-parsable** - Can be processed by scripts
+- **Structured** - Organized and consistent
+- **Complete** - Contains all stored information
+
+### How to Export
+
+1. Run the `/data` command
+2. Copy the JSON data from the response
+3. Save to a file (e.g., `my-hoyovista-data.json`)
+4. Store securely
+
+<CodeGroup>
+
+```bash Manual Copy
+# 1. Run the command
+/data
+
+# 2. Select and copy each JSON block
+# 3. Paste into a text editor
+# 4. Save as .json file
+```
+
+```javascript Process with Script
+// Example: Parse exported data
+const fs = require('fs');
+
+// Load exported data
+const data = JSON.parse(fs.readFileSync('my-hoyovista-data.json'));
+
+// Access user settings
+console.log('Privacy Blur:', data.user.private);
+console.log('Linked Games:', data.games.length);
+```
+
+</CodeGroup>
+
+### What to Do With Exported Data
+
+<CardGroup cols={2}>
+  <Card title="Personal Backup" icon="floppy-disk">
+    Keep a local copy of your data for your records and peace of mind.
+  </Card>
+  
+  <Card title="Privacy Audit" icon="magnifying-glass">
+    Review exactly what information HoYoVista stores about you.
+  </Card>
+  
+  <Card title="Support Tickets" icon="life-ring">
+    Share with support staff (redact sensitive cookies!) when troubleshooting.
+  </Card>
+  
+  <Card title="Data Analysis" icon="chart-line">
+    Analyze your usage patterns, linked games, and preferences.
+  </Card>
+</CardGroup>
+
+<Warning>
+  When sharing data for support, always redact or remove your HoYoLAB cookies. They provide full access to your account.
+</Warning>
+
+## Deleting Your Data
+
+### Account Deletion
+
+You can permanently delete all your HoYoVista data at any time.
+
+**What gets deleted:**
+- User account and settings
+- All preferences (notifications, privacy, etc.)
+- HoYoLAB cookies
+- Linked games
+- Analytics events
+- Check-in history
+- Redemption history
+- Attempted codes list
+- Cached game data
+
+**What happens after deletion:**
+- Bot commands requiring registration will no longer work
+- You'll need to re-register and re-link your account to use the bot again
+- No automatic check-ins or redemptions will occur
+- All settings are lost and cannot be recovered
+
+<Warning>
+  Account deletion is permanent and cannot be reversed. Make sure to export your data first if you want to keep a copy.
+</Warning>
+
+### How to Delete Your Data
+
+1. Use the `/hoyolink` command
+2. Click "Unlink HoYoLAB Account"
+3. Read the warning carefully
+4. Click "Confirm" to proceed
+
+```bash
+/hoyolink
+```
+
+**Step-by-step:**
+
+<Steps>
+  <Step title="Run the command">
+    Execute `/hoyolink` in Discord
+  </Step>
+  
+  <Step title="Click Unlink">
+    Since you already have an account linked, you'll see an "Unlink HoYoLAB Account" button. Click it.
+  </Step>
+  
+  <Step title="Confirm deletion">
+    Read the warning: "This action is destructive and cannot be reversed, continue?"
+    
+    Click "Confirm" to proceed with deletion.
+  </Step>
+  
+  <Step title="Deletion complete">
+    You'll see: "Your HoYoLAB account has been successfully unlinked."
+    
+    All your data has been permanently deleted.
+  </Step>
+</Steps>
+
+### What Happens Immediately
+
+When you confirm deletion:
+
+```sql
+-- Database operations (for transparency)
+DELETE FROM users WHERE uid = 'your_discord_id';
+-- This cascades to delete:
+-- - All linked games
+-- - All cookies  
+-- - All analytics events (user-specific)
+-- - All cached data
+```
+
+The deletion is:
+- **Immediate** - Takes effect instantly
+- **Complete** - All related data removed
+- **Irreversible** - Cannot be undone
+- **Permanent** - No recovery possible
+
+### After Deletion
+
+If you want to use HoYoVista again:
+
+1. Run `/register` to create a new account
+2. Use `/hoyolink` to connect your HoYoLAB account
+3. Reconfigure your settings in `/settings`
+4. Re-enable automatic features as desired
+
+<Note>
+  Starting fresh means all settings return to defaults and you'll need to reconfigure your preferences.
+</Note>
+
+## Data Retention Policies
+
+### Active Account Data
+
+**User Settings & Account Info**
+- **Retention:** Indefinite (while account is active)
+- **Purpose:** Core bot functionality
+- **Deletion:** Only when you unlink account
+
+**HoYoLAB Cookies**
+- **Retention:** Indefinite (while account is active)
+- **Purpose:** Authentication with HoYoLAB
+- **Deletion:** Immediate when account unlinked
+- **Updates:** Replaced when you re-link
+
+**Linked Games**
+- **Retention:** Indefinite (while account is active)
+- **Purpose:** Game-specific features
+- **Deletion:** Immediate when account unlinked
+
+### Analytics Data
+
+**Events (when collection enabled)**
+- **Retention:** Up to 1 year
+- **Purpose:** Usage analytics, year-end wrapped
+- **Deletion:** Automatic after 1 year, or immediate when account deleted
+- **Opt-out:** Disable "Collect Analytics Data" in settings
+
+**Aggregate Statistics**
+- **Retention:** Indefinite
+- **Anonymization:** No personal identifiers
+- **Purpose:** Overall bot improvement
+- **Cannot be deleted:** Already anonymized
+
+### Temporary Data
+
+**Cached Game Data**
+- **Retention:** 5-10 minutes (temporary)
+- **Purpose:** Performance optimization
+- **Deletion:** Automatic expiration
+- **Updates:** Refreshed on each request
+
+**Rate Limit Counters**
+- **Retention:** 30 seconds to 5 minutes
+- **Purpose:** Prevent abuse
+- **Deletion:** Automatic expiration
+
+### Deleted Account Data
+
+**User-Specific Data**
+- **Retention:** None
+- **Deletion:** Immediate and permanent
+- **Recovery:** Not possible
+
+**Anonymized Analytics**
+- **Retention:** May remain in aggregate form
+- **Personal info:** Already removed
+- **Purpose:** Statistical analysis only
+
+## Data Access Requests
+
+### Standard Access
+
+Use the `/data` command for immediate access to all your data.
+
+**Response time:** Instant
+
+**Format:** JSON
+
+**Completeness:** 100% of stored data
+
+### Bulk Historical Data
+
+If you need historical analytics beyond the 2 most recent events:
+
+1. Contact support through Discord
+2. Verify your identity (Discord ID)
+3. Request full analytics export
+4. Receive data via secure method
+
+**Response time:** 7-14 days
+
+**Format:** JSON or CSV
+
+### Legal Requests
+
+For GDPR or CCPA requests:
+
+1. Submit formal request to support
+2. Provide necessary identification
+3. Specify request type (access, deletion, etc.)
+4. Receive response within legal timeframes
+
+**GDPR:** 30 days maximum
+
+**CCPA:** 45 days maximum
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Regular Data Reviews">
+    - Check `/data` periodically (e.g., monthly)
+    - Verify settings match your preferences
+    - Ensure only expected games are linked
+    - Review what analytics are being collected
+  </Accordion>
+
+  <Accordion title="Secure Your Exports">
+    - Never share exported data publicly
+    - Redact cookies before sharing with support
+    - Store exports in secure locations
+    - Delete old exports when no longer needed
+  </Accordion>
+
+  <Accordion title="Understand What's Stored">
+    - Read through each section of `/data` output
+    - Understand why each piece of data exists
+    - Know your privacy rights
+    - Ask questions if anything is unclear
+  </Accordion>
+
+  <Accordion title="Before Deleting">
+    - Export your data first
+    - Consider if you'll want to use the bot again
+    - Understand deletion is permanent
+    - Review what features you'll lose
+  </Accordion>
+</AccordionGroup>
+
+## Privacy Rights Summary
+
+| Right | How to Exercise | Timeframe |
+|-------|----------------|----------|
+| **Right to Access** | Use `/data` command | Instant |
+| **Right to Export** | Copy data from `/data` | Instant |
+| **Right to Rectification** | Use `/settings` to update | Instant |
+| **Right to Deletion** | Use `/hoyolink` unlink | Instant |
+| **Right to Object** | Disable analytics in `/settings` | Instant |
+| **Right to Portability** | Export via `/data` as JSON | Instant |
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can I delete only some data?">
+    No. The bot requires all core data (account, cookies, games) to function. It's all-or-nothing.
+    
+    However, you can:
+    - Disable analytics collection (keeps account, stops tracking)
+    - Remove specific games by unlinking and re-linking
+  </Accordion>
+
+  <Accordion title="Can I recover deleted data?">
+    No. Once you confirm account deletion, all data is permanently removed from our systems.
+    
+    Make sure to export your data first if you want to keep a copy.
+  </Accordion>
+
+  <Accordion title="Why can't I see all my analytics events?">
+    The `/data` command shows only the 2 most recent events to keep the response concise.
+    
+    For full event history, contact support to request a complete export.
+  </Accordion>
+
+  <Accordion title="What if my data looks wrong?">
+    - Verify you're using the correct Discord account
+    - Check if settings match your expectations
+    - Ensure games are linked correctly in `/hoyolink`
+    - Contact support if data appears corrupted
+  </Accordion>
+
+  <Accordion title="Can I transfer my data to another Discord account?">
+    No. Data is tied to your Discord User ID and cannot be transferred.
+    
+    You would need to:
+    1. Export data from old account
+    2. Delete old account
+    3. Register new account
+    4. Manually reconfigure settings
+  </Accordion>
+</AccordionGroup>
+
+## Compliance & Legal
+
+### GDPR (EU Users)
+
+HoYoVista complies with GDPR requirements:
+
+- **Right to access:** `/data` command
+- **Right to rectification:** `/settings` command
+- **Right to erasure:** `/hoyolink` unlink
+- **Right to data portability:** JSON export via `/data`
+- **Right to object:** Disable analytics in `/settings`
+- **Right to be informed:** This documentation
+
+### CCPA (California Users)
+
+HoYoVista complies with CCPA requirements:
+
+- **Right to know:** `/data` command
+- **Right to delete:** `/hoyolink` unlink
+- **Right to opt-out:** Disable analytics in `/settings`
+- **No data sales:** We never sell your data
+
+### Data Processing Agreement
+
+By using HoYoVista, you consent to:
+- Storage of necessary account data
+- Use of HoYoLAB cookies for authentication
+- Optional analytics collection (can be disabled)
+- Data retention as outlined above
+
+You can withdraw consent at any time by deleting your account.
+
+## Related Documentation
+
+- [Privacy Policy](/configuration/privacy) - Detailed privacy practices
+- [Settings Configuration](/configuration/settings) - Manage preferences
+- [Getting Help](/support/getting-help) - Support resources
+
+## Need Help?
+
+If you have questions about data management:
+
+- Review this documentation thoroughly
+- Check the [Privacy guide](/configuration/privacy)
+- Visit our [support resources](/support/getting-help)
+- Contact us through our Discord community

@@ -1,0 +1,295 @@
+---
+title: /feedback
+description: Send feedback to the developer
+icon: comment
+---
+
+## Overview
+
+The `/feedback` command provides a direct channel to submit suggestions, report bugs, request features, or share thoughts with the HoYoVista development team.
+
+## Usage
+
+```bash
+/feedback
+```
+
+<ParamField path="None" type="none">
+  This command takes no parameters - it opens an interactive modal
+</ParamField>
+
+## Feedback Process
+
+<Steps>
+  <Step title="Run the Command">
+    Execute `/feedback` to see the feedback introduction
+  </Step>
+  
+  <Step title="Click 'Give Feedback'">
+    Opens a modal form with two fields
+  </Step>
+  
+  <Step title="Fill Out the Form">
+    - **Feedback Type**: Bug report, suggestion, feature request, etc.
+    - **Content**: Detailed description of your feedback
+  </Step>
+  
+  <Step title="Submit">
+    Your feedback is sent directly to the developer via webhook
+  </Step>
+</Steps>
+
+## Feedback Modal
+
+When you click the "Give Feedback" button:
+
+### Field 1: Feedback Type
+
+<ParamField path="feedback_type" type="string" required>
+  **Label**: Feedback Type
+  
+  **Description**: What type of feedback are you giving?
+  
+  **Style**: Short text input
+  
+  **Placeholder**: "Bug reports, suggestions, feature requests, etc."
+  
+  **Examples**:
+  - Bug Report
+  - Feature Request
+  - Suggestion
+  - Complaint
+  - Compliment
+  - Question
+</ParamField>
+
+### Field 2: Content
+
+<ParamField path="feedback_text" type="string" required>
+  **Label**: Content
+  
+  **Description**: What would you like to share?
+  
+  **Style**: Paragraph (multi-line text)
+  
+  **Placeholder**: "Type your feedback here...."
+  
+  **Max Length**: 4000 characters
+</ParamField>
+
+## What to Include
+
+### Bug Reports
+
+<Accordion title="Effective Bug Report Template">
+  **Feedback Type**: Bug Report
+  
+  **Content**:
+  ```
+  Command: /profile
+  Issue: Profile doesn't load for Genshin Impact
+  
+  Steps to reproduce:
+  1. Run /profile account:Genshin Impact (NA)
+  2. Wait for response
+  3. Error message appears
+  
+  Expected: Profile displays with stats
+  Actual: "An error occurred while fetching your data"
+  
+  Additional info: Started happening today, worked yesterday
+  ```
+</Accordion>
+
+### Feature Requests
+
+<Accordion title="Feature Request Template">
+  **Feedback Type**: Feature Request
+  
+  **Content**:
+  ```
+  Feature: Character build tracking
+  
+  Description:
+  Would love to see a command that tracks my character builds,
+  showing artifacts, weapons, and talent levels.
+  
+  Use case:
+  I want to compare builds between my accounts and share
+  them with friends easily.
+  
+  Similar to: Enka.Network but integrated in Discord
+  ```
+</Accordion>
+
+### Suggestions
+
+<Accordion title="Suggestion Template">
+  **Feedback Type**: Suggestion
+  
+  **Content**:
+  ```
+  Suggestion: Add expedition timer to /notes
+  
+  Reason:
+  Would be helpful to see when expeditions complete
+  alongside resin and commission info.
+  
+  This would reduce the need to open the game just
+  to check expedition status.
+  ```
+</Accordion>
+
+## Response
+
+After submission:
+
+```markdown
+Your feedback has been successfully submitted. 
+Thank you for your input!
+```
+
+<Info>
+  The developer receives your feedback immediately via webhook. While individual responses aren't guaranteed, all feedback is read and considered.
+</Info>
+
+## Developer Integration
+
+Feedback is sent to a Discord webhook with:
+
+### Embed Format
+
+```
+Author: YourUsername [YourUserID]
+Avatar: Your Discord profile picture
+
+Fields:
+├─ Feedback Type: [Your specified type]
+└─ Content: [Your detailed feedback]
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Be Specific" icon="bullseye">
+    Include exact command names, error messages, and reproduction steps
+  </Card>
+  
+  <Card title="Be Constructive" icon="lightbulb">
+    Focus on the problem and potential solutions rather than complaints
+  </Card>
+  
+  <Card title="Be Clear" icon="message">
+    Use proper grammar and formatting for easier understanding
+  </Card>
+  
+  <Card title="Be Patient" icon="clock">
+    Development takes time - not all feedback can be implemented immediately
+  </Card>
+</CardGroup>
+
+## What NOT to Include
+
+<Warning>
+  **Do not share**:
+  - HoYoLAB cookies or tokens
+  - Account passwords
+  - Personal identifying information (beyond Discord ID)
+  - Other users' private information
+</Warning>
+
+## Alternative Feedback Channels
+
+### Support Server
+
+Join the official Discord server:
+- **Link**: `https://discord.gg/WATyv9tkFC`
+- Real-time support
+- Community discussions
+- Feature voting
+
+### GitHub Issues
+
+For developers and technical users:
+- **Repository**: Check `/about` for GitHub URL
+- Bug tracking
+- Feature requests
+- Code contributions
+
+## Feedback Impact
+
+Your feedback helps:
+
+<Steps>
+  <Step title="Bug Fixes">
+    Identify and resolve issues quickly
+  </Step>
+  
+  <Step title="Feature Prioritization">
+    Determine which features users want most
+  </Step>
+  
+  <Step title="User Experience">
+    Improve command designs and workflows
+  </Step>
+  
+  <Step title="Documentation">
+    Clarify confusing aspects of the bot
+  </Step>
+</Steps>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  10 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/feedback.js:19-23`
+- **Cooldown**: `src/commands/feedback.js:18`
+- **Modal Builder**: `src/commands/feedback.js:63-86`
+- **Webhook Submit**: `src/commands/feedback.js:96-115`
+
+## Introduction Message
+
+The initial feedback screen displays:
+
+```markdown
+## Heyo~
+
+Thank you for using HoYoVista! Your feedback is important to us, 
+whether it's a suggestion, a problem you've encountered, or just 
+a thought you'd like to share.
+
+Click the button below to get started. We appreciate your input!
+
+[🗨️ Give Feedback Button]
+```
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="About" icon="circle-info" href="/commands/about">
+    Learn about the bot and access support links
+  </Card>
+  
+  <Card title="Data" icon="database" href="/commands/data">
+    View your data if reporting a data-related issue
+  </Card>
+</CardGroup>

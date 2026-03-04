@@ -1,0 +1,230 @@
+---
+title: /redeem
+description: Redeem promotional codes for in-game rewards
+icon: ticket
+---
+
+## Overview
+
+The `/redeem` command allows you to redeem promotional codes for in-game rewards across your linked HoYoverse games.
+
+<Warning>
+  This command is currently **under maintenance** and temporarily unavailable.
+</Warning>
+
+## Usage
+
+```bash
+/redeem [account] [code]
+```
+
+<ParamField path="account" type="string" required={false}>
+  The specific account to redeem codes for. If omitted, redeems for all supported linked accounts.
+  
+  **Autocomplete**: Shows your linked games
+</ParamField>
+
+<ParamField path="code" type="string" required={false}>
+  The redemption code(s) to use. Multiple codes can be separated by: `-`, `,`, `|`, `/`, `:`
+  
+  If omitted, automatically fetches available codes from seria_ati's API.
+</ParamField>
+
+## Supported Games
+
+- **Genshin Impact**
+- **Honkai: Star Rail**
+- **Zenless Zone Zero**
+
+<Note>
+  Honkai Impact 3rd is excluded from code redemption.
+</Note>
+
+## Examples
+
+<CodeGroup>
+```bash Redeem All Available Codes
+/redeem
+```
+
+```bash Redeem Specific Code
+/redeem code:GENSHINGIFT
+```
+
+```bash Multiple Codes
+/redeem code:CODE1-CODE2-CODE3
+```
+
+```bash Specific Account
+/redeem account:Genshin Impact (NA) code:GENSHINGIFT
+```
+</CodeGroup>
+
+## Code Sources
+
+When no code is provided, HoYoVista automatically fetches the latest codes from:
+
+<ParamField path="seria_ati API" type="source">
+  External API service providing up-to-date promotional codes
+</ParamField>
+
+## Code Redemption Process
+
+<Steps>
+  <Step title="Code Validation">
+    Bot validates the code format and availability
+  </Step>
+  
+  <Step title="Account Selection">
+    Determines which accounts to redeem for
+  </Step>
+  
+  <Step title="Redemption">
+    Submits codes to HoYoverse redemption API
+  </Step>
+  
+  <Step title="Results">
+    Displays success/failure for each account and code
+  </Step>
+</Steps>
+
+## Automation
+
+You can enable automatic code redemption:
+
+<Accordion title="Enable Auto-Redeem">
+  1. Run `/settings`
+  2. Select **"Code Redemption Settings"**
+  3. Toggle auto-redeem for each game
+  4. Enable DM notifications to receive redemption results
+</Accordion>
+
+<Info>
+  Auto-redeem automatically claims new promotional codes as soon as they're available.
+</Info>
+
+## Expected Response Format
+
+When the command is fully operational:
+
+### Successful Redemption
+
+```markdown
+### Genshin Impact (600******6)
+✅ GENSHINGIFT: Primogem x60, Hero's Wit x5
+```
+
+### Already Redeemed
+
+```markdown
+### Genshin Impact (600******6)
+⚠️ GENSHINGIFT: Code has already been redeemed
+```
+
+### Invalid Code
+
+```markdown
+### Genshin Impact (600******6)
+❌ INVALIDCODE: Invalid redemption code
+```
+
+### No New Codes
+
+```markdown
+No new codes found.
+```
+
+## Common Error Codes
+
+| Message | Meaning |
+|---------|----------|
+| "Code has already been redeemed" | You've used this code before |
+| "Invalid redemption code" | Code is expired or incorrect |
+| "Redemption limit reached" | Code usage limit exceeded |
+| "Account not found" | Game account not properly linked |
+
+## Notifications
+
+When auto-redeem is enabled with DM notifications:
+
+```markdown
+🎁 Auto-Redemption Complete
+
+Genshin Impact (600******6)
+✅ NEWCODE2024: Primogem x60, Mora x50000
+
+Zenless Zone Zero (100******7)
+✅ NEWCODE2024: Polychrome x100
+```
+
+<Warning>
+  Ensure your Discord DMs are open to receive auto-redemption notifications.
+</Warning>
+
+## Code Format
+
+Redemption codes typically:
+- Are 12-16 characters long
+- Contain uppercase letters and numbers
+- Case-sensitive (use uppercase)
+- Have expiration dates
+
+## Finding Codes
+
+Promotional codes are released:
+- During livestream events
+- Special occasions and holidays
+- Community events
+- Developer announcements
+
+<Note>
+  HoYoVista automatically fetches codes from seria_ati's API, so you don't need to manually input them when using auto-redeem.
+</Note>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  60 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Ephemeral (only visible to you)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/redeem.js:12-29`
+- **Cooldown**: `src/commands/redeem.js:11`
+- **Maintenance Status**: `src/commands/redeem.js:64-68`
+- **Excluded Games**: `src/commands/redeem.js:37`
+
+## Maintenance Notice
+
+<Warning>
+  **Status**: Under Maintenance
+  
+  The `/redeem` command is temporarily disabled while improvements are being made. Check back later or join the support server for updates.
+</Warning>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/commands/settings">
+    Enable auto-redeem and notifications
+  </Card>
+  
+  <Card title="Check-in" icon="calendar-check" href="/commands/check-in">
+    Claim daily HoYoLAB rewards
+  </Card>
+</CardGroup>

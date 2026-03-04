@@ -1,0 +1,531 @@
+---
+title: 'Setup Guide'
+description: 'Complete setup instructions for HoYoVista'
+icon: 'gear'
+---
+
+This comprehensive guide covers everything you need to know about setting up and configuring HoYoVista for optimal use.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A Discord account
+- A HoYoLAB account with at least one linked game
+- Access to a web browser with Developer Tools
+
+## Adding HoYoVista to Discord
+
+<Accordion title="Add the Bot to Your Server">
+  If you want to use HoYoVista in your own Discord server:
+
+  1. Visit the official HoYoVista invite link
+  2. Select the server where you want to add the bot
+  3. Grant the necessary permissions (see below)
+  4. Click **"Authorize"**
+
+  <Note>
+    HoYoVista can also be used in DMs and supports Discord's User Install feature, allowing you to use it anywhere without needing to add it to a server.
+  </Note>
+</Accordion>
+
+<Accordion title="Required Permissions">
+  HoYoVista requires the following permissions to function properly:
+
+  - **Send Messages** - To respond to commands
+  - **Embed Links** - To display rich content and game data
+  - **Use Slash Commands** - To register and execute commands
+  - **Read Message History** - For command context
+
+  <Warning>
+    Without these permissions, some features may not work correctly. Ensure the bot has appropriate permissions in the channels where you want to use it.
+  </Warning>
+</Accordion>
+
+## Account Registration
+
+<Steps>
+  <Step title="Create Your HoYoVista Account">
+    Register your Discord account with HoYoVista:
+
+    ```bash
+    /register
+    ```
+
+    The registration process:
+    1. Bot displays Privacy Policy and Terms of Service
+    2. Click **"Agree and Register"** to accept
+    3. Your account is created in the database
+    4. Confirmation message with available commands
+
+    <Info>
+      The bot stores minimal data:
+      - Discord User ID
+      - Privacy preferences
+      - Data collection settings (opt-in)
+      - Linked game information (after using `/hoyolink`)
+    </Info>
+
+    **What happens during registration:**
+    ```javascript
+    // From register.js:96
+    await addUser(interaction.user.id);
+    ```
+
+    The system creates a user profile that enables you to link your HoYoLAB account and use all bot features.
+  </Step>
+
+  <Step title="Check Registration Status">
+    If you try to register again, the bot will inform you:
+
+    ```
+    You have already registered your account.
+    ```
+
+    To manage your existing account, use:
+    - `/settings` - Modify account preferences
+    - `/data` - View or delete your stored data
+    - `/hoyolink` - Manage HoYoLAB connection
+  </Step>
+</Steps>
+
+## Linking Your HoYoLAB Account
+
+<Accordion title="Getting Your HoYoLAB Cookies (Detailed)">
+  HoYoLAB cookies are authentication tokens that allow HoYoVista to access your game data on your behalf.
+
+  ### Step-by-Step Instructions
+
+  **1. Access HoYoLAB**
+  - Go to [https://www.hoyolab.com/home](https://www.hoyolab.com/home)
+  - Log in to your account
+  - Navigate to your Personal Homepage (click profile picture → Personal Homepage)
+
+  **2. Open Developer Tools**
+
+  Choose your browser:
+  - **Chrome/Edge**: Press `F12` or `Ctrl+Shift+I` (Windows) / `Cmd+Option+I` (Mac)
+  - **Firefox**: Press `F12` or `Ctrl+Shift+K` (Windows) / `Cmd+Option+K` (Mac)
+  - **Safari**: Enable Developer Menu in Preferences → Advanced, then press `Cmd+Option+I`
+
+  **3. Navigate to Network Tab**
+  - Click the **"Network"** tab in DevTools
+  - Refresh the page (`Ctrl+R` or `Cmd+R`)
+  - Wait for network requests to populate
+
+  **4. Find the Cookie Header**
+  - In the filter box, type: `getGame`
+  - Click on the request named **"getGameRecordCard"**
+  - Navigate to **"Headers"** section
+  - Scroll to **"Request Headers"**
+  - Locate the `Cookie:` field
+
+  **5. Copy the Cookies**
+  - Copy **everything** after `Cookie:` (do not include "Cookie:" itself)
+  - The cookies should look like this:
+
+  ```text
+  ltmid_v2=____; ltoken_v2=v2____; ltuid_v2=____; DEVICEFP=____; 
+  HYV_LOGIN_PLATFORM_LIFECYCLE_ID={}; account_id_v2=____; 
+  account_mid_v2=____; cookie_token_v2=v2____; mi18nLang=en-us
+  ```
+
+  **6. Enter Cookies in Bot**
+  - Run `/hoyolink` in Discord
+  - Click **"Add HoYoLAB Account"**
+  - Paste the cookies in the modal
+  - Submit
+
+  ### Required Cookies
+
+  The bot validates these required cookies:
+  ```javascript
+  // From hoyolink.js:219
+  const requiredCookies = ['ltmidV2', 'ltokenV2', 'ltuidV2'];
+  ```
+
+  If any are missing, you'll see an error message specifying which cookies are required.
+
+  <Warning>
+    **Security Best Practices:**
+    - Never share your cookies with anyone
+    - Cookies provide full access to your HoYoLAB account
+    - If compromised, change your HoYoLAB password immediately
+    - The bot stores cookies securely in an encrypted database
+    - You can remove cookies anytime using `/hoyolink` → Unlink
+  </Warning>
+</Accordion>
+
+<Accordion title="Linking Process">
+  After running `/hoyolink` and entering your cookies:
+
+  **1. Cookie Validation**
+  ```javascript
+  // From hoyolink.js:216
+  const parsedCookies = parseCookies(cookies);
+  ```
+  The bot parses and validates your cookie format.
+
+  **2. Game Record Fetch**
+  ```javascript
+  // From hoyolink.js:244
+  const gameRecord = await fetchGameRecord({ cookies: parsedCookies });
+  ```
+  The bot fetches your linked games from HoYoLAB.
+
+  **3. Account Detection**
+  The bot automatically detects all games linked to your HoYoLAB account:
+  - Genshin Impact
+  - Honkai: Star Rail
+  - Honkai Impact 3rd
+  - Zenless Zone Zero
+  - Tears of Themis
+
+  **4. Data Storage**
+  ```javascript
+  // From hoyolink.js:274-282
+  for (const game of gameList) {
+    await addGame(interaction.user.id, {
+      game: IdToAbbr[String(game.game_id)],
+      gameId: String(game.game_id),
+      gameRoleId: String(game.game_role_id),
+      region: String(game.region),
+      regionName: String(game.region_name),
+    });
+  }
+  ```
+  Each game is stored with its UID, region, and metadata.
+
+  **5. Confirmation**
+  After successful linking:
+  ```
+  ## You're all set~
+  Welcome to HoYoVista! Here are some commands you can use to get started:
+  - /profile - View statics for the selected game
+  - /income - View income for the selected month
+  - /roadmap - View planned improvements and features
+  - /settings - Access and modify your account settings
+  ```
+</Accordion>
+
+<Accordion title="Unlinking Your Account">
+  To remove your HoYoLAB connection:
+
+  1. Run `/hoyolink`
+  2. Click **"Unlink HoYoLAB Account"**
+  3. Confirm the destructive action
+
+  <Warning>
+    **This action is irreversible!**
+    - All stored cookies are deleted
+    - All linked game data is removed
+    - You'll need to re-link and re-enter cookies to use the bot again
+  </Warning>
+
+  ```javascript
+  // From hoyolink.js:194
+  await deleteUser(interaction.user.id);
+  ```
+</Accordion>
+
+## Configuring Settings
+
+<Accordion title="Privacy Settings">
+  HoYoVista respects your privacy. Configure settings using `/settings`:
+
+  **Privacy Mode**
+  - When enabled, your UID is censored in bot responses
+  - Example: `123456789` → `1234***89`
+
+  **Data Collection**
+  - Opt-in feature for analytics
+  - Tracks command usage to help improve the bot
+  - Can be disabled at any time
+
+  ```javascript
+  // Privacy in action (from check-in.js:125)
+  censorUid({ uid: game.gameRoleId, flag: user.private })
+  ```
+
+  <Info>
+    Data collection, when enabled, tracks:
+    - Command usage frequency
+    - Check-in rewards received
+    - Game interactions
+    
+    It does NOT collect:
+    - Message content
+    - Personal information
+    - Credentials or passwords
+  </Info>
+</Accordion>
+
+<Accordion title="Managing Your Data">
+  Access data management tools via `/data`:
+
+  **View Stored Data**
+  - See what information the bot has about you
+  - Review linked games
+  - Check privacy preferences
+
+  **Delete Your Data**
+  - Completely remove all stored information
+  - Includes account profile, cookies, and game data
+  - Action cannot be undone
+
+  <Note>
+    Deleting your data is equivalent to unlinking your account. You'll need to register and re-link to use the bot again.
+  </Note>
+</Accordion>
+
+## Using HoYoVista Features
+
+<Accordion title="Daily Check-Ins">
+  Claim daily HoYoLAB rewards:
+
+  ```bash
+  # Check in all games
+  /check-in
+
+  # Check in specific game
+  /check-in account:Genshin Impact
+  ```
+
+  **Features:**
+  - 30-minute cooldown to prevent rate limiting
+  - Autocomplete for game selection
+  - Batch check-in for all linked games
+  - Displays rewards and missed days
+
+  **What you'll see:**
+  ```
+  # Checkin Summary
+  ### Genshin Impact (1234***89)
+  Daily Check-in Claimed
+  Primogem x20
+  ```
+
+  <Tip>
+    Set a daily reminder to maximize your check-in rewards! Missing consecutive days can affect certain game bonuses.
+  </Tip>
+</Accordion>
+
+<Accordion title="Game Profiles">
+  View detailed game statistics:
+
+  ```bash
+  /profile account:Genshin Impact
+  ```
+
+  **Supported Games:**
+  - Genshin Impact (with Enka.Network integration)
+  - Zenless Zone Zero (with Enka.Network integration)
+  - More games coming soon
+
+  **Genshin Impact Profile Includes:**
+  ```javascript
+  // From profile.js:211-217
+  - Total Achievements
+  - Max Friendships
+  - Spiral Abyss progress
+  - Imaginarium Theater progress
+  - Stygian Onslaught records
+  ```
+
+  **Zenless Zone Zero Profile Includes:**
+  ```javascript
+  // From profile.js:254-260
+  - Active Days
+  - Achievement count
+  - Simulated Battle Trial progress
+  - Battle Trial: The Last Stand
+  ```
+
+  <Note>
+    Profile data is fetched in real-time from HoYoLAB and Enka.Network, ensuring you always see up-to-date information.
+  </Note>
+</Accordion>
+
+<Accordion title="Additional Commands">
+  **Income Tracking:**
+  ```bash
+  /income
+  ```
+  View monthly currency income for supported games.
+
+  **Redeem Codes:**
+  ```bash
+  /redeem
+  ```
+  Automatically redeem promotional codes (when available).
+
+  **Real-Time Notes:**
+  ```bash
+  /notes
+  ```
+  Check resin, stamina, and other real-time game resources.
+
+  **Feedback:**
+  ```bash
+  /feedback
+  ```
+  Report bugs or suggest new features.
+
+  **About:**
+  ```bash
+  /about
+  ```
+  View bot information, version, and credits.
+</Accordion>
+
+## Troubleshooting
+
+<Accordion title="Common Issues">
+  **"You are not registered" error**
+  - Run `/register` first
+  - Registration is required before using any features
+
+  **"Invalid or incomplete cookies" error**
+  - Ensure you copied the entire cookie string
+  - Verify all required cookies are present: `ltmid_v2`, `ltoken_v2`, `ltuid_v2`
+  - Try refreshing HoYoLAB and getting new cookies
+
+  **"No games found" error**
+  - Ensure you have games linked to your HoYoLAB account
+  - Log in to HoYoLAB and verify games appear in your profile
+  - Some games may not be supported yet
+
+  **"Already checked in" message**
+  - You can only check in once per day per game
+  - Check-in resets at daily reset time (server-specific)
+
+  **Command cooldown**
+  - Most commands have cooldowns to prevent rate limiting
+  - `/check-in`: 30 minutes
+  - `/register`: 10 seconds
+  - `/hoyolink`: 30 seconds
+  - `/profile`: 30 seconds
+
+  <Warning>
+    If you experience persistent errors, your cookies may have expired. Re-link your account using `/hoyolink`.
+  </Warning>
+</Accordion>
+
+<Accordion title="Cookie Expiration">
+  HoYoLAB cookies can expire after:
+  - Changing your HoYoLAB password
+  - Long periods of inactivity
+  - Security-related logouts
+
+  **Signs your cookies expired:**
+  - "Failed to fetch game data" errors
+  - Commands return authentication errors
+  - Check-ins fail consistently
+
+  **Solution:**
+  1. Run `/hoyolink`
+  2. Click "Unlink HoYoLAB Account"
+  3. Re-link with fresh cookies
+
+  <Tip>
+    If you notice commands failing, try getting fresh cookies before reporting a bug. Cookie expiration is the most common cause of issues.
+  </Tip>
+</Accordion>
+
+## Environment Variables (Self-Hosting)
+
+If you're hosting HoYoVista yourself:
+
+```bash
+# From config.js
+TOKEN=                 # Discord bot token
+CLIENT_ID=            # Discord application client ID
+CLIENT_SECRET=        # Discord application client secret
+MONGO_URI=            # MongoDB connection string (deprecated)
+DATABASE_URL=         # PostgreSQL database URL
+WEBHOOK_ID=           # Discord webhook ID for logging
+WEBHOOK_TOKEN=        # Discord webhook token
+ENVIRONMENT=          # 'development' or 'production'
+```
+
+<Info>
+  HoYoVista requires:
+  - Node.js >= 22.12.0
+  - PostgreSQL database
+  - Discord.js v14.25.1+
+</Info>
+
+**Installation:**
+```bash
+# Clone the repository
+git clone https://github.com/ScobbleQ/HoYoVista
+cd HoYoVista
+
+# Install dependencies
+npm install
+
+# Deploy commands
+npm run deploy
+
+# Start the bot
+npm start
+```
+
+## Privacy & Security
+
+<Accordion title="Data Storage">
+  HoYoVista stores:
+  - Discord User ID (for account identification)
+  - HoYoLAB cookies (encrypted)
+  - Linked game information (UIDs, regions)
+  - Privacy and data collection preferences
+  - Command usage statistics (if opted-in)
+
+  HoYoVista does NOT store:
+  - HoYoLAB passwords
+  - Message content
+  - Personal information beyond Discord ID
+  - Payment information
+</Accordion>
+
+<Accordion title="Privacy Policy">
+  Read the full privacy policy: [HoYoVista Privacy Policy](/legal/privacy-policy)
+
+  Key points:
+  - Your data is never shared with third parties
+  - Cookies are encrypted at rest
+  - You can delete your data at any time
+  - Data collection is opt-in and can be disabled
+</Accordion>
+
+<Accordion title="Terms of Service">
+  Read the terms of service: [HoYoVista Terms of Service](/legal/terms-of-service)
+
+  By using HoYoVista, you agree to:
+  - Use the bot in accordance with Discord's Terms of Service
+  - Not abuse or exploit the bot
+  - Not share your cookies or credentials
+  - Accept that the service is provided "as-is"
+</Accordion>
+
+## Support
+
+Need help? Here's how to get assistance:
+
+1. **In-App Feedback**: Use `/feedback` to report issues directly
+2. **GitHub Issues**: [Report bugs or request features](https://github.com/ScobbleQ/HoYoVista/issues)
+3. **Roadmap**: Check `/roadmap` for planned features
+
+<Tip>
+  Before reporting an issue, try refreshing your cookies and ensure you're using the latest bot version. Many issues are resolved by re-linking your account.
+</Tip>
+
+## Next Steps
+
+- Explore all available commands
+- Configure your privacy settings
+- Join the community (if available)
+- Check the roadmap for upcoming features
+- Consider contributing to the project on GitHub
+
+Enjoy your enhanced HoYoverse experience with HoYoVista! 🎮✨

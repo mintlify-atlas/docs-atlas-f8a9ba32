@@ -1,0 +1,173 @@
+---
+title: /check-in
+description: Daily check-in to claim HoYoLAB rewards
+icon: calendar-check
+---
+
+## Overview
+
+The `/check-in` command performs daily check-ins on HoYoLAB for your linked games, earning you in-game rewards like Primogems, Stellar Jade, and more.
+
+## Usage
+
+```bash
+/check-in [account]
+```
+
+<ParamField path="account" type="string" required={false}>
+  The specific account to check-in for. If omitted, checks in for all linked accounts.
+  
+  **Autocomplete**: Shows your linked games
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+```bash Check-in All Accounts
+/check-in
+```
+
+```bash Check-in Specific Account
+/check-in account:Genshin Impact (NA)
+```
+</CodeGroup>
+
+## Supported Games
+
+Daily check-ins are available for:
+- **Genshin Impact**
+- **Honkai: Star Rail**
+- **Zenless Zone Zero**
+- **Honkai Impact 3rd**
+
+<Info>
+  All your linked games will be checked in if no account is specified.
+</Info>
+
+## Response Format
+
+### Successful Check-in
+
+```markdown
+# Checkin Summary
+-# <timestamp>
+
+### Genshin Impact (800******1)
+Daily Check-in Claimed
+Primogem x20
+-# Missed 0 days
+
+---
+
+### Zenless Zone Zero (100******8)
+Daily Check-in Claimed
+Polychrome x60
+```
+
+### No Details Available
+
+Some games may not provide reward details:
+
+```markdown
+### Honkai Impact 3rd (200******5)
+Daily Check-in Claimed
+-# No checkin details available
+```
+
+### Failed Check-in
+
+```markdown
+### Genshin Impact (800******1)
+Failed to check-in with code `-5003`
+You have already checked in today.
+```
+
+## Common Error Codes
+
+| Code | Meaning | Solution |
+|------|---------|----------|
+| `-5003` | Already checked in today | Wait until tomorrow |
+| `-100` | Invalid cookies | Re-link account with `/hoyolink` |
+| `-10001` | Account not found | Verify game is linked |
+
+## Privacy
+
+UIDs are automatically censored based on your privacy settings:
+- **Privacy Blur OFF**: `800123451` (full UID)
+- **Privacy Blur ON**: `800******1` (censored)
+
+<Note>
+  Configure privacy settings using `/settings` → General Settings → Privacy Blur
+</Note>
+
+## Automation
+
+You can enable automatic daily check-ins:
+
+<Steps>
+  <Step title="Open Settings">
+    Run `/settings`
+  </Step>
+  
+  <Step title="Navigate to Check-in Settings">
+    Select "Check-in Settings" from the dropdown
+  </Step>
+  
+  <Step title="Enable Auto Check-in">
+    Toggle auto check-in for each game you want automated
+  </Step>
+  
+  <Step title="Configure Notifications">
+    Enable DM notifications to receive check-in results
+  </Step>
+</Steps>
+
+### Automation Schedule
+
+Automatic check-ins run daily between:
+- **Start**: `<t:1735751100:t>` (server time)
+- **End**: `<t:1735754400:t>` (server time)
+
+<Warning>
+  Ensure your Discord DMs are open to receive check-in notifications.
+</Warning>
+
+## Technical Details
+
+<ParamField path="Cooldown" type="number">
+  1800 seconds (30 minutes)
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - 0 (Guild Install)
+  - 1 (User Install)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - 0 (Guild)
+  - 1 (Bot DM)
+  - 2 (Private Channel)
+</ParamField>
+
+<ParamField path="Response" type="string">
+  Public (visible to everyone in the channel)
+</ParamField>
+
+## Source Reference
+
+- **File**: `src/commands/check-in.js:14-25`
+- **Cooldown**: `src/commands/check-in.js:13`
+- **Check-in Logic**: `src/commands/check-in.js:119`
+- **Autocomplete**: `src/commands/check-in.js:30-48`
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/commands/settings">
+    Enable auto check-in and notifications
+  </Card>
+  
+  <Card title="HoYoLink" icon="link" href="/commands/hoyolink">
+    Link accounts for check-in access
+  </Card>
+</CardGroup>

@@ -1,0 +1,353 @@
+---
+title: Real-Time Notes
+description: Check resin, stamina, daily missions, and other time-gated resources
+icon: clock
+---
+
+The `/notes` command provides real-time information about your time-gated resources, daily missions, and redeemable rewards across all HoYoverse games.
+
+## Usage
+
+```bash
+/notes account:<game>
+```
+
+### Parameters
+
+- `account` (required) - The game account to check notes for. Select from your linked accounts.
+
+### Examples
+
+**Check Genshin Impact notes:**
+```bash
+/notes account:Genshin Impact
+```
+
+**Check Star Rail notes:**
+```bash
+/notes account:Honkai: Star Rail
+```
+
+<Info>
+  The notes command has a 30-second cooldown to balance API usage.
+</Info>
+
+## Genshin Impact Notes
+
+### Original Resin
+
+Monitor your resin count and recovery time:
+
+```
+### Original Resin
+Fully replenished in 2 hours
+160/160
+```
+
+- Current resin / Maximum resin (160)
+- Estimated time until full
+- Updates in real-time
+
+### Enemies of Note
+
+Weekly boss discount tracker:
+
+```
+### Enemies of Note
+Remaining resin cost-halving opportunities this week
+3/3
+```
+
+- Tracks your 3 weekly discounted boss runs
+- Resets every Monday at server reset
+
+### Daily Commission Reward
+
+Visual progress tracker for daily commissions:
+
+```
+### Daily Commission Reward
+Daily Commissions
+✅✅✅✅
+Encounter Points
+✅✅
+Long-Term Encounter Points
+⭐ x42
+4/4
+```
+
+- Shows completion status with checkmarks
+- Displays stored Encounter Points
+- "All Claimed" when daily reward is collected
+
+### Jar of Riches - Realm Currency
+
+```
+### Jar of Riches - Realm Currency
+The Limit will be reached in 5 hours
+1800/2400
+```
+
+- Current Realm Currency / Maximum capacity
+- Time until full (based on accumulation rate)
+- Only shown if Serenitea Pot is unlocked
+
+### Parametric Transformer
+
+```
+### Parametric Transformer
+Can be used again in 6 days
+Cooldown in progress
+```
+
+- Shows days until next use
+- Only appears if you've obtained the transformer
+- Status: "Obtained" or "Cooldown in progress"
+
+## Zenless Zone Zero Notes
+
+### Battery Charge
+
+```
+### Battery Charge
+240/240
+Fully Recovered
+```
+
+Or with time remaining:
+```
+Full at 14:30 Today
+```
+
+- Current / Maximum battery charge
+- Recovery time and date
+
+### Daily Missions
+
+```
+### Daily Missions
+Engagement Today: 100/100
+Scratch Card Mania: Complete
+Video Store Management: Revenue Available
+```
+
+- Daily engagement progress
+- Scratch card completion status
+- Video store revenue status
+
+### Season Missions
+
+```
+### Season Missions
+Bounty Commission Progress: 3/3
+Refreshes in 4 days
+Ridu Weekly Points: 1200/1500
+Refreshes in 4 days
+```
+
+- Weekly bounty commission progress
+- Ridu Weekly Points accumulation
+- Reset timers for both systems
+
+## Honkai: Star Rail Notes
+
+### Trailblazer Powder
+
+```
+### Trailblazer Powder
+180/180
+Fully Restored
+```
+
+- Current stamina / Maximum
+- Time until full restoration
+
+### Daily Training
+
+```
+### Daily Training
+500/500
+```
+
+- Daily training points earned
+- Tracks Battle Pass daily objectives
+
+### Echo of War
+
+```
+### Echo of War
+3/3
+```
+
+- Weekly boss attempts remaining
+- Resets every Monday
+
+### Simulated Universe Points
+
+```
+### Simulated Universe Points
+14000/14000
+```
+
+- Weekly Simulated Universe score limit
+
+### Currency War Points
+
+```
+### Currency War Points
+4000/4000
+```
+
+- Forgotten Hall currency rewards claimed
+
+## Honkai Impact 3rd Notes
+
+### Stamina
+
+```
+### Stamina
+180/180
+Fully Restored
+Daily BP: 500/500
+```
+
+- Current stamina and maximum
+- Daily Battle Pass progress
+
+### Q-Manifold
+
+```
+### Q-Manifold
+Time Left: 2 days
+Current Score: 480/500
+```
+
+- Shows when Q-Manifold is open
+- Current reward score progress
+
+### Superstring Dimension
+
+```
+### Superstring Dimension
+Time Left: 3 days
+Current Score: 32450
+Current Tier: Nirvana
+```
+
+- Active cycle countdown
+- Your current score
+- Tier: Forbidden, Sinful I-III, Agony I-III, Redlotus, Nirvana
+
+### Memorial Arena
+
+```
+### Memorial Arena
+Time Left: 2 days
+Challenge Rewards: 800/800
+SSS-rank Rewards: 3/3
+```
+
+- Challenge completion status
+- SSS-rank boss clear rewards
+
+### Elysian Realm
+
+```
+### Elysian Realm
+Time Left: 5 days
+Current Score: 480/500
+```
+
+- Shows when Elysian Realm is available
+- Reward collection progress
+
+## Time Display Formats
+
+HoYoVista uses Discord's relative timestamps:
+
+- `Fully replenished in 4 hours` - Discord relative time
+- `Refreshes <t:1234567890:R>` - Dynamic countdown
+- `Full at 14:30 Today` - Absolute time for ZZZ battery
+
+<Note>
+  All times are automatically converted to your local timezone by Discord.
+</Note>
+
+## Understanding Your Notes
+
+### Resource Management
+
+**Resin/Stamina/Battery:**
+- Try to keep below maximum to avoid waste
+- Set reminders for full recovery times
+- Plan your farming routes in advance
+
+**Daily Missions:**
+- Complete all tasks before server reset
+- Don't forget to claim commission rewards
+- Check stored rewards regularly
+
+**Weekly Content:**
+- Boss discounts reset Monday
+- Weekly bounties refresh on cycle
+- Plan weekly boss runs efficiently
+
+### Notifications
+
+Consider setting up notifications for:
+- Resin/stamina near full
+- Realm currency approaching cap
+- Parametric Transformer ready
+- Weekly reset reminders
+
+## Data Accuracy
+
+<Warning>
+  Real-Time Notes data is delayed by approximately 1-2 hours. The information reflects your account status from the last time HoYoLAB updated.
+</Warning>
+
+The delay varies by game:
+- **Genshin Impact:** ~1 hour delay
+- **Star Rail:** ~1 hour delay  
+- **Zenless Zone Zero:** ~2 hours delay
+- **Honkai Impact 3rd:** ~1 hour delay
+
+## Privacy
+
+Notes display your resources without showing sensitive information like:
+- Your exact UID (censored by privacy settings)
+- Character build details
+- Inventory specifics
+
+## Error Handling
+
+Common issues:
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| No notes found | Privacy settings | Enable Battle Chronicle in HoYoLAB |
+| Old data | HoYoLAB cache | Wait for next update cycle |
+| Timeout | API overload | Try again in a few minutes |
+
+## Performance Metrics
+
+The command shows performance data:
+
+```
+Retrieving your data. Please wait...
+Account successfully retrieved in 134ms.
+Fetching notes from HoYoverse...
+Notes retrieved in 456ms.
+Preparing your data...
+```
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Profile" icon="user" href="/features/profile">
+    View your game profile and statistics
+  </Card>
+  <Card title="Income" icon="coins" href="/features/income">
+    Check your monthly currency earnings
+  </Card>
+</CardGroup>

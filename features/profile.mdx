@@ -1,0 +1,243 @@
+---
+title: Game Profile
+description: View detailed profile statistics and achievements for your HoYoverse characters
+icon: user
+---
+
+The `/profile` command displays comprehensive profile information for your HoYoverse game accounts, including statistics, achievements, and character data.
+
+## Usage
+
+```bash
+/profile account:<game>
+```
+
+### Parameters
+
+- `account` (required) - The game account to view the profile for. Select from your linked accounts.
+
+### Examples
+
+**View Genshin Impact profile:**
+```bash
+/profile account:Genshin Impact
+```
+
+**View Zenless Zone Zero profile:**
+```bash
+/profile account:Zenless Zone Zero
+```
+
+<Info>
+  The profile command has a 30-second cooldown per user.
+</Info>
+
+## How It Works
+
+When you request a profile:
+
+1. HoYoVista fetches your account data from HoYoLAB
+2. Retrieves additional profile details from Enka Network
+3. Combines data from both sources for a comprehensive view
+4. Displays profile with namecard, stats, and achievements
+
+## Profile Information
+
+### Genshin Impact
+
+**Basic Info:**
+- Namecard banner background
+- Player nickname and signature
+- Adventure Rank
+- Server region
+- UID (censored based on privacy settings)
+
+**Statistics:**
+- Total Achievements unlocked
+- Max Friendship characters
+- Spiral Abyss progress (floor-chamber-stars)
+- Imaginarium Theater progress (act and stars)
+- Stygian Onslaught difficulty and clear time
+
+**Example Response:**
+```
+# PlayerName
+AR 60 | America | 123****890
+Exploring the world one domain at a time...
+
+Total Achievements: 965
+Max Friendships: 42
+Spiral Abyss: 12-3 | 36⭐
+Imaginarium Theater: Act 8 | 648⭐
+Stygian Onslaught: Coiled 180s
+```
+
+### Zenless Zone Zero
+
+**Basic Info:**
+- Character card banner
+- Agent nickname and description
+- Inter-Knot Level
+- Server region
+- UID (censored based on privacy settings)
+
+**Statistics:**
+- Personal title
+- Active Days
+- Total Achievements
+- Simulated Battle Trial highest floor
+- Battle Trial: The Last Stand highest floor
+
+**Example Response:**
+```
+# AgentName
+Lv.60 | America | 100****890
+Always ready for the next commission!
+
+Proxy at Your Service
+Active Days: 180
+Achievements: 342
+Simulated Battle Trial: 50
+Battle Trial: The Last Stand: 30
+```
+
+<Warning>
+  Star Rail and Honkai Impact 3rd are excluded from the profile command as they have limited API support for profile data.
+</Warning>
+
+## Supported Games
+
+<CardGroup cols={2}>
+  <Card title="Genshin Impact" icon="check">
+    Full profile support with Enka Network integration
+  </Card>
+  <Card title="Zenless Zone Zero" icon="check">
+    Full profile support with Enka Network integration
+  </Card>
+  <Card title="Honkai: Star Rail" icon="xmark">
+    Not supported (API limitations)
+  </Card>
+  <Card title="Honkai Impact 3rd" icon="xmark">
+    Not supported (API limitations)
+  </Card>
+</CardGroup>
+
+## Data Sources
+
+The profile command combines data from multiple sources:
+
+### HoYoLAB Game Records
+- Player basic information
+- Statistics from game records API
+- Region and server data
+
+### Enka Network
+- Namecard and card backgrounds
+- Real-time player signature
+- Spiral Abyss/Theater/Stygian data
+- Character showcase information
+
+<Note>
+  Profile data may be delayed by up to 1 hour due to HoYoLAB API caching.
+</Note>
+
+## Understanding Statistics
+
+### Genshin Impact Stats
+
+**Spiral Abyss Format:** `Floor-Chamber | Stars`
+- Example: `12-3 | 36⭐` means Floor 12, Chamber 3, with 36 total stars
+- "Not yet attempted" if you haven't started the Abyss
+
+**Imaginarium Theater Format:** `Act X | Stars`
+- Example: `Act 8 | 648⭐`
+- "Not yet attempted" if you haven't entered the Theater
+
+**Stygian Onslaught Format:** `Difficulty Time`
+- Example: `Coiled 180s` means Coiled difficulty in 180 seconds
+- Difficulties: Lurking → Stalking → Coiled → Poised
+
+### Zenless Zone Zero Stats
+
+**Personal Title:** Your current equipped title in-game
+
+**Active Days:** Total number of days you've logged in
+
+**Simulated Battle Trial:** Your highest floor reached
+
+**Battle Trial: The Last Stand:** Your highest floor in the alternate mode
+
+## Visual Elements
+
+### Namecard Display
+
+Profiles display your equipped namecard as a banner:
+- Genshin: Your currently equipped namecard from game
+- ZZZ: Your character card background
+
+### Profile Icon
+
+The thumbnail shows your current profile icon:
+- Genshin: Game profile avatar
+- ZZZ: Current equipped head icon
+
+## Privacy & Censoring
+
+UIDs in profiles are automatically censored based on your settings:
+
+```bash
+/settings privacy:true  # Censored: 123****890
+/settings privacy:false # Full: 123456890
+```
+
+## Performance
+
+The profile command provides performance metrics:
+
+```
+Retrieving your data. Please wait...
+Account successfully retrieved in 245ms.
+Fetching profile from HoYoverse...
+Profile retrieved in 892ms.
+Preparing your data...
+```
+
+These messages show:
+1. Database query time
+2. HoYoLAB API response time
+3. Data processing time
+
+<Info>
+  If profile loading takes longer than expected, it may be due to Enka Network rate limits or HoYoLAB server delays.
+</Info>
+
+## Troubleshooting
+
+### Profile Not Loading
+
+1. Check that your account is linked: `/hoyolink`
+2. Verify your HoYoLAB privacy settings allow public viewing
+3. Ensure your game account has logged in recently
+
+### Missing Statistics
+
+- Some stats only appear after reaching certain milestones
+- Spiral Abyss data requires at least one attempt
+- Achievements must be claimed in-game to appear
+
+### Namecard Not Displaying
+
+- Namecard data comes from Enka Network
+- May fail if Enka is experiencing downtime
+- Try again in a few minutes
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Notes" icon="clock" href="/features/notes">
+    Check real-time resources and stamina
+  </Card>
+  <Card title="Income" icon="coins" href="/features/income">
+    View your monthly currency income
+  </Card>
+</CardGroup>

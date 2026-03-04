@@ -1,0 +1,339 @@
+---
+title: 'Supported Games'
+description: 'Complete list of supported games and their features'
+icon: 'gamepad'
+---
+
+## Overview
+
+HoYoVista supports four HoYoverse games with varying feature availability. All games require linking your HoYoLAB account via `/hoyolink`.
+
+## Genshin Impact
+
+<Card title="Genshin Impact" icon="sword">
+  **Game ID:** `2`
+  
+  **API Identifier:** `hk4e_global`
+  
+  **Act ID:** `e202102251931481`
+</Card>
+
+### Supported Features
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Daily Check-in | ✅ Full Support | Automatic and manual |
+| Real-Time Notes | ✅ Full Support | Resin, commissions, realm currency, transformer |
+| Profile View | ✅ Full Support | Uses Enka Network API |
+| Income/Ledger | ✅ Full Support | Primogems and Mora tracking |
+| Code Redemption | ⚠️ Maintenance | Feature temporarily disabled |
+
+### Real-Time Notes Data
+
+**Original Resin**
+- Current resin count (max 200)
+- Time until fully replenished
+- Recovery timestamps
+
+**Daily Commissions**
+- Task completion status (4 commissions)
+- Encounter Points status
+- Long-Term Encounter Points accumulation
+- Daily commission rewards claimed
+
+**Enemies of Note**
+- Weekly boss discount status
+- Remaining resin cost-halving opportunities
+
+**Jar of Riches**
+- Current realm currency (Serenitea Pot)
+- Maximum capacity based on trust rank
+- Time until full
+- Requires Serenitea Pot unlocked
+
+**Parametric Transformer**
+- Availability status
+- Cooldown remaining in days
+- Requires transformer obtained in-game
+
+### Profile & Stats
+
+- Adventure Rank (AR)
+- Total achievements
+- Characters with max friendship
+- Spiral Abyss progress (floor-chamber-stars)
+- Imaginarium Theater progress (act and stars)
+- Stygian Onslaught difficulty and clear time
+- Namecard display
+- Profile signature
+
+### Income Reports
+
+- Monthly Primogem earnings breakdown
+- Monthly Mora earnings
+- Daily earnings (for current month)
+- Comparison with previous month (percentage change)
+- Sources: Daily Activities, Quests, Spiral Abyss, Events, Mail, etc.
+- Primary source analysis
+- Excludes top-up purchases
+
+<Note>
+Data has approximately 1-hour delay from in-game actions.
+</Note>
+
+---
+
+## Honkai: Star Rail
+
+<Card title="Honkai: Star Rail" icon="star">
+  **Game ID:** `6`
+  
+  **API Identifier:** `hkrpg_global`
+  
+  **Act ID:** `e202303301540311`
+</Card>
+
+### Supported Features
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Daily Check-in | ✅ Full Support | Automatic and manual |
+| Real-Time Notes | ✅ Full Support | Trailblazer Power, training, simulated universe |
+| Profile View | ❌ Not Supported | Not yet implemented |
+| Income/Ledger | ❌ Not Supported | API returns error code -100 |
+| Code Redemption | ⚠️ Maintenance | Feature temporarily disabled |
+
+### Real-Time Notes Data
+
+**Trailblazer Power**
+- Current stamina count (max 240)
+- Time until fully restored
+- Restoration timestamp
+
+**Daily Training**
+- Current training score
+- Maximum daily score (500)
+
+**Echo of War**
+- Weekly boss clears
+- Weekly limit (3 clears)
+
+**Simulated Universe Points**
+- Current weekly points
+- Maximum points capacity
+
+**Currency War Points**
+- Current weekly apocalyptic shadow points
+- Weekly maximum
+
+<Note>
+Income/Ledger feature disabled due to HoYoLAB API limitations (retcode -100).
+</Note>
+
+---
+
+## Honkai Impact 3rd
+
+<Card title="Honkai Impact 3rd" icon="bolt">
+  **Game ID:** `1`
+  
+  **API Identifier:** `bh3_os`
+  
+  **Act ID:** `e202110291205111`
+</Card>
+
+### Supported Features
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Daily Check-in | ✅ Full Support | Automatic and manual |
+| Real-Time Notes | ✅ Full Support | Stamina, abyss, memorial arena |
+| Profile View | ❌ Not Supported | Not yet implemented |
+| Income/Ledger | ❌ Not Supported | Not available for this game |
+| Code Redemption | ❌ Not Supported | Not available for this game |
+
+### Real-Time Notes Data
+
+**Stamina**
+- Current stamina amount
+- Maximum stamina capacity
+- Time until fully restored
+- Daily Battle Pass (BP) points
+
+**Superstring Dimension**
+- Current challenge score
+- Current tier (Forbidden, Sinful I-III, Agony I-III, Redlotus, Nirvana)
+- Schedule status (open/closed)
+- Time remaining when active
+
+**Q-Manifold** (for lower level captains)
+- Current score
+- Maximum reward score
+- Schedule status
+- Time remaining when active
+
+**Memorial Arena**
+- Challenge reward progress
+- SSS-rank reward progress
+- Schedule status (open/locked)
+- Time remaining when active
+
+**Elysian Realm** (if available)
+- Current score
+- Maximum reward score  
+- Schedule status
+- Time remaining when active
+
+<Note>
+Superstring Dimension and Q-Manifold are mutually exclusive based on captain level.
+</Note>
+
+---
+
+## Zenless Zone Zero
+
+<Card title="Zenless Zone Zero" icon="zap">
+  **Game ID:** `8`
+  
+  **API Identifier:** `nap_global`
+  
+  **Act ID:** `e202406031448091`
+</Card>
+
+### Supported Features
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Daily Check-in | ✅ Full Support | Automatic and manual |
+| Real-Time Notes | ✅ Full Support | Battery, dailies, season missions |
+| Profile View | ✅ Full Support | Uses Enka Network API |
+| Income/Ledger | ✅ Full Support | Polychromes, Master Tapes, Boopons |
+| Code Redemption | ⚠️ Maintenance | Feature temporarily disabled |
+
+### Real-Time Notes Data
+
+**Battery Charge**
+- Current battery/energy level (max 240)
+- Time until fully recovered
+- Exact recovery time (hour:minute, today/tomorrow)
+
+**Daily Missions**
+- Engagement Today progress
+- Scratch Card Mania completion status
+- Video Store Management status (revenue available/currently open)
+
+**Season Missions**
+- Bounty Commission progress and total
+- Bounty refresh countdown
+- Ridu Weekly Points progress
+- Weekly points refresh countdown
+
+### Profile & Stats
+
+- Inter-Knot Level
+- Active days played
+- Total achievements
+- Simulated Battle Trial progress (floor)
+- Battle Trial: The Last Stand progress
+- Personal title display
+- Profile description
+- Custom namecard
+
+### Income Reports
+
+**Resources tracked:**
+- Polychromes (premium currency)
+- Master Tapes (gacha pulls)
+- Boopons (gacha tickets)
+
+**Revenue Sources:**
+- Mail Rewards
+- Shiyu Defense & Deadly Assault Rewards
+- Daily Activity Rewards
+- Development Rewards
+- Event Rewards
+- Hollow Zero Rewards
+- Other Rewards
+
+**Analysis includes:**
+- Monthly totals for each resource
+- Primary source identification
+- Percentage breakdown by source
+- Polychromes from Monochromes excluded
+
+<Note>
+Data has approximately 2-hour delay from in-game actions.
+</Note>
+
+---
+
+## API Endpoints
+
+HoYoVista uses the following HoYoLAB API endpoints:
+
+| Endpoint | Purpose |
+|----------|----------|
+| `https://bbs-api-os.hoyolab.com` | Main API for game records and user data |
+| `https://api-account-os.hoyolab.com` | Account authentication |
+| `https://sg-hk4e-api.hoyolab.com` | Genshin Impact specific APIs |
+| `https://sg-public-api.hoyolab.com` | Public game data |
+| `https://sg-act-nap-api.hoyolab.com` | Zenless Zone Zero check-ins |
+| `https://act.hoyolab.com` | Event and check-in actions |
+
+## Feature Comparison
+
+| Feature | Genshin | Star Rail | Honkai 3rd | ZZZ |
+|---------|---------|-----------|------------|-----|
+| Check-in | ✅ | ✅ | ✅ | ✅ |
+| Real-Time Notes | ✅ | ✅ | ✅ | ✅ |
+| Profile | ✅ | ❌ | ❌ | ✅ |
+| Income | ✅ | ❌ | ❌ | ✅ |
+| Redeem Codes | ⚠️ | ⚠️ | ❌ | ⚠️ |
+| Auto Check-in | ✅ | ✅ | ✅ | ✅ |
+| Auto Redeem | ⚠️ | ⚠️ | ❌ | ⚠️ |
+
+**Legend:**
+- ✅ Fully Supported
+- ⚠️ Under Maintenance/Limited
+- ❌ Not Supported
+
+## Coming Soon
+
+<Info>
+Check `/roadmap` in Discord for the latest planned features and improvements:
+- Code redemption restoration
+- Star Rail income tracking (pending API fix)
+- Star Rail and Honkai 3rd profile views
+- Additional real-time note features
+- Enhanced statistics and analytics
+</Info>
+
+## Technical Details
+
+### Game Abbreviations
+
+Used internally by the bot:
+- Genshin Impact: `genshin`
+- Honkai: Star Rail: `hkrpg`
+- Honkai Impact 3rd: `honkai3rd`
+- Zenless Zone Zero: `zzz`
+
+### Event Paths
+
+Used for check-in API calls:
+- Genshin Impact: `sol`
+- Honkai: Star Rail: `luna/hkrpg/os`
+- Honkai Impact 3rd: `mani`
+- Zenless Zone Zero: `luna/zzz/os`
+
+### Region Codes
+
+Supported server regions:
+- North America: `os_usa`
+- Europe: `os_euro`
+- Asia: `os_asia`
+- TW/HK/MO: `os_cht`
+
+<Warning>
+Chinese (CN) servers are not supported. Only global/overseas servers work with HoYoVista.
+</Warning>

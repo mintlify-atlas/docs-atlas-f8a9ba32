@@ -1,0 +1,297 @@
+---
+title: Code Redemption
+description: Redeem promotional codes for in-game rewards
+icon: ticket
+---
+
+The `/redeem` command allows you to redeem promotional codes for in-game rewards across your HoYoverse games.
+
+<Warning>
+  This command is currently under maintenance and not available for use. The feature is being rebuilt to improve reliability and code detection.
+</Warning>
+
+## Planned Usage
+
+When the feature returns, the command will work as follows:
+
+```bash
+/redeem [account] [code]
+```
+
+### Parameters
+
+- `account` (optional) - The game account to redeem for. If not provided, redeems for all eligible accounts.
+- `code` (optional) - The code(s) to redeem, separated by `-`, `,`, `|`, `/`, or `:`. If not provided, automatically redeems all available codes.
+
+### Planned Examples
+
+**Auto-redeem all available codes:**
+```bash
+/redeem
+```
+
+**Redeem specific code for one account:**
+```bash
+/redeem account:Genshin Impact code:GENSHINGIFT
+```
+
+**Redeem multiple codes:**
+```bash
+/redeem code:CODE1,CODE2,CODE3
+```
+
+## How Code Redemption Works
+
+### Automatic Code Detection
+
+When active, HoYoVista will:
+1. Monitor official sources for new promotional codes
+2. Fetch codes from the Seria API
+3. Store available codes by game
+4. Redeem codes automatically if auto-redeem is enabled
+
+### Manual Redemption
+
+You can also redeem codes manually:
+1. Get the code from official announcements
+2. Use `/redeem code:YOURCODE`
+3. HoYoVista redeems it via HoYoLAB API
+4. Rewards are sent to your in-game mail
+
+<Info>
+  The redeem command has a 60-second cooldown to prevent abuse and comply with HoYoLAB rate limits.
+</Info>
+
+## Supported Games
+
+When the feature returns, it will support:
+
+<CardGroup cols={2}>
+  <Card title="Genshin Impact" icon="check">
+    Full support for code redemption
+  </Card>
+  <Card title="Zenless Zone Zero" icon="check">
+    Full support for code redemption
+  </Card>
+  <Card title="Honkai: Star Rail" icon="check">
+    Full support for code redemption
+  </Card>
+  <Card title="Honkai Impact 3rd" icon="xmark">
+    Not supported (redemption API unavailable)
+  </Card>
+</CardGroup>
+
+## Code Sources
+
+### Official Sources
+
+Promotional codes are released through:
+- **Livestreams** - Version preview broadcasts
+- **Events** - Special in-game and web events
+- **Social Media** - Official Twitter, Facebook, Discord
+- **Promotions** - Partnerships and collaborations
+- **Anniversaries** - Annual celebration codes
+
+### Third-Party Aggregators
+
+HoYoVista integrates with:
+- **Seria Codes API** - Community-maintained code database
+- Automatically fetches newly released codes
+- Filters codes by game and validity
+
+## Redemption Process
+
+### Step-by-Step Flow
+
+1. **Code Validation**
+   - Checks if code format is valid
+   - Verifies code hasn't been redeemed
+   - Confirms game compatibility
+
+2. **API Request**
+   - Sends redemption request to HoYoLAB
+   - Uses your linked account credentials
+   - Processes response codes
+
+3. **Result Handling**
+   - Success: Rewards sent to in-game mail
+   - Already redeemed: Skips code
+   - Invalid: Reports error
+   - Expired: Marks as unavailable
+
+4. **Notification**
+   - Shows redemption status
+   - Lists rewards obtained
+   - Reports any failures
+
+## Common Response Codes
+
+When the feature is active, you may see:
+
+| Code | Meaning | Action |
+|------|---------|--------|
+| `OK` | Successfully redeemed | Rewards in mail |
+| `-2003` | Code already redeemed | No action needed |
+| `-2001` | Invalid code | Check code spelling |
+| `-2004` | Code expired | Cannot redeem |
+| `-2016` | Account not found | Verify linked account |
+| `-2017` | Redemption in cooldown | Wait before retrying |
+
+## Rewards
+
+### Typical Code Rewards
+
+**Genshin Impact:**
+- Primogems (20-300)
+- Mora (10,000-100,000)
+- Hero's Wit
+- Mystic Enhancement Ore
+- Talent Books
+
+**Honkai: Star Rail:**
+- Stellar Jade (20-300)
+- Credit (5,000-50,000)
+- Lost Gold Fragments
+- Traveler's Guide
+- Refined Aether
+
+**Zenless Zone Zero:**
+- Polychromes (20-300)
+- Dennies (10,000-100,000)
+- W-Engine Energy Modules
+- Upgrade Materials
+- Boopons
+
+<Note>
+  Reward amounts vary by code. Special event codes may offer larger rewards or exclusive items.
+</Note>
+
+## Auto-Redeem Feature
+
+When enabled, HoYoVista can automatically redeem new codes:
+
+### Setup Auto-Redeem
+
+```bash
+/settings auto-redeem:enabled
+```
+
+### How It Works
+
+1. Bot detects new promotional codes
+2. Automatically attempts redemption for all linked accounts
+3. Sends notification with results
+4. Logs redemption in your data history
+
+### Notification Example
+
+```
+🎫 New codes redeemed!
+
+Genshin Impact (123****890)
+✅ GENSHINGIFT: Primogem x100, Mora x50,000
+✅ ANNIVERSARY: Primogem x200
+
+Honkai: Star Rail (456****789)
+❌ STARRAILCODE: Already redeemed
+```
+
+<Info>
+  Auto-redeem requires the auto-redeem automation feature. Learn more in the [Auto-Redeem](/automation/auto-redeem) documentation.
+</Info>
+
+## Privacy & Security
+
+### Safe Redemption
+
+- Codes are redeemed through official HoYoLAB API
+- No third-party websites involved
+- Your credentials remain secure
+- All requests use encrypted connections
+
+### Data Collection
+
+If analytics are enabled:
+- Records redemption attempts
+- Tracks code success rates
+- Helps improve reliability
+- Never shares personal data
+
+## Code Etiquette
+
+### Best Practices
+
+1. **Redeem quickly** - Many codes have limited uses
+2. **Share codes** - Help the community
+3. **Report expired codes** - Provide feedback
+4. **Don't spam** - Respect cooldowns
+
+### Code Expiration
+
+Most codes expire:
+- **Livestream codes:** 12-24 hours
+- **Event codes:** 1-7 days
+- **Special codes:** Varies by promotion
+
+## Maintenance Status
+
+The redeem feature is currently being rebuilt to:
+
+- Improve code detection accuracy
+- Enhance redemption reliability
+- Add better error handling
+- Support more code sources
+- Optimize API usage
+
+<Warning>
+  Attempting to use `/redeem` will return: "This command is currently under maintenance."
+</Warning>
+
+## Alternative Redemption Methods
+
+While the command is unavailable, redeem codes manually:
+
+### In-Game Redemption
+
+**Genshin Impact:**
+1. Open Paimon Menu
+2. Settings → Account → Redeem Code
+3. Enter code and confirm
+
+**Honkai: Star Rail:**
+1. Open phone menu
+2. Three dots (⋯) → Redemption Code
+3. Enter code and confirm
+
+**Zenless Zone Zero:**
+1. Open Phaeton menu
+2. Settings → Other → Redemption Code
+3. Enter code and confirm
+
+### Web Redemption
+
+Visit official redemption pages:
+- Genshin: https://genshin.hoyoverse.com/gift
+- Star Rail: https://hsr.hoyoverse.com/gift
+- ZZZ: https://zenless.hoyoverse.com/redemption
+
+## When Will It Return?
+
+The redeem feature will be restored when:
+- Code detection system is rebuilt
+- New API integration is tested
+- Auto-redeem automation is stable
+- Error handling is improved
+
+Follow the [GitHub repository](https://github.com/ScobbleQ/HoYoVista) for updates.
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Auto-Redeem" icon="robot" href="/automation/auto-redeem">
+    Automated code redemption (when available)
+  </Card>
+  <Card title="Settings" icon="gear" href="/configuration/settings">
+    Configure auto-redeem preferences
+  </Card>
+</CardGroup>
