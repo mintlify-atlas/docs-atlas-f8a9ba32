@@ -112,6 +112,7 @@
     "/settings - Configure bot settings and automation",
     "/data - Manage your stored data",
     "/feedback - Send feedback to developers",
+    "/roadmap - View upcoming features and improvements",
     "/about - View bot information and statistics"
   ]
 }

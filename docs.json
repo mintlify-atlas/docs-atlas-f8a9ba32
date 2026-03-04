@@ -7,7 +7,7 @@
     "light": "#8c93ed",
     "dark": "#8c93ed"
   },
-  "favicon": "/favicon.png",
+  "favicon": "https://media.brand.dev/86d2d81a-1543-44eb-acb5-29a4e13182e1.png",
   "navbar": {
     "primary": {
       "type": "github",
@@ -78,6 +78,7 @@
               "commands/settings",
               "commands/data",
               "commands/feedback",
+              "commands/roadmap",
               "commands/about"
             ]
           }

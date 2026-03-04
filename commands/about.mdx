@@ -12,7 +12,7 @@ The `/about` command displays comprehensive information about HoYoVista, includi
 
 ```bash
 /about
-```
+```text
 
 <ParamField path="None" type="none">
   This command takes no parameters
@@ -26,7 +26,7 @@ The `/about` command displays comprehensive information about HoYoVista, includi
 ## About HoYoVista
 HoYoVista is a multipurpose Discord bot designed to enhance your 
 gaming experience across various HoYoverse titles.
-```
+```text
 
 ### Statistics & Technical Info
 
@@ -142,7 +142,7 @@ v20.11.0
 <t:1709559600:R>
 
 [Directory] [GitHub] [Docs] [Server]
-```
+```text
 
 ## Guild Count Calculation
 
@@ -156,7 +156,7 @@ const guildCountPromise =
 const guildCount = guildCountPromise
   ? guildCountPromise.reduce((acc, count) => acc + count, 0)
   : interaction.client.guilds.cache.size;
-```
+```text
 
 <Info>
   The bot automatically aggregates guild counts across all shards if sharding is enabled.
@@ -168,7 +168,7 @@ For non-sharded deployments:
 
 ```javascript
 const guildCount = interaction.client.guilds.cache.size;
-```
+```text
 
 ## Uptime Calculation
 
@@ -177,7 +177,7 @@ Uptime displays when the bot last started:
 ```javascript
 const startTime = Math.floor((Date.now() - interaction.client.uptime) / 1000);
 // Format: <t:${startTime}:R>
-```
+```text
 
 **Display formats**:
 - "started 5 minutes ago"
@@ -313,7 +313,7 @@ The command reads from `package.json`:
     "url": "https://github.com/username/hoyovista"
   }
 }
-```
+```text
 
 <Info>
   This ensures version information is always accurate and automatically updated.

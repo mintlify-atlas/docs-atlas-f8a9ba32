@@ -12,7 +12,7 @@ The `/data` command allows you to view all data that HoYoVista stores about your
 
 ```bash
 /data
-```
+```text
 
 <ParamField path="None" type="none">
   This command takes no parameters
@@ -37,7 +37,7 @@ The command returns a comprehensive view of your stored information:
   "createdAt": "2024-01-15T08:30:00.000Z",
   "updatedAt": "2024-03-04T14:22:00.000Z"
 }
-```
+```text
 
 <Accordion title="User Data Fields">
   <ParamField path="discordId" type="string">
@@ -83,7 +83,7 @@ The command returns a comprehensive view of your stored information:
   "accountIdV2": "****",
   "cookieTokenV2": "v2_****"
 }
-```
+```text
 
 <Note>
   Sensitive cookie values are stored encrypted and only shown to you in this command.
@@ -112,7 +112,7 @@ The command returns a comprehensive view of your stored information:
     "autoRedeem": true
   }
 ]
-```
+```text
 
 <Accordion title="Game Data Fields">
   <ParamField path="game" type="string">
@@ -167,7 +167,7 @@ The command returns a comprehensive view of your stored information:
     "timestamp": "2024-03-04T08:00:00.000Z"
   }
 ]
-```
+```text
 
 <Accordion title="Event Types">
   **Discord Interactions**
@@ -193,23 +193,23 @@ Data is displayed in formatted JSON code blocks:
 ### User Data
 ```json
 {...}
-```
+```text
 
 ### Hoyolab Cookies
 ```json
 {...}
-```
+```text
 
 ### Linked Games
 ```json
 [...]
-```
+```text
 
 ### Recent Events (Latest 2)
 ```json
 [...]
-```
-```
+```text
+```text
 
 ## Privacy & Security
 
@@ -260,8 +260,8 @@ If you haven't linked a HoYoLAB account yet:
 ### User Data
 ```json
 {...}
-```
-```
+```text
+```text
 
 Only base user data is shown without cookies, games, or events.
 

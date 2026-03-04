@@ -20,10 +20,10 @@ Privacy Blur automatically censors your game UIDs (User IDs) when the bot displa
 
 **How it works:**
 
-```
+```text
 Original UID: 123456789
 With Privacy Blur: 1****6789
-```
+```text
 
 The censoring algorithm:
 - Preserves the first digit of your UID
@@ -43,7 +43,7 @@ const middlePart = uid.slice(1, -4)     // Middle portion
   .replace(/[0-9]/g, '*');              // Replaced with *
 
 return firstPart + middlePart + lastPart;
-```
+```text
 
 #### When Privacy Blur Applies
 
@@ -109,7 +109,7 @@ When data collection is enabled, we track:
     "command": "settings"
   }
 }
-```
+```text
 
 **Event Information:**
 - Timestamp of interaction
@@ -248,7 +248,7 @@ You can view all data we store about you at any time:
 
 ```bash
 /data
-```
+```text
 
 This command shows:
 - Your user settings
@@ -274,7 +274,7 @@ You can delete all your data at any time:
 
 ```bash
 /hoyolink
-```
+```text
 
 Then click "Unlink HoYoLAB Account" and confirm.
 

@@ -72,32 +72,32 @@ You'll see:
 - Rewards received
 
 **Example:**
-```
+```text
 **Genshin Impact** (123***789)
 - Code: `GENSHINGIFT`
 > Reward: Primogem x60, Hero's Wit x5
 - Code: `STARRAILGIFT`
 > Reward: Stellar Jade x50, Credit x10000
-```
+```text
 
 ### Already Redeemed
 
 If a code was already used:
-```
+```text
 - Code: `GENSHINGIFT`
 > [-2017] Redemption code already used
-```
+```text
 
 ### Honkai Impact 3rd Special Case
 
 Honkai Impact 3rd codes cannot be redeemed via API. Instead, you'll receive codes to redeem manually:
 
-```
+```text
 **Honkai Impact 3rd** (456***012)
 -# Please redeem these codes manually in-game:
 - Code: `HONKAIIMPACT`
 > Reward: Crystals x100
-```
+```text
 
 <Warning>
 Honkai Impact 3rd requires manual in-game redemption. The bot will track which codes you've been notified about to avoid sending duplicates.
@@ -106,22 +106,22 @@ Honkai Impact 3rd requires manual in-game redemption. The bot will track which c
 ### Error States
 
 **Invalid UID:**
-```
+```text
 - Code: `GENSHINGIFT`
 > [-1071] Invalid UID
-```
+```text
 
 **Rate Limited:**
-```
+```text
 - Code: `GENSHINGIFT`
 > [-2018] Redemption is currently in cooldown
-```
+```text
 
 **Internal Error:**
-```
+```text
 - Code: `GENSHINGIFT`
 > [-999] Internal server error
-```
+```text
 
 ## Code Tracking
 
@@ -306,9 +306,9 @@ Data collection is completely optional and can be disabled in `/settings` under 
 
 You can also redeem codes manually using the `/redeem` command:
 
-```
+```text
 /redeem code:GENSHINGIFT
-```
+```text
 
 This is useful for:
 - Testing if codes work

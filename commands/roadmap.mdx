@@ -1,0 +1,136 @@
+---
+title: /roadmap
+description: View upcoming features and improvements for HoYoVista
+icon: map
+---
+
+## Overview
+
+The `/roadmap` command displays HoYoVista's development roadmap, showing planned features, improvements, and upcoming changes. This helps users stay informed about what's coming next to the bot.
+
+## Usage
+
+```bash
+/roadmap
+```text
+
+<ParamField path="None" type="none">
+  This command takes no parameters
+</ParamField>
+
+## Command Details
+
+<ParamField path="Cooldown" type="number">
+  10 seconds
+</ParamField>
+
+<ParamField path="Integration Types" type="array">
+  - Guild Install (use in servers)
+  - User Install (use in DMs)
+</ParamField>
+
+<ParamField path="Contexts" type="array">
+  - Guild channels
+  - DMs
+  - Private channels
+</ParamField>
+
+## Current Roadmap
+
+The roadmap is displayed in an ephemeral message (only visible to you) with the following information:
+
+### Moonlit Reverie (v4.0.0)
+
+<Accordion title="Command Improvements">
+  - **[/notes]** Restore support to Zenless Zone Zero, Honkai: Star Rail, and Honkai Impact 3rd
+  - **[/redeem]** Add support for manual code redemption
+</Accordion>
+
+<Accordion title="New Commands/Features">
+  - **Monthly Income Report** - Enhanced income tracking and reporting
+  - **[/builds]** Character Builds - Integration with Enka.Network for viewing character builds
+  - **[/events]** View upcoming in-game events
+  - **[/banners]** View current and upcoming banners
+</Accordion>
+
+<Info>
+  The roadmap is updated regularly and all items are subject to change. Last updated: February 6, 2026
+</Info>
+
+## Example Response
+
+When you run `/roadmap`, you'll see a formatted message like this:
+
+```markdown
+## Moonlit Reverie (v4.0.0)
+
+### Command Improvements
+- [/notes] Restore support to Zenless, Star Rail, and Honkai
+- [/redeem] Add support for manual code redemption
+
+### New Commands/Features
+- Monthly Income Report
+- [/builds] Character Builds (integrates with Enka.Network)
+- [/events] View upcoming events
+- [/banners] View the banners
+
+— Last updated on Feb 06, 2026. Subject to change.
+```text
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="Stay Informed" icon="bell">
+    Keep track of planned features and improvements
+  </Card>
+  <Card title="Ephemeral Response" icon="eye-slash">
+    Response is only visible to you
+  </Card>
+  <Card title="Regular Updates" icon="rotate">
+    Roadmap is updated as development progresses
+  </Card>
+  <Card title="Version Tracking" icon="code-branch">
+    See what's planned for specific versions
+  </Card>
+</CardGroup>
+
+## Use Cases
+
+<Steps>
+  <Step title="Check upcoming features">
+    Run `/roadmap` to see what new features are being developed
+  </Step>
+  
+  <Step title="Track feature requests">
+    See if a feature you requested is on the roadmap
+  </Step>
+  
+  <Step title="Plan ahead">
+    Know what capabilities will be available in future versions
+  </Step>
+</Steps>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card title="/about" icon="circle-info" href="/commands/about">
+    View current bot version and information
+  </Card>
+  <Card title="/feedback" icon="comment" href="/commands/feedback">
+    Submit feature requests and feedback
+  </Card>
+</CardGroup>
+
+## Notes
+
+<Note>
+  The roadmap shows planned features but does not guarantee specific release dates or that all features will be implemented exactly as described.
+</Note>
+
+<Tip>
+  Use `/feedback` to suggest new features or improvements that you'd like to see on the roadmap!
+</Tip>
+
+## Source Reference
+
+This command is implemented in `/src/commands/roadmap.js` (lines 1-41) with a 10-second cooldown.

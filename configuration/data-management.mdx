@@ -16,7 +16,7 @@ The `/data` command displays all information HoYoVista stores about you in a str
 
 ```bash
 /data
-```
+```text
 
 **Cooldown:** 5 minutes (to prevent spam)
 
@@ -45,7 +45,7 @@ Your core account information and settings:
   "notifyRedeem": true,
   "updatedAt": "2024-03-04T15:30:00.000Z"
 }
-```
+```text
 
 **Fields explained:**
 - `uid` - Your Discord User ID
@@ -74,7 +74,7 @@ Your stored HoYoLAB authentication cookies:
   "account_id_v2": "...",
   "account_mid_v2": "..."
 }
-```
+```text
 
 **Cookie purposes:**
 - `ltmid_v2` - Session identifier
@@ -123,7 +123,7 @@ All games connected to your account:
     "game": "hkrpg"
   }
 ]
-```
+```text
 
 **Fields explained:**
 - `uid` - Your Discord ID (links to your account)
@@ -163,7 +163,7 @@ Your most recent analytics events (latest 2 shown):
     }
   }
 ]
-```
+```text
 
 **Event data:**
 - `game` - Context (usually "discord" for bot commands)
@@ -203,7 +203,7 @@ All data is displayed in JSON format, which is:
 # 2. Select and copy each JSON block
 # 3. Paste into a text editor
 # 4. Save as .json file
-```
+```text
 
 ```javascript Process with Script
 // Example: Parse exported data
@@ -215,7 +215,7 @@ const data = JSON.parse(fs.readFileSync('my-hoyovista-data.json'));
 // Access user settings
 console.log('Privacy Blur:', data.user.private);
 console.log('Linked Games:', data.games.length);
-```
+```text
 
 </CodeGroup>
 
@@ -279,7 +279,7 @@ You can permanently delete all your HoYoVista data at any time.
 
 ```bash
 /hoyolink
-```
+```text
 
 **Step-by-step:**
 
@@ -317,7 +317,7 @@ DELETE FROM users WHERE uid = 'your_discord_id';
 -- - All cookies  
 -- - All analytics events (user-specific)
 -- - All cached data
-```
+```text
 
 The deletion is:
 - **Immediate** - Takes effect instantly

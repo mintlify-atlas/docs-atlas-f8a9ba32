@@ -10,7 +10,7 @@ The `/profile` command displays comprehensive profile information for your HoYov
 
 ```bash
 /profile account:<game>
-```
+```text
 
 ### Parameters
 
@@ -21,12 +21,12 @@ The `/profile` command displays comprehensive profile information for your HoYov
 **View Genshin Impact profile:**
 ```bash
 /profile account:Genshin Impact
-```
+```text
 
 **View Zenless Zone Zero profile:**
 ```bash
 /profile account:Zenless Zone Zero
-```
+```text
 
 <Info>
   The profile command has a 30-second cooldown per user.
@@ -60,7 +60,7 @@ When you request a profile:
 - Stygian Onslaught difficulty and clear time
 
 **Example Response:**
-```
+```text
 # PlayerName
 AR 60 | America | 123****890
 Exploring the world one domain at a time...
@@ -70,7 +70,7 @@ Max Friendships: 42
 Spiral Abyss: 12-3 | 36⭐
 Imaginarium Theater: Act 8 | 648⭐
 Stygian Onslaught: Coiled 180s
-```
+```text
 
 ### Zenless Zone Zero
 
@@ -89,7 +89,7 @@ Stygian Onslaught: Coiled 180s
 - Battle Trial: The Last Stand highest floor
 
 **Example Response:**
-```
+```text
 # AgentName
 Lv.60 | America | 100****890
 Always ready for the next commission!
@@ -99,7 +99,7 @@ Active Days: 180
 Achievements: 342
 Simulated Battle Trial: 50
 Battle Trial: The Last Stand: 30
-```
+```text
 
 <Warning>
   Star Rail and Honkai Impact 3rd are excluded from the profile command as they have limited API support for profile data.
@@ -188,19 +188,19 @@ UIDs in profiles are automatically censored based on your settings:
 ```bash
 /settings privacy:true  # Censored: 123****890
 /settings privacy:false # Full: 123456890
-```
+```text
 
 ## Performance
 
 The profile command provides performance metrics:
 
-```
+```text
 Retrieving your data. Please wait...
 Account successfully retrieved in 245ms.
 Fetching profile from HoYoverse...
 Profile retrieved in 892ms.
 Preparing your data...
-```
+```text
 
 These messages show:
 1. Database query time

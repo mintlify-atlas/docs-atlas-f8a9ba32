@@ -16,7 +16,7 @@ The `/redeem` command allows you to redeem promotional codes for in-game rewards
 
 ```bash
 /redeem [account] [code]
-```
+```text
 
 <ParamField path="account" type="string" required={false}>
   The specific account to redeem codes for. If omitted, redeems for all supported linked accounts.
@@ -45,19 +45,19 @@ The `/redeem` command allows you to redeem promotional codes for in-game rewards
 <CodeGroup>
 ```bash Redeem All Available Codes
 /redeem
-```
+```text
 
 ```bash Redeem Specific Code
 /redeem code:GENSHINGIFT
-```
+```text
 
 ```bash Multiple Codes
 /redeem code:CODE1-CODE2-CODE3
-```
+```text
 
 ```bash Specific Account
 /redeem account:Genshin Impact (NA) code:GENSHINGIFT
-```
+```text
 </CodeGroup>
 
 ## Code Sources
@@ -112,27 +112,27 @@ When the command is fully operational:
 ```markdown
 ### Genshin Impact (600******6)
 ✅ GENSHINGIFT: Primogem x60, Hero's Wit x5
-```
+```text
 
 ### Already Redeemed
 
 ```markdown
 ### Genshin Impact (600******6)
 ⚠️ GENSHINGIFT: Code has already been redeemed
-```
+```text
 
 ### Invalid Code
 
 ```markdown
 ### Genshin Impact (600******6)
 ❌ INVALIDCODE: Invalid redemption code
-```
+```text
 
 ### No New Codes
 
 ```markdown
 No new codes found.
-```
+```text
 
 ## Common Error Codes
 
@@ -155,7 +155,7 @@ Genshin Impact (600******6)
 
 Zenless Zone Zero (100******7)
 ✅ NEWCODE2024: Polychrome x100
-```
+```text
 
 <Warning>
   Ensure your Discord DMs are open to receive auto-redemption notifications.

@@ -10,7 +10,7 @@ The `/income` command provides detailed reports on your monthly currency income,
 
 ```bash
 /income account:<game> month:<month>
-```
+```text
 
 ### Parameters
 
@@ -22,12 +22,12 @@ The `/income` command provides detailed reports on your monthly currency income,
 **Check current month income:**
 ```bash
 /income account:Genshin Impact month:March
-```
+```text
 
 **Check previous month:**
 ```bash
 /income account:Zenless Zone Zero month:February
-```
+```text
 
 <Info>
   The income command has a 30-second cooldown per user.
@@ -47,12 +47,12 @@ When you request an income report:
 
 ### Overview Display
 
-```
+```text
 ## Income Overview: March
 PlayerName | America | 123****890
 💎 Primogems: 12,450
 🪙 Mora: 2,450,000
-```
+```text
 
 **Shows:**
 - Month name
@@ -64,55 +64,55 @@ PlayerName | America | 123****890
 
 Sources are automatically categorized:
 
-```
+```text
 - Daily Commissions: 2,400 Primogems
 - Events: 4,200 Primogems
 - Spiral Abyss: 1,800 Primogems
 - Quests: 1,600 Primogems
 - Mail: 800 Primogems
 - Other: 1,650 Primogems
-```
+```text
 
 ### Primary Source Analysis
 
-```
+```text
 This month, your primary source for obtaining Primogems 
 is through Events, for a total of 4,200 Primogems, 
 or 33.7% of your total.
-```
+```text
 
 ### Monthly Comparison
 
 For previous months:
 
-```
+```text
 15% more Primogems than last month, 
 8% less Mora than last month.
-```
+```text
 
 ### Current Month Note
 
 For the current month:
 
-```
+```text
 You have earned 560 Primogems and 125,000 Mora today, 
 what a bountiful day!
-```
+```text
 
 Or if no activity today:
 
-```
+```text
 Where did you venture off to today?
-```
+```text
 
 ### Data Disclaimers
 
-```
+```text
 * The data is delayed by about one hour, 
   please check the updated records later
 * This diary only includes the resources obtained 
   outside of top-ups
-```
+```text
 
 <Warning>
   Primogems from purchases/top-ups are NOT included in the Traveler's Diary. Only free-to-play income is tracked.
@@ -122,13 +122,13 @@ Where did you venture off to today?
 
 ### Overview Display
 
-```
+```text
 ## Income Overview: March  
 AgentName | America | 100****890
 💎 Polychromes: 8,640
 🎟️ Master Tape: 12
 🎫 Boopons: 24
-```
+```text
 
 **Shows:**
 - Month name
@@ -139,14 +139,14 @@ AgentName | America | 100****890
 
 ### Income Breakdown
 
-```
+```text
 - Daily Activity Rewards: 3,600 Polychromes
 - Event Rewards: 2,520 Polychromes  
 - Shiyu Defense & Deadly Assult Rewards: 1,800 Polychromes
 - Mail Rewards: 480 Polychromes
 - Development Rewards: 180 Polychromes
 - Hallow Zero Rewards: 60 Polychromes
-```
+```text
 
 Categories mapped from API:
 - `daily_activity_rewards` → Daily Activity Rewards
@@ -159,20 +159,20 @@ Categories mapped from API:
 
 ### Primary Source Analysis
 
-```
+```text
 This month, your primary source for obtaining Polychromes 
 is through Daily Activity Rewards, for a total of 
 3,600 Polychromes, or 41.7% of your total.
-```
+```text
 
 ### Data Disclaimers
 
-```
+```text
 * Please note that there is a delay of approximately 
   2 hours for data to be updated
 * Polychromes exchanged using Monochromes are not 
   counted as Polychrome revenue
-```
+```text
 
 ## Supported Games
 
@@ -255,13 +255,13 @@ Use the income command to:
 
 ## Performance Metrics
 
-```
+```text
 Retrieving your data. Please wait...
 Account successfully retrieved in 98ms.
 Fetching ledger from HoYoverse...
 Ledger retrieved in 723ms.
 Preparing your data...
-```
+```text
 
 The command shows:
 1. Database query time
@@ -297,7 +297,7 @@ Your UID is automatically censored in income reports based on privacy settings.
 Modify privacy with:
 ```bash
 /settings privacy:true
-```
+```text
 
 ## Troubleshooting
 
